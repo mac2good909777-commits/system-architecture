@@ -54,10 +54,17 @@
 
 ======================================
   OpenClaw 系統備份
-  日期: 2026-03-12 11:22:42
+  日期: 2026-03-12 11:22:41
 ======================================
 
 📝 [0/4] 更新系統架構文件（CCW_CONTEXT.md）...
+error: cannot fork() for git-remote-https: Resource temporarily unavailable
+fatal: remote helper 'https' aborted session
+  ✅ system-architecture 已推送到 GitHub
+
+📁 [1/3] 建立本機完整備份...
+  複製 ~/.openclaw/...
+  複製 ~/.google-mcp/...
 
 ---
 
@@ -156,11 +163,8 @@
 🔵 **待安排**
 - 重啟 行程表到期檢查 cron jobs（目前停用中）
 - GA4 API 串接
+- GitHub email 改為 mac2good909777
 - 大管家各群組 Google Doc 日摘要整合測試
-- **GitHub 帳號遷移**（mac2good909777-commits → mac2good909777）：
-  1. 在 mac2good909777 建立新 PAT（repo 權限）
-  2. 建立 repo：system-architecture（公開）+ openclaw-config-backup（私有）
-  3. 提供新 PAT 給 CCW，更新 backup_openclaw.sh 並重新推送
 
 ---
 
