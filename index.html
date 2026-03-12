@@ -346,7 +346,7 @@
   <div class="subtitle">OpenClaw mm Agent — 工業不動產智慧助手</div>
   <div class="meta-badges">
     <span class="badge"><span class="dot dot-green"></span> Gateway 運行中</span>
-    <span class="badge">OpenClaw v2026.3.2</span>
+    <span class="badge">OpenClaw v2026.3.10</span>
     <span class="badge">Mac Mini M4</span>
     <span class="badge">24H 待命</span>
   </div>
@@ -358,9 +358,9 @@
 <div class="stats-bar">
   <div class="stat"><div class="stat-value">3</div><div class="stat-label">Agents</div></div>
   <div class="stat"><div class="stat-value">7</div><div class="stat-label">Skills</div></div>
-  <div class="stat"><div class="stat-value">8</div><div class="stat-label">Tools</div></div>
-  <div class="stat"><div class="stat-value">6</div><div class="stat-label">Telegram 群組</div></div>
-  <div class="stat"><div class="stat-value">7</div><div class="stat-label">Cron Jobs</div></div>
+  <div class="stat"><div class="stat-value">9</div><div class="stat-label">Tools</div></div>
+  <div class="stat"><div class="stat-value">7</div><div class="stat-label">Telegram 群組</div></div>
+  <div class="stat"><div class="stat-value">8</div><div class="stat-label">Cron Jobs</div></div>
   <div class="stat"><div class="stat-value">9</div><div class="stat-label">外部服務</div></div>
 </div>
 
@@ -369,7 +369,7 @@
   <div class="section-title"><span class="icon">🚨</span> 需要注意</div>
   <div class="alert alert-red">
     <span class="alert-icon">🔴</span>
-    <div><strong>管家群 bot 被踢</strong> — @mac2nice_bot 需要重新邀請回「管家」群組，2 個 cron job 持續報錯（6:30 鬧鐘、7:00 台中港提醒）</div>
+    <div><strong>管家群 bot 被踢</strong> — @mac2housekeeper_bot 需要重新邀請回「管家群」，排程通知無法發出</div>
   </div>
   <div class="alert alert-red">
     <span class="alert-icon">🔴</span>
@@ -377,7 +377,11 @@
   </div>
   <div class="alert alert-yellow">
     <span class="alert-icon">🟡</span>
-    <div><strong>2 個 Google 排程已停用</strong> — 行程表到期檢查、週末行程表到期檢查，待 Google OAuth 驗證後重新啟用</div>
+    <div><strong>2 個排程已停用</strong> — 行程表到期檢查、週末行程表到期檢查，待重新啟用</div>
+  </div>
+  <div class="alert alert-yellow">
+    <span class="alert-icon">🟡</span>
+    <div><strong>Masterboard 定期更新待驗證</strong> — 大管家 07/14/19 自動更新 + push，首次執行結果待確認</div>
   </div>
 </div>
 
@@ -432,7 +436,7 @@
         <div class="card-icon icon-blue">🗂️</div>
         <div><div class="card-title">大管家 (housekeeper)</div><div class="card-subtitle">openai/gpt-5.1-codex</div></div>
       </div>
-      <div class="card-body">綁定「夢想家」群組。負責群組摘要彙整、任務看板同步、跨群聚合</div>
+      <div class="card-body">獨立 bot（@mac2housekeeper_bot）。負責固定排程、每日匯報（07/14/19 DM Mac）、Masterboard 更新、系統健康巡檢</div>
     </div>
     <div class="card">
       <div class="card-header">
@@ -502,7 +506,7 @@
 
 <!-- Tools -->
 <div class="section">
-  <div class="section-title"><span class="icon">🛠️</span> Tools（8 個 Python 腳本）</div>
+  <div class="section-title"><span class="icon">🛠️</span> Tools（9 個 Python 腳本）</div>
   <div class="grid grid-2">
     <div class="card">
       <div class="card-header">
@@ -533,7 +537,8 @@
       </div>
       <div class="card-body">
         <code>update_channel_summary.py</code> — 群組摘要同步到 Doc<br>
-        <code>update_housekeeper_doc.py</code> — 任務看板同步
+        <code>update_housekeeper_doc.py</code> — 任務看板同步<br>
+        <code>update_masterboard.py</code> — <span class="tag tag-new">新增</span> Masterboard HTML 更新 + push
       </div>
     </div>
     <div class="card">
@@ -553,48 +558,53 @@
 
 <!-- Telegram Groups -->
 <div class="section">
-  <div class="section-title"><span class="icon">💬</span> Telegram 群組（6 個）</div>
+  <div class="section-title"><span class="icon">💬</span> Telegram 群組（7 個）</div>
   <div class="table-wrap">
     <table>
       <thead>
-        <tr><th>群組</th><th>代碼</th><th>chat_id</th><th>角色</th><th>Google Doc</th><th>狀態</th></tr>
+        <tr><th>群組</th><th>Bot</th><th>chat_id</th><th>角色</th><th>Google Doc</th><th>狀態</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>夢想家</strong></td><td>dreamer</td><td>-5189082842</td><td>創新顧問</td>
+          <td><strong>夢想家</strong></td><td>@mac2nice_bot</td><td>-5189082842</td><td>創新顧問</td>
           <td><span class="tag tag-green">✓ 已建</span></td>
           <td><span class="tag tag-green">✓ 正常</span></td>
         </tr>
         <tr>
-          <td><strong>文章 資訊收集</strong></td><td>articles</td><td>-5066112336</td><td>資訊彙整</td>
+          <td><strong>文章 資訊收集</strong></td><td>@mac2nice_bot</td><td>-5066112336</td><td>資訊彙整</td>
           <td><span class="tag tag-green">✓ 已建</span></td>
           <td><span class="tag tag-green">✓ 正常</span></td>
         </tr>
         <tr>
-          <td><strong>財務</strong></td><td>finance</td><td>-5131453587</td><td>財務助理</td>
+          <td><strong>財務</strong></td><td>@mac2nice_bot</td><td>-5131453587</td><td>財務助理</td>
           <td><span class="tag tag-green">✓ 已建</span></td>
           <td><span class="tag tag-green">✓ 正常</span></td>
         </tr>
         <tr>
-          <td><strong>自動輸入</strong></td><td>auto-input</td><td>-5252940048</td><td>自動化</td>
+          <td><strong>自動輸入</strong></td><td>@mac2nice_bot</td><td>-5252940048</td><td>自動化</td>
           <td><span class="tag tag-green">✓ 已建</span></td>
           <td><span class="tag tag-green">✓ 正常</span></td>
         </tr>
         <tr>
-          <td><strong>行銷</strong></td><td>marketing</td><td>-5197008668</td><td>行銷顧問</td>
+          <td><strong>行銷</strong></td><td>@mac2nice_bot</td><td>-5197008668</td><td>行銷顧問</td>
           <td><span class="tag tag-green">✓ 已建</span></td>
           <td><span class="tag tag-green">✓ 正常</span></td>
         </tr>
         <tr>
-          <td><strong>管家</strong></td><td>—</td><td>-5288539372</td><td>個人助理</td>
-          <td>—</td>
+          <td><strong>網路任務</strong></td><td>@mac2nice_bot</td><td>-5064371355</td><td>網路調查</td>
+          <td><span class="tag tag-new">✓ 新建</span></td>
+          <td><span class="tag tag-green">✓ 正常</span></td>
+        </tr>
+        <tr>
+          <td><strong>管家群</strong></td><td>@mac2housekeeper_bot</td><td>-5288539372</td><td>大管家匯報</td>
+          <td><span class="tag tag-yellow">⏳ 待建</span></td>
           <td><span class="tag tag-red">⚠ bot 被踢</span></td>
         </tr>
       </tbody>
     </table>
   </div>
   <div style="margin-top:0.75rem; font-size:0.82rem; color:var(--text-dim);">
-    Bot: <strong>@mac2nice_bot</strong> · DM 白名單: Mac (ID: 8285632663) · 群組策略: open
+    mm Bot: <strong>@mac2nice_bot</strong> · 大管家 Bot: <strong>@mac2housekeeper_bot</strong> · Mac DM: 8285632663
   </div>
 </div>
 
@@ -608,31 +618,35 @@
       </thead>
       <tbody>
         <tr>
-          <td>天氣衣著提醒</td><td>每天 06:00</td><td>systemEvent</td>
+          <td>系統健康巡檢</td><td>每天 06:00</td><td>大管家</td>
           <td><span class="tag tag-green">✓ 正常</span></td>
         </tr>
         <tr>
-          <td>早上鬧鐘提醒</td><td>每天 06:30</td><td>systemEvent</td>
-          <td><span class="tag tag-red">✗ 錯誤 ×2</span></td>
-        </tr>
-        <tr>
-          <td>台中港提醒</td><td>每天 07:00</td><td>systemEvent</td>
-          <td><span class="tag tag-red">✗ 錯誤 ×2</span></td>
-        </tr>
-        <tr>
-          <td>任務清單播報</td><td>07 · 14 · 19 時</td><td>systemEvent</td>
+          <td>天氣衣著提醒</td><td>每天 06:00</td><td>mm</td>
           <td><span class="tag tag-green">✓ 正常</span></td>
         </tr>
         <tr>
-          <td>任務清單自動寫入</td><td>07 · 14 · 19 時</td><td>agentTurn</td>
+          <td>任務清單播報 → DM Mac</td><td>07 · 14 · 19 時</td><td>大管家</td>
           <td><span class="tag tag-green">✓ 正常</span></td>
         </tr>
         <tr>
-          <td>行程表到期檢查</td><td>平日 06:30/08:30/13:30/19:30</td><td>agentTurn</td>
+          <td>任務清單寫入 + MB 更新</td><td>07 · 14 · 19 時</td><td>大管家</td>
+          <td><span class="tag tag-green">✓ 正常</span></td>
+        </tr>
+        <tr>
+          <td>工具品質測試</td><td>每天 12:00</td><td>大管家</td>
+          <td><span class="tag tag-green">✓ 正常</span></td>
+        </tr>
+        <tr>
+          <td>行銷週報自動生成</td><td>每週一 08:00</td><td>大管家</td>
+          <td><span class="tag tag-green">✓ 正常</span></td>
+        </tr>
+        <tr>
+          <td>行程表到期檢查</td><td>平日 06:30/08:30/13:30/19:30</td><td>mm</td>
           <td><span class="tag tag-gray">⏸ 停用</span></td>
         </tr>
         <tr>
-          <td>週末行程表到期檢查</td><td>週末 08:30/19:30</td><td>agentTurn</td>
+          <td>週末行程表到期檢查</td><td>週末 08:30/19:30</td><td>mm</td>
           <td><span class="tag tag-gray">⏸ 停用</span></td>
         </tr>
       </tbody>
@@ -781,7 +795,7 @@
     <div class="card">
       <div class="card-header"><div class="card-icon icon-red">🔴</div><div><div class="card-title">緊急</div></div></div>
       <div class="card-body">
-        • 管家群重新邀請 @mac2nice_bot<br>
+        • 管家群重新邀請 @mac2housekeeper_bot<br>
         • 更換外洩的 OpenAI API Key
       </div>
     </div>
@@ -797,11 +811,11 @@
     <div class="card">
       <div class="card-header"><div class="card-icon icon-blue">🔵</div><div><div class="card-title">待安排</div></div></div>
       <div class="card-body">
-        • 重啟 Google 行程表到期檢查 cron<br>
+        • 重啟行程表到期檢查 cron<br>
         • GA4 API 串接<br>
-        • Facebook Insights API 申請<br>
-        • OpenClaw 升級 → 2026.3.7<br>
-        • GitHub email 改為 mac2good909777
+        • GitHub 帳號遷移（→ mac2good909777）<br>
+        • 管家群 Google Doc 建立<br>
+        • BotFather 改名：@mac2nice_bot → mac2good
       </div>
     </div>
     <div class="card">
@@ -819,7 +833,7 @@
 </div>
 
 <div class="footer">
-  Mac AI System Architecture · Generated 2026-03-12 · OpenClaw v2026.3.2 on Mac Mini M4
+  Mac AI System Architecture · 最後更新：2026-03-12 22:00 · OpenClaw v2026.3.10 on Mac Mini M4
 </div>
 
 </body>
