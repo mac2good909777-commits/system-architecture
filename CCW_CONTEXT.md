@@ -33,7 +33,7 @@
 **OC Gateway：** ws://127.0.0.1:18789（port 18789）
 **mm 模型：** openai/gpt-5.1-codex
 **Google 帳號：** mac2good909777@gmail.com（舊帳號 mac2nice308152 已停用）
-**GitHub 帳號：** mac2good909777
+**GitHub 帳號：** mac2good909777-commits
 **Google Cloud 專案：** coherent-surf-489717-q2
 **OAuth Token：** ~/.google-mcp/tokens/mac2good.json
 
