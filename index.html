@@ -346,7 +346,7 @@
   <div class="subtitle">OpenClaw mm Agent — 工業不動產智慧助手</div>
   <div class="meta-badges">
     <span class="badge"><span class="dot dot-green"></span> Gateway 運行中</span>
-    <span class="badge">OpenClaw v2026.3.10</span>
+    <span class="badge">OpenClaw v2026.3.2</span>
     <span class="badge">Mac Mini M4</span>
     <span class="badge">24H 待命</span>
   </div>
@@ -356,10 +356,10 @@
 
 <!-- Stats -->
 <div class="stats-bar">
-  <div class="stat"><div class="stat-value">3</div><div class="stat-label">Agents</div></div>
-  <div class="stat"><div class="stat-value">7</div><div class="stat-label">Skills</div></div>
+  <div class="stat"><div class="stat-value">2</div><div class="stat-label">Agents</div></div>
+  <div class="stat"><div class="stat-value">8</div><div class="stat-label">Skills</div></div>
   <div class="stat"><div class="stat-value">9</div><div class="stat-label">Tools</div></div>
-  <div class="stat"><div class="stat-value">7</div><div class="stat-label">Telegram 群組</div></div>
+  <div class="stat"><div class="stat-value">8</div><div class="stat-label">Telegram 群組</div></div>
   <div class="stat"><div class="stat-value">8</div><div class="stat-label">Cron Jobs</div></div>
   <div class="stat"><div class="stat-value">9</div><div class="stat-label">外部服務</div></div>
 </div>
@@ -367,10 +367,6 @@
 <!-- Alerts -->
 <div class="section">
   <div class="section-title"><span class="icon">🚨</span> 需要注意</div>
-  <div class="alert alert-red">
-    <span class="alert-icon">🔴</span>
-    <div><strong>管家群 bot 被踢</strong> — @mac2housekeeper_bot 需要重新邀請回「管家群」，排程通知無法發出</div>
-  </div>
   <div class="alert alert-red">
     <span class="alert-icon">🔴</span>
     <div><strong>OpenAI API Key 外洩</strong> — 曾在對話中曝光，需到 platform.openai.com/api-keys 更換</div>
@@ -381,7 +377,7 @@
   </div>
   <div class="alert alert-yellow">
     <span class="alert-icon">🟡</span>
-    <div><strong>Masterboard 定期更新待驗證</strong> — 大管家 07/14/19 自動更新 + push，首次執行結果待確認</div>
+    <div><strong>Great Team chat_id 待補</strong> — 新群組已建立，大管家首次 @mention 後自動寫入 chat_id</div>
   </div>
 </div>
 
@@ -423,34 +419,27 @@
 <!-- Agents -->
 <div class="section">
   <div class="section-title"><span class="icon">🤖</span> Agents（代理人）</div>
-  <div class="grid grid-3">
+  <div class="grid grid-2">
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-accent">🤖</div>
-        <div><div class="card-title">mm（主體）</div><div class="card-subtitle">openai/gpt-5.1-codex</div></div>
+        <div><div class="card-title">mm（主體）</div><div class="card-subtitle">openai/gpt-5.1-codex · @mac2nice_bot</div></div>
       </div>
       <div class="card-body">處理所有用戶互動、執行任務、管理記憶。maxConcurrent: 2 / subagents: 4</div>
     </div>
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-blue">🗂️</div>
-        <div><div class="card-title">大管家 (housekeeper)</div><div class="card-subtitle">openai/gpt-5.1-codex</div></div>
+        <div><div class="card-title">大管家 (housekeeper)</div><div class="card-subtitle">openai/gpt-5.1-codex · @mac2housekeeper_bot</div></div>
       </div>
-      <div class="card-body">獨立 bot（@mac2housekeeper_bot）。負責固定排程、每日匯報（07/14/19 DM Mac）、Masterboard 更新、系統健康巡檢</div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon icon-purple">🔧</div>
-        <div><div class="card-title">skill-creator</div><div class="card-subtitle">技能建立與管理</div></div>
-      </div>
-      <div class="card-body">負責新技能的建立、測試、優化。可自主建立 SKILL.md</div>
+      <div class="card-body">獨立 bot。負責固定排程、每日匯報（07/14/19 DM Mac）、Masterboard 更新、系統健康巡檢。群組 policy: open（requireMention: true）</div>
     </div>
   </div>
 </div>
 
 <!-- Skills -->
 <div class="section">
-  <div class="section-title"><span class="icon">⚡</span> Skills（7 個技能）</div>
+  <div class="section-title"><span class="icon">⚡</span> Skills（8 個技能）</div>
   <div class="grid grid-4">
     <div class="card">
       <div class="card-header">
@@ -500,6 +489,13 @@
         <div><div class="card-title">skill-vetter</div></div>
       </div>
       <div class="card-body">社群技能安全審核</div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">🔧</div>
+        <div><div class="card-title">skill-creator</div></div>
+      </div>
+      <div class="card-body">技能建立、測試、優化。可自主建立 SKILL.md</div>
     </div>
   </div>
 </div>
@@ -558,7 +554,7 @@
 
 <!-- Telegram Groups -->
 <div class="section">
-  <div class="section-title"><span class="icon">💬</span> Telegram 群組（7 個）</div>
+  <div class="section-title"><span class="icon">💬</span> Telegram 群組（8 個）</div>
   <div class="table-wrap">
     <table>
       <thead>
@@ -596,9 +592,14 @@
           <td><span class="tag tag-green">✓ 正常</span></td>
         </tr>
         <tr>
-          <td><strong>管家群</strong></td><td>@mac2housekeeper_bot</td><td>-5288539372</td><td>大管家匯報</td>
+          <td><strong>大管家群</strong></td><td>@mac2housekeeper_bot</td><td>-5288539372</td><td>大管家私聊</td>
           <td><span class="tag tag-yellow">⏳ 待建</span></td>
-          <td><span class="tag tag-red">⚠ bot 被踢</span></td>
+          <td><span class="tag tag-green">✓ 正常</span></td>
+        </tr>
+        <tr>
+          <td><strong>Great Team</strong> <span class="tag tag-new">新</span></td><td>@mac2housekeeper_bot + @mac2nice_bot</td><td>（待補）</td><td>核心協作</td>
+          <td><span class="tag tag-yellow">⏳ 待建</span></td>
+          <td><span class="tag tag-green">✓ 正常</span></td>
         </tr>
       </tbody>
     </table>
@@ -795,7 +796,6 @@
     <div class="card">
       <div class="card-header"><div class="card-icon icon-red">🔴</div><div><div class="card-title">緊急</div></div></div>
       <div class="card-body">
-        • 管家群重新邀請 @mac2housekeeper_bot<br>
         • 更換外洩的 OpenAI API Key
       </div>
     </div>
@@ -814,8 +814,9 @@
         • 重啟行程表到期檢查 cron<br>
         • GA4 API 串接<br>
         • GitHub 帳號遷移（→ mac2good909777）<br>
-        • 管家群 Google Doc 建立<br>
-        • BotFather 改名：@mac2nice_bot → mac2good
+        • Great Team / 大管家群 Google Doc 建立<br>
+        • BotFather 改名：@mac2nice_bot → mac2good<br>
+        • Great Team chat_id 補完
       </div>
     </div>
     <div class="card">
@@ -833,7 +834,7 @@
 </div>
 
 <div class="footer">
-  Mac AI System Architecture · 最後更新：2026-03-12 22:00 · OpenClaw v2026.3.10 on Mac Mini M4
+  Mac AI System Architecture · 最後更新：2026-03-13 09:43 · OpenClaw v2026.3.2 on Mac Mini M4
 </div>
 
 </body>
