@@ -446,7 +446,9 @@
 
 <!-- Skills -->
 <div class="section">
-  <div class="section-title"><span class="icon">⚡</span> Skills（8 個技能）</div>
+  <div class="section-title"><span class="icon">⚡</span> Skills（系統內建 8 個 + Mac 自訂）</div>
+
+  <div style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.75rem;">📦 系統內建技能</div>
   <div class="grid grid-4">
     <div class="card">
       <div class="card-header">
@@ -505,11 +507,25 @@
       <div class="card-body">技能建立、測試、優化。可自主建立 SKILL.md</div>
     </div>
   </div>
+
+  <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 1.25rem; margin-bottom: 0.75rem;">✨ Mac 自訂技能（由 skill-creator 製作）</div>
+  <div class="grid grid-4">
+    <div class="card" style="border-style: dashed; border-color: rgba(99,102,241,.4); background: rgba(99,102,241,.04);">
+      <div class="card-header">
+        <div class="card-icon icon-accent">➕</div>
+        <div><div class="card-title">即將開始製作</div><div class="card-subtitle">Mac 自訂中</div></div>
+      </div>
+      <div class="card-body">使用 skill-creator 製作業務專屬技能，依工業不動產需求客製擴充</div>
+    </div>
+  </div>
+  <div style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.5rem;">
+    💡 技能存放位置：<code>~/.openclaw/skills/</code>，可搭配 CCW Cowork 或 OC mm Agent 使用
+  </div>
 </div>
 
 <!-- Tools -->
 <div class="section">
-  <div class="section-title"><span class="icon">🛠️</span> Tools（9 個 Python 腳本）</div>
+  <div class="section-title"><span class="icon">🛠️</span> Tools（10 個 Python 腳本）</div>
   <div class="grid grid-2">
     <div class="card">
       <div class="card-header">
@@ -541,7 +557,8 @@
       <div class="card-body">
         <code>update_channel_summary.py</code> — 群組摘要同步到 Doc<br>
         <code>update_housekeeper_doc.py</code> — 任務看板同步<br>
-        <code>update_masterboard.py</code> — <span class="tag tag-new">新增</span> Masterboard HTML 更新 + push
+        <code>update_masterboard.py</code> — <span class="tag tag-new">新增</span> Masterboard HTML 更新 + push<br>
+        <code>google_calendar.py</code> — <span class="tag tag-new">新增</span> Google Calendar 行程讀取
       </div>
     </div>
     <div class="card">
@@ -556,6 +573,118 @@
         APIs: Drive · Docs · Sheets · Calendar · Gmail
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Security Settings -->
+<div class="section">
+  <div class="section-title"><span class="icon">🔐</span> 安全性設置</div>
+  <div class="grid grid-2">
+
+    <!-- API Keys & Token Limits -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-red">🔑</div>
+        <div><div class="card-title">API Keys 與用量上限</div><div class="card-subtitle">費用防護</div></div>
+      </div>
+      <div class="card-body">
+        <span class="tag tag-red">⚠️ 需更換</span> <strong>OpenAI API Key</strong>（已曝光）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;└ <span class="tag tag-green">✓ 已設</span> 月用量上限 $50 USD（platform.openai.com）<br>
+        <br>
+        <span class="tag tag-green">✓ 正常</span> <strong>Tavily</strong> — 免費方案 1,000 次/月（無額外費用）<br>
+        <span class="tag tag-yellow">⏳ 未設</span> <strong>GitHub PAT</strong> — 無費用，建議設有效期限<br>
+        <span class="tag tag-yellow">⏳ 未設</span> <strong>Google APIs</strong> — 目前在免費額度內，建議設 quota alert<br>
+        <span class="tag tag-gray">N/A</span> <strong>wttr.in / DuckDuckGo</strong> — 完全免費，無需 key
+      </div>
+    </div>
+
+    <!-- Bot Tokens -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-cyan">🤖</div>
+        <div><div class="card-title">Bot Tokens</div><div class="card-subtitle">Telegram Bot 身份驗證</div></div>
+      </div>
+      <div class="card-body">
+        <span class="tag tag-green">✓</span> <strong>mm</strong>: @mac2nice_bot — token 已設定<br>
+        <span class="tag tag-green">✓</span> <strong>大管家</strong>: @mac2housekeeper_bot — token 已設定<br>
+        <span class="tag tag-new">新</span> <strong>夢想家</strong>: token 已設定，bot 待向 @BotFather 命名<br>
+        <br>
+        <span style="color: var(--text-dim); font-size: 0.8rem;">⚠️ Bot token 儲存於 <code>openclaw.json</code>，不應提交至公開 repo</span>
+      </div>
+    </div>
+
+    <!-- Google OAuth -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-blue">🔓</div>
+        <div><div class="card-title">Google OAuth 2.0</div><div class="card-subtitle">授權令牌管理</div></div>
+      </div>
+      <div class="card-body">
+        憑證: <code>~/.openclaw/google-workspace/credentials.json</code><br>
+        主 token: <code>~/.google-mcp/tokens/mac2good.json</code><br>
+        Calendar token: <code>~/.openclaw/google-workspace/cal_token.json</code><br>
+        <br>
+        Scopes: Drive · Docs · Sheets · Calendar · Gmail<br>
+        <span style="color: var(--text-dim); font-size: 0.8rem;">token 過期自動 refresh（refresh_token 永久有效）</span>
+      </div>
+    </div>
+
+    <!-- Access Control -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-orange">🛡️</div>
+        <div><div class="card-title">存取控制</div><div class="card-subtitle">群組與 Gateway 權限</div></div>
+      </div>
+      <div class="card-body">
+        mm groupPolicy: <span class="tag tag-green">open</span><br>
+        大管家 groupPolicy: <span class="tag tag-blue">open + requireMention</span><br>
+        <br>
+        Gateway port: <code>18789</code>（本機僅限，無外部暴露）<br>
+        Gateway auth token: 儲存於 <code>openclaw.json</code><br>
+        LaunchAgent: <code>ai.openclaw.gateway</code>（用戶層自啟動）
+      </div>
+    </div>
+
+    <!-- Backup Mechanism -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-green">💾</div>
+        <div><div class="card-title">備份 / 復原機制</div><div class="card-subtitle">backup_openclaw.sh</div></div>
+      </div>
+      <div class="card-body">
+        腳本: <code>~/Documents/Claude/backup_openclaw.sh</code><br>
+        備份內容：<code>~/.openclaw/</code> 整個目錄<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├ <code>openclaw.json</code>（設定、bot tokens）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├ <code>cron/jobs.json</code>（排程任務）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├ <code>workspace/*.md</code>（靈魂檔案）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;└ <code>workspace/tools/*.py</code>（Python 工具）<br>
+        <br>
+        推送至: <span class="tag tag-orange">GitHub（私有 repo）</span><br>
+        復原: <code>git clone</code> 後重新啟動 OC 即可
+      </div>
+    </div>
+
+    <!-- CCW Cloud Memory -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">☁️</div>
+        <div><div class="card-title">CCW 雲端背景記憶</div><div class="card-subtitle">memory skill 讀取機制</div></div>
+      </div>
+      <div class="card-body">
+        技能: <code>memory</code>（Cowork 的 SKILL.md）<br>
+        來源: GitHub → <code>CCW_CONTEXT.md</code><br>
+        <br>
+        讀取內容包含：<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• 系統架構全覽（Agent / 群組 / 工具）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• 帳號清單（Google / GitHub / Telegram）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• AI 工具簡稱對照（OC / CCW / GB 等）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• 待處理事項（SHORT_TERM 摘要）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;• 重要決策紀錄（LONG_TERM 摘要）<br>
+        <br>
+        觸發詞：「記憶」「背景」「load memory」「context」
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -841,7 +970,7 @@
 </div>
 
 <div class="footer">
-  Mac AI System Architecture · 最後更新：2026-03-13 20:47 · OpenClaw v2026.3.2 on Mac Mini M4
+  Mac AI System Architecture · 最後更新：2026-03-13 22:15 · OpenClaw v2026.3.2 on Mac Mini M4
 </div>
 
 </body>
