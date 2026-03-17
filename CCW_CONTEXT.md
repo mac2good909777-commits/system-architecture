@@ -81,12 +81,12 @@ launchctl print gui/$(id -u)/ai.openclaw.gateway
 ~/.openclaw/agents/housekeeper/workspace/ 大管家的獨立 workspace
 ~/.openclaw/agents/dreamer/workspace/     夢想家的獨立 workspace
 ~/Library/LaunchAgents/ai.openclaw.gateway.plist  Gateway 自動啟動設定
-~/Documents/Claude/                       CCW 的工作資料夾
-~/Documents/Claude/.env                   所有 API Keys
-~/Documents/Claude/system-architecture/  本架構文件（此檔案所在）
-~/Documents/Claude/HANDOFF.md            系統交接文件
-~/Documents/Claude/backup_openclaw.sh    備份腳本（v2 輕量版）
-~/Documents/Claude/OC_COMMANDS.md        OC 指令速查
+~/Documents/Claude-MM4/                       CCW 的工作資料夾
+~/Documents/Claude-MM4/.env                   所有 API Keys
+~/Documents/Claude-MM4/system-architecture/  本架構文件（此檔案所在）
+~/Documents/Claude-MM4/HANDOFF.md            系統交接文件
+~/Documents/Claude-MM4/backup_openclaw.sh    備份腳本（v2 輕量版）
+~/Documents/Claude-MM4/OC_COMMANDS.md        OC 指令速查
 ```
 
 ---
