@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>彰濱工業區｜稀有千坪鋼骨大廠房｜瑞禾開發</title>
+  <meta name="description" content="彰濱工業區鹿港鎮，鋼骨造輕齡千坪大廠房，超高挑高、天車到位、臨貨櫃碼頭，整棟出售 78,000 萬。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4B872F;
+      --primary-dark: #2B5937;
+      --accent: #C0A434;
+      --accent-light: #E8D48B;
+      --cream: #F5F3EE;
+      --text: #333333;
+      --text-light: #888888;
+      --text-muted: #AAAAAA;
+      --border: #E8E6E1;
+      --white: #FFFFFF;
+      --font: 'Noto Sans TC', sans-serif;
+      --radius: 10px;
+      --max-w: 1100px;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--text); background: var(--white); line-height: 1.7; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #6aaa4a 100%);
+      color: var(--white);
+      padding: 60px 24px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(192,164,52,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -40px; left: -40px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 30px;
+      padding: 6px 20px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(4px);
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 900;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+    .hero-sub {
+      font-size: clamp(15px, 2.5vw, 18px);
+      opacity: 0.85;
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+    .hero-price {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary-dark);
+      font-size: clamp(26px, 4.5vw, 38px);
+      font-weight: 900;
+      padding: 10px 36px;
+      border-radius: 8px;
+      letter-spacing: 2px;
+      box-shadow: 0 4px 20px rgba(192,164,52,0.3);
+    }
+    .hero-price span { font-size: 0.55em; font-weight: 500; vertical-align: middle; }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .hero-tags .tag {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ── Container ── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 20px; }
+
+    /* ── Quick Stats ── */
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0;
+      background: var(--cream);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: -28px 20px 0;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      max-width: var(--max-w);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 22px 12px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-label { font-size: 12px; color: var(--text-light); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+    .stat-value { font-size: 20px; font-weight: 700; color: var(--primary-dark); }
+    .stat-value small { font-size: 13px; font-weight: 400; color: var(--text-light); }
+
+    /* ── Section ── */
+    .section { padding: 52px 20px; }
+    .section-alt { background: var(--cream); }
+    .section-title {
+      text-align: center;
+      font-size: clamp(22px, 3.5vw, 28px);
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+    .section-desc {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    /* ── Feature Cards ── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(75,135,47,0.1);
+    }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+      color: var(--white);
+    }
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* ── Overview List ── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .overview-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      border-radius: 8px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+    }
+    .overview-dot {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .overview-item span { font-size: 15px; }
+
+    /* ── Description ── */
+    .description {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 15.5px;
+      line-height: 1.9;
+      color: #444;
+    }
+    .description p { margin-bottom: 18px; }
+    .description strong { color: var(--primary-dark); }
+
+    /* ── Nearby ── */
+    .nearby-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .nearby-chip {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 10px 22px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--primary-dark);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .nearby-chip .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 56px 24px;
+    }
+    .cta-section h2 {
+      font-size: clamp(22px, 3.5vw, 30px);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .cta-section p {
+      opacity: 0.85;
+      font-size: 15px;
+      margin-bottom: 30px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover { transform: translateY(-2px); }
+    .cta-btn.phone {
+      background: var(--accent);
+      color: var(--primary-dark);
+      box-shadow: 0 4px 16px rgba(192,164,52,0.3);
+    }
+    .cta-btn.line {
+      background: #06C755;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(6,199,85,0.3);
+    }
+
+    /* ── Contact Card ── */
+    .contact-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      max-width: 480px;
+      margin: 0 auto;
+      backdrop-filter: blur(4px);
+    }
+    .contact-card .name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .contact-card .role {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-bottom: 12px;
+    }
+    .contact-card .info-line {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 4px;
+    }
+    .contact-card .info-line a { color: var(--accent-light); text-decoration: none; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+    }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+
+    /* ── Price Banner ── */
+    .price-banner {
+      text-align: center;
+      padding: 28px 20px;
+      background: linear-gradient(135deg, #fdf6e3 0%, #fef9ee 100%);
+      border-top: 3px solid var(--accent);
+      border-bottom: 3px solid var(--accent);
+    }
+    .price-banner .label { font-size: 14px; color: var(--text-light); margin-bottom: 4px; }
+    .price-banner .price-highlight {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 900;
+      color: var(--primary-dark);
+    }
+    .price-banner .price-highlight span { color: var(--accent); }
+    .price-banner .note { font-size: 13px; color: var(--text-light); margin-top: 6px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero { padding: 44px 18px 40px; }
+      .quick-stats { grid-template-columns: repeat(2, 1fr); margin: -24px 12px 0; }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item { padding: 16px 10px; }
+      .section { padding: 40px 16px; }
+      .features { grid-template-columns: 1fr; }
+      .overview-grid { grid-template-columns: 1fr; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .cta-btn { width: 100%; max-width: 300px; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════ HERO ════════════ -->
+<header class="hero">
+  <div class="hero-badge">瑞禾開發｜工業廠房</div>
+  <h1>彰濱工業區<br>稀有千坪鋼骨大廠房</h1>
+  <p class="hero-sub">鹿港鎮｜彰濱工業區｜丁種建築用地</p>
+  <div class="hero-price">78,000 <span>萬</span></div>
+  <div class="hero-tags">
+    <span class="tag">整棟出售</span>
+    <span class="tag">超高挑高</span>
+    <span class="tag">天車到位</span>
+    <span class="tag">臨貨櫃碼頭</span>
+    <span class="tag">低於行情</span>
+  </div>
+</header>
+
+<!-- ════════════ QUICK STATS ════════════ -->
+<div class="quick-stats">
+  <div class="stat-item">
+    <div class="stat-label">建坪</div>
+    <div class="stat-value">6,400<small>+ 坪</small></div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">地坪</div>
+    <div class="stat-value">3,600<small>+ 坪</small></div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">結構</div>
+    <div class="stat-value">鋼骨造</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">屋齡</div>
+    <div class="stat-value">輕齡 <small>10年內</small></div>
+  </div>
+</div>
+
+<!-- ════════════ FEATURES ════════════ -->
+<section class="section" style="padding-top:68px;">
+  <h2 class="section-title">物件亮點</h2>
+  <p class="section-desc">稀有大規模工業廠房，一次到位的製造業等級配置</p>
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">🏭</div>
+      <h3>千坪稀有大廠</h3>
+      <p>建坪逾六千坪，整棟出售，市場罕見釋出。多樓層設計含夾層與太子樓，空間運用極具彈性。</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📐</div>
+      <h3>超高挑高空間</h3>
+      <p>一樓廠區挑高充裕，重型機具進出無礙，適合大型製造、組裝產線或倉儲物流配置。</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏗️</div>
+      <h3>天車設備到位</h3>
+      <p>配備天車系統，適合重工業、機械加工、鋼構等產業需求，進駐即可投入運作。</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🚢</div>
+      <h3>臨貨櫃碼頭</h3>
+      <p>緊鄰碼頭，上下貨極為便利。大型車門設計，貨車、貨櫃車可直接進出廠區。</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>高壓大電到位</h3>
+      <p>製造業等級電力配置，滿足高用電需求產業。電力規格完整，歡迎來電索取詳細數據。</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <h3>安全設備完善</h3>
+      <p>配備警衛保全、消防栓、緊報器、逃生梯、貨梯等完善設施，符合工廠管理規範。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ OVERVIEW ════════════ -->
+<section class="section section-alt">
+  <h2 class="section-title">廠房概況</h2>
+  <p class="section-desc">設備齊全，即刻進駐</p>
+  <div class="overview-grid">
+    <div class="overview-item"><span class="overview-dot"></span><span>鋼骨造結構，堅實耐用</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>多樓層規劃（含夾層/太子樓）</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>一樓超高挑高，空間充裕</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>天車系統配備</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>高壓大電，製造業等級</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>貨櫃碼頭，物流便利</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>大型車門，貨車直接進出</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>貨梯載重充裕</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>辦公室、茶水間、會議室</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>警衛保全系統</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>消防設備齊全</span></div>
+    <div class="overview-item"><span class="overview-dot"></span><span>充足戶外停車空間</span></div>
+  </div>
+</section>
+
+<!-- ════════════ DESCRIPTION ════════════ -->
+<section class="section">
+  <h2 class="section-title">物件說明</h2>
+  <p class="section-desc"></p>
+  <div class="description">
+    <p>
+      坐落於<strong>彰濱工業區核心地段</strong>，本案為市場上極為稀有的大規模整棟鋼骨廠房。建坪超過六千坪、地坪逾三千六百坪，從一樓到頂樓每一層都有寬闊的作業空間，適合物流倉儲、製造組裝、科技產線等多元用途。
+    </p>
+    <p>
+      一樓廠區挑高充裕，配備天車系統，重型設備吊掛作業得心應手。廠房緊鄰<strong>貨櫃碼頭</strong>，進出口貿易、原物料運補都能以最短動線完成。大型車門設計讓各式貨車、貨櫃車暢行無阻。
+    </p>
+    <p>
+      高壓大電已到位，消防安全設備齊全，辦公室與員工休憩空間一應俱全。輕齡鋼骨結構堅實耐用，整體條件在彰濱工業區內屬頂級配置，且<strong>開價低於區域行情</strong>，誠意出售。
+    </p>
+  </div>
+</section>
+
+<!-- ════════════ PRICE BANNER ════════════ -->
+<div class="price-banner">
+  <div class="label">整棟出售 總價</div>
+  <div class="price-highlight"><span>78,000</span> 萬</div>
+  <div class="note">低於區域行情，完整價格分析歡迎來電索取</div>
+</div>
+
+<!-- ════════════ NEARBY ════════════ -->
+<section class="section section-alt">
+  <h2 class="section-title">周邊環境</h2>
+  <p class="section-desc">知名企業群聚，產業聚落成熟</p>
+  <div class="nearby-list">
+    <div class="nearby-chip"><span class="dot"></span>Google 資料中心（線西）</div>
+    <div class="nearby-chip"><span class="dot"></span>台玻集團</div>
+    <div class="nearby-chip"><span class="dot"></span>炎洲集團 YC GROUP</div>
+    <div class="nearby-chip"><span class="dot"></span>ARTC 車輛研究測試中心</div>
+    <div class="nearby-chip"><span class="dot"></span>白蘭氏健康博物館</div>
+    <div class="nearby-chip"><span class="dot"></span>緞帶王觀光工廠</div>
+    <div class="nearby-chip"><span class="dot"></span>近西濱快速道路</div>
+    <div class="nearby-chip"><span class="dot"></span>彰濱產業園區鹿港區</div>
+  </div>
+</section>
+
+<!-- ════════════ CTA + CONTACT ════════════ -->
+<section class="cta-section">
+  <h2>想了解更多？</h2>
+  <p>完整資料（各樓層坪數、電力規格、格局配置圖）歡迎來電或加 LINE 索取</p>
+  <div class="cta-buttons">
+    <a href="tel:0953909777" class="cta-btn phone">📞 立即來電</a>
+    <a href="https://line.me/ti/p/~0953909777" class="cta-btn line">💬 LINE 索取資料</a>
+  </div>
+  <div class="contact-card">
+    <div class="name">張現傑</div>
+    <div class="role">工業不動產・設廠評估・整合服務</div>
+    <div class="info-line">17年+ 不動產經驗｜歷經信義集團・磐石工業地產</div>
+    <div class="info-line">專長：工業地產買賣、企業設廠選址、資產活化</div>
+    <div class="info-line" style="margin-top:10px;">
+      📞 <a href="tel:0953909777">0953-909-777</a>
+      &nbsp;｜&nbsp;
+      💬 LINE：<a href="https://line.me/ti/p/~0953909777">0953909777</a>
+    </div>
+    <div class="info-line" style="margin-top:8px; font-size:12px; opacity:0.6;">
+      現職：睦聚地產開發 負責人｜合作：瑞禾開發
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <p>瑞禾開發｜建築・房產整合團隊</p>
+  <p style="margin-top:4px;">本頁僅供行銷參考，實際資料以地政機關登記為準</p>
+</footer>
+
+</body>
+</html>
