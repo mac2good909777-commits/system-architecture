@@ -306,31 +306,78 @@
     }
 
     /* ── Contact Card ── */
-    .contact-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: var(--radius);
-      padding: 24px 28px;
-      max-width: 480px;
+    /* ── Business Card ── */
+    .biz-card {
+      background: var(--white);
+      border-radius: 12px;
+      max-width: 580px;
       margin: 0 auto;
-      backdrop-filter: blur(4px);
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     }
-    .contact-card .name {
-      font-size: 20px;
+    .biz-card-top {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .biz-card-logo { flex-shrink: 0; }
+    .biz-card-brand {
+      color: var(--white);
+    }
+    .biz-card-brand .brand-name { font-size: 18px; font-weight: 700; letter-spacing: 2px; }
+    .biz-card-brand .brand-sub { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+    .biz-card-body {
+      padding: 24px 28px;
+      color: var(--text);
+      display: flex;
+      gap: 24px;
+    }
+    .biz-card-left { flex: 1; }
+    .biz-card-right {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    .biz-card-dept { font-size: 12px; color: var(--primary); font-weight: 500; margin-bottom: 2px; }
+    .biz-card-title { font-size: 12px; color: var(--text-light); margin-bottom: 8px; }
+    .biz-card-name { font-size: 26px; font-weight: 900; color: var(--primary-dark); margin-bottom: 4px; }
+    .biz-card-phone { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+    .biz-card-phone a { color: var(--primary); text-decoration: none; }
+    .biz-card-phone .line-badge {
+      display: inline-block;
+      background: #06C755;
+      color: #fff;
+      font-size: 10px;
       font-weight: 700;
-      margin-bottom: 4px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      vertical-align: middle;
+      margin-left: 6px;
     }
-    .contact-card .role {
-      font-size: 13px;
-      opacity: 0.7;
-      margin-bottom: 12px;
+    .biz-card-offices { font-size: 12px; color: var(--text-light); line-height: 1.8; }
+    .biz-card-offices strong { color: var(--text); font-weight: 600; }
+    .biz-card-bottom {
+      background: var(--cream);
+      padding: 10px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
     }
-    .contact-card .info-line {
-      font-size: 14px;
-      opacity: 0.85;
-      margin-bottom: 4px;
+    .biz-card-bottom a { color: var(--primary); text-decoration: none; }
+    @media (max-width: 520px) {
+      .biz-card-body { flex-direction: column; gap: 16px; }
+      .biz-card-right { align-items: flex-start; }
     }
-    .contact-card .info-line a { color: var(--accent-light); text-decoration: none; }
 
     /* ── Footer ── */
     footer {
@@ -377,6 +424,17 @@
 
 <!-- ════════════ HERO ════════════ -->
 <header class="hero">
+  <div style="margin-bottom:16px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 52 52" style="vertical-align:middle;">
+      <rect x="2" y="2" width="48" height="48" rx="8" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+      <text x="26" y="36" text-anchor="middle" font-family="Noto Sans TC, sans-serif" font-size="28" font-weight="900" fill="#FFFFFF">禾</text>
+      <g fill="#C0A434" opacity="0.7">
+        <ellipse cx="6" cy="14" rx="3" ry="5" transform="rotate(-10 6 14)"/>
+        <ellipse cx="4" cy="24" rx="2.5" ry="4.5" transform="rotate(-18 4 24)"/>
+        <ellipse cx="6" cy="33" rx="2" ry="4" transform="rotate(-12 6 33)"/>
+      </g>
+    </svg>
+  </div>
   <div class="hero-badge">瑞禾開發｜工業廠房</div>
   <h1>彰濱工業區<br>稀有千坪鋼骨大廠房</h1>
   <p class="hero-sub">鹿港鎮｜彰濱工業區｜丁種建築用地</p>
@@ -386,7 +444,7 @@
     <span class="tag">超高挑高</span>
     <span class="tag">天車到位</span>
     <span class="tag">臨貨櫃碼頭</span>
-    <span class="tag">低於行情</span>
+    <span class="tag">行情有競爭力</span>
   </div>
 </header>
 
@@ -480,7 +538,7 @@
       一樓廠區挑高充裕，配備天車系統，重型設備吊掛作業得心應手。廠房緊鄰<strong>貨櫃碼頭</strong>，進出口貿易、原物料運補都能以最短動線完成。大型車門設計讓各式貨車、貨櫃車暢行無阻。
     </p>
     <p>
-      高壓大電已到位，消防安全設備齊全，辦公室與員工休憩空間一應俱全。輕齡鋼骨結構堅實耐用，整體條件在彰濱工業區內屬頂級配置，且<strong>開價低於區域行情</strong>，誠意出售。
+      高壓大電已到位，消防安全設備齊全，辦公室與員工休憩空間一應俱全。輕齡鋼骨結構堅實耐用，整體條件在彰濱工業區內屬頂級配置，且<strong>開價在區域行情中極具競爭力</strong>，誠意出售。
     </p>
   </div>
 </section>
@@ -489,7 +547,7 @@
 <div class="price-banner">
   <div class="label">整棟出售 總價</div>
   <div class="price-highlight"><span>78,000</span> 萬</div>
-  <div class="note">低於區域行情，完整價格分析歡迎來電索取</div>
+  <div class="note">行情有競爭力，完整價格分析歡迎來電索取</div>
 </div>
 
 <!-- ════════════ NEARBY ════════════ -->
@@ -508,7 +566,7 @@
   </div>
 </section>
 
-<!-- ════════════ CTA + CONTACT ════════════ -->
+<!-- ════════════ CTA + BUSINESS CARD ════════════ -->
 <section class="cta-section">
   <h2>想了解更多？</h2>
   <p>完整資料（各樓層坪數、電力規格、格局配置圖）歡迎來電或加 LINE 索取</p>
@@ -516,24 +574,62 @@
     <a href="tel:0953909777" class="cta-btn phone">📞 立即來電</a>
     <a href="https://line.me/ti/p/~0953909777" class="cta-btn line">💬 LINE 索取資料</a>
   </div>
-  <div class="contact-card">
-    <div class="name">張現傑</div>
-    <div class="role">工業不動產・設廠評估・整合服務</div>
-    <div class="info-line">17年+ 不動產經驗｜歷經信義集團・磐石工業地產</div>
-    <div class="info-line">專長：工業地產買賣、企業設廠選址、資產活化</div>
-    <div class="info-line" style="margin-top:10px;">
-      📞 <a href="tel:0953909777">0953-909-777</a>
-      &nbsp;｜&nbsp;
-      💬 LINE：<a href="https://line.me/ti/p/~0953909777">0953909777</a>
+
+  <!-- 名片風格聯絡區塊 -->
+  <div class="biz-card">
+    <div class="biz-card-top">
+      <div class="biz-card-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52">
+          <rect x="2" y="2" width="48" height="48" rx="8" fill="#4B872F"/>
+          <text x="26" y="36" text-anchor="middle" font-family="Noto Sans TC, sans-serif" font-size="28" font-weight="900" fill="#FFFFFF">禾</text>
+          <g fill="#C0A434" opacity="0.7">
+            <ellipse cx="6" cy="14" rx="3" ry="5" transform="rotate(-10 6 14)"/>
+            <ellipse cx="4" cy="24" rx="2.5" ry="4.5" transform="rotate(-18 4 24)"/>
+            <ellipse cx="6" cy="33" rx="2" ry="4" transform="rotate(-12 6 33)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="biz-card-brand">
+        <div class="brand-name">瑞禾開發</div>
+        <div class="brand-sub">建築・地產整合團隊｜RueiHe Development Co., Ltd.</div>
+      </div>
     </div>
-    <div class="info-line" style="margin-top:8px; font-size:12px; opacity:0.6;">
-      現職：睦聚地產開發 負責人｜合作：瑞禾開發
+    <div class="biz-card-body">
+      <div class="biz-card-left">
+        <div class="biz-card-dept">工業地產部</div>
+        <div class="biz-card-title">業務總監</div>
+        <div class="biz-card-name">張現傑</div>
+        <div class="biz-card-phone">
+          <a href="tel:0953909777">0953-909 777</a>
+          <span class="line-badge">LINE</span>
+        </div>
+      </div>
+      <div class="biz-card-right">
+        <div class="biz-card-offices">
+          <strong>南屯總部</strong><br>
+          台中市南屯區益豐路四段91號<br>
+          T/ 04-2380-1259<br><br>
+          <strong>嘉義營業處</strong><br>
+          太保市蒲頂里蒲子頂1-64號<br>
+          T/ 05-3711-110
+        </div>
+      </div>
+    </div>
+    <div class="biz-card-bottom">
+      <span>客服專線 / 0800-329-029</span>
+      <span>E-mail / <a href="mailto:a.ruei.he@gmail.com">a.ruei.he@gmail.com</a></span>
     </div>
   </div>
 </section>
 
 <!-- ════════════ FOOTER ════════════ -->
 <footer>
+  <div style="margin-bottom:8px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52" style="vertical-align:middle;">
+      <rect x="2" y="2" width="48" height="48" rx="8" fill="rgba(255,255,255,0.1)"/>
+      <text x="26" y="36" text-anchor="middle" font-family="Noto Sans TC, sans-serif" font-size="28" font-weight="900" fill="rgba(255,255,255,0.5)">禾</text>
+    </svg>
+  </div>
   <p>瑞禾開發｜建築・房產整合團隊</p>
   <p style="margin-top:4px;">本頁僅供行銷參考，實際資料以地政機關登記為準</p>
 </footer>
