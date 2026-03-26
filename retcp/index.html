@@ -15,22 +15,16 @@
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: -apple-system,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
   .container { max-width:900px; margin:0 auto; padding:16px; }
-
-  /* Header */
   .header { display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid var(--border); margin-bottom:20px; }
   .header h1 { font-size:1.4rem; } .header h1 span { color:var(--accent2); }
   .sync-row { display:flex; align-items:center; gap:8px; font-size:0.8rem; color:var(--text2); }
   .sync-dot { width:8px; height:8px; border-radius:50%; }
   .sync-dot.ok { background:var(--green); } .sync-dot.pending { background:var(--yellow); animation:pulse 1.5s infinite; } .sync-dot.error { background:var(--red); }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
-  /* Stats */
-  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:16px; }
+  .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:16px; }
   .stat { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center; }
-  .stat-val { font-size:1.6rem; font-weight:700; color:var(--accent2); }
-  .stat-lbl { font-size:0.75rem; color:var(--text2); margin-top:2px; }
-
-  /* Cards */
+  .stat-val { font-size:1.5rem; font-weight:700; color:var(--accent2); }
+  .stat-lbl { font-size:0.72rem; color:var(--text2); margin-top:2px; }
   .card { background:var(--surface); border:1px solid var(--border); border-radius:12px; margin-bottom:14px; overflow:hidden; }
   .card-head { padding:14px 16px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; user-select:none; }
   .card-head:hover { background:var(--surface2); }
@@ -40,15 +34,11 @@
   .card-body.open { display:block; }
   .chevron { transition:transform 0.2s; color:var(--text3); }
   .chevron.open { transform:rotate(90deg); }
-
-  /* Priority badges */
   .badge { font-size:0.7rem; font-weight:700; padding:2px 8px; border-radius:4px; }
   .badge.p0 { background:var(--red-bg); color:var(--red); }
   .badge.p1 { background:var(--yellow-bg); color:var(--yellow); }
   .badge.p2 { background:rgba(59,130,246,.15); color:var(--accent2); }
-  .badge.ccw { background:rgba(34,197,94,.12); color:var(--green); }
-
-  /* Steps */
+  .badge.phase { background:rgba(139,92,246,.15); color:#a78bfa; }
   .step { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid rgba(71,85,105,.3); }
   .step:last-child { border-bottom:none; }
   .step-check { flex-shrink:0; margin-top:2px; }
@@ -62,8 +52,6 @@
   .step-note { width:100%; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:6px 8px; color:var(--text); font-size:0.82rem; margin-top:6px; resize:none; min-height:32px; }
   .step-note:focus { outline:none; border-color:var(--accent); }
   .step-note::placeholder { color:var(--text3); }
-
-  /* Traffic light */
   .lights { display:flex; gap:10px; margin:10px 0; }
   .light { flex:1; padding:10px; border-radius:8px; border:2px solid transparent; cursor:pointer; text-align:center; font-weight:600; font-size:0.9rem; transition:all .2s; }
   .light.g { background:var(--green-bg); color:var(--green); }
@@ -72,60 +60,51 @@
   .light.y.on { border-color:var(--yellow); box-shadow:0 0 12px rgba(234,179,8,.3); }
   .light.r { background:var(--red-bg); color:var(--red); }
   .light.r.on { border-color:var(--red); box-shadow:0 0 12px rgba(239,68,68,.3); }
-
-  /* Decision */
   .dec { background:var(--surface2); border-radius:8px; padding:12px; margin-bottom:10px; }
-  .dec-q { font-weight:600; font-size:0.92rem; margin-bottom:6px; }
+  .dec-q { font-weight:600; font-size:0.92rem; margin-bottom:4px; }
   .dec-hint { font-size:0.78rem; color:var(--text3); margin-bottom:8px; }
   .dec-opts { display:flex; flex-wrap:wrap; gap:6px; }
   .dec-opt { padding:6px 12px; border-radius:6px; border:1px solid var(--border); cursor:pointer; font-size:0.85rem; transition:all .15s; }
   .dec-opt:hover { border-color:var(--accent); }
   .dec-opt.sel { background:var(--accent); border-color:var(--accent); color:#fff; }
-
-  /* Inputs */
   .inp-group { margin-bottom:10px; }
   .inp-group label { display:block; font-size:0.82rem; color:var(--text2); margin-bottom:3px; }
   .inp-group input,.inp-group textarea,.inp-group select {
     width:100%; background:var(--bg); border:1px solid var(--border); border-radius:6px;
     padding:8px 10px; color:var(--text); font-size:0.9rem;
   }
-  .inp-group input:focus,.inp-group textarea:focus,.inp-group select:focus { outline:none; border-color:var(--accent); }
+  .inp-group input:focus,.inp-group textarea:focus { outline:none; border-color:var(--accent); }
   .inp-group textarea { resize:vertical; min-height:50px; }
-
-  /* Buttons */
   .btn { padding:10px 20px; border-radius:8px; border:none; cursor:pointer; font-size:0.92rem; font-weight:600; transition:all .2s; }
   .btn-pri { background:var(--accent); color:#fff; } .btn-pri:hover { background:var(--accent2); }
   .btn-sec { background:var(--surface2); color:var(--text); } .btn-sec:hover { background:var(--border); }
   .btn-row { display:flex; gap:8px; margin:20px 0; justify-content:center; flex-wrap:wrap; }
-
-  /* Setup */
   .setup { background:linear-gradient(135deg,#1e3a5f,#1e293b); border:1px solid var(--accent); border-radius:12px; padding:16px; margin-bottom:16px; }
   .setup h3 { color:var(--accent2); margin-bottom:8px; font-size:1rem; }
   .setup-step { margin:6px 0; padding:6px 0; border-bottom:1px solid var(--surface2); font-size:0.88rem; }
   .setup-step:last-child { border-bottom:none; }
-
   .toast { position:fixed; bottom:20px; right:20px; padding:10px 16px; border-radius:8px; font-size:0.85rem; z-index:999; transition:opacity .3s; }
   .toast.success { background:var(--green-bg); color:var(--green); border:1px solid var(--green); }
   .toast.error { background:var(--red-bg); color:var(--red); border:1px solid var(--red); }
   .toast.hidden { opacity:0; pointer-events:none; }
-
   hr.div { border:none; border-top:1px solid var(--border); margin:20px 0; }
-  @media(max-width:600px) { .stats{grid-template-columns:1fr;} .lights{flex-direction:column;} }
+  .phase-label { font-size:0.75rem; color:#a78bfa; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; margin-top:16px; }
+  @media(max-width:600px) { .stats{grid-template-columns:repeat(2,1fr);} .lights{flex-direction:column;} }
 </style>
 </head>
 <body>
-<div class="container" id="app">
+<div class="container">
 
   <div class="header">
     <h1>📊 <span>RETCP-2026</span> 控場面板</h1>
     <div class="sync-row"><div class="sync-dot" id="sDot"></div><span id="sTxt">尚未連線</span></div>
   </div>
 
-  <!-- Setup (collapsible) -->
+  <!-- Setup -->
   <div class="setup" id="setupBox" style="display:none">
     <h3>⚙️ Google Sheet 連線設定</h3>
     <div class="setup-step"><strong>1.</strong> 建立 Google Sheet → 記下 Sheet ID</div>
-    <div class="setup-step"><strong>2.</strong> <a href="https://script.google.com" target="_blank" style="color:var(--accent2)">script.google.com</a> → 新專案 → 貼上 Apps Script 程式碼 → 部署為網頁應用程式</div>
+    <div class="setup-step"><strong>2.</strong> <a href="https://script.google.com" target="_blank" style="color:var(--accent2)">script.google.com</a> → 新專案 → 貼 Apps Script → 部署為網頁應用程式</div>
     <div class="setup-step"><strong>3.</strong> 填入下面兩欄 → 儲存</div>
     <div class="inp-group" style="margin-top:10px"><label>Google Sheet ID</label><input id="cfgSid" placeholder="1AbCdEf..."></div>
     <div class="inp-group"><label>Apps Script URL</label><input id="cfgUrl" placeholder="https://script.google.com/macros/s/..."></div>
@@ -137,16 +116,15 @@
 
   <!-- Stats -->
   <div class="stats">
-    <div class="stat"><div class="stat-val" id="sPhase">Phase 1</div><div class="stat-lbl">驗證期（月 1-4）</div></div>
+    <div class="stat"><div class="stat-val" id="sPhase">Phase 0</div><div class="stat-lbl">查驗標準化</div></div>
     <div class="stat"><div class="stat-val" id="sWeek">W0</div><div class="stat-lbl">啟動準備週</div></div>
     <div class="stat"><div class="stat-val" id="sLight">🟢</div><div class="stat-lbl">停損燈號</div></div>
+    <div class="stat"><div class="stat-val" id="sTotal">0%</div><div class="stat-lbl">總完成率</div></div>
   </div>
 
   <!-- 停損燈號 -->
   <div class="card">
-    <div class="card-head" onclick="tog(this)">
-      <div class="card-title">🚦 停損燈號</div><span class="chevron">▶</span>
-    </div>
+    <div class="card-head" onclick="tog(this)"><div class="card-title">🚦 停損燈號</div><span class="chevron">▶</span></div>
     <div class="card-body">
       <div class="lights">
         <div class="light g on" onclick="setL(this,'green')">🟢 綠燈<br><small>正常推進</small></div>
@@ -157,40 +135,91 @@
     </div>
   </div>
 
-  <!-- ========== P0 ========== -->
-  <div class="card" id="card-p0">
+  <!-- ========== PHASE 0：查驗標準化 ========== -->
+  <div class="phase-label">── Phase 0：查驗標準化（核心引擎）──</div>
+
+  <!-- Step 1: 法律前提 -->
+  <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p0">P0</span> 啟動前必做（3 大項）</div>
-      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-p0">0/9</span><span class="chevron open">▶</span></div>
+      <div class="card-title"><span class="badge p0">P0</span> Step 1：法律前提確認</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-legal">0/3</span><span class="chevron open">▶</span></div>
     </div>
-    <div class="card-body open" id="body-p0"></div>
+    <div class="card-body open" id="body-legal"></div>
   </div>
 
-  <!-- ========== P1: 報告七模組 ========== -->
-  <div class="card" id="card-mod">
+  <!-- Step 2: 查驗項目標準化 -->
+  <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p1">P1</span> 報告模板七模組</div>
+      <div class="card-title"><span class="badge p0">P0</span> Step 2：查驗項目標準化 ⭐ 最重要</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-verify">0/5</span><span class="chevron open">▶</span></div>
+    </div>
+    <div class="card-body open" id="body-verify"></div>
+  </div>
+
+  <!-- Step 3: 七模組模板 -->
+  <div class="card">
+    <div class="card-head" onclick="tog(this)">
+      <div class="card-title"><span class="badge p1">P1</span> Step 3：七模組報告模板</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-mod">0/7</span><span class="chevron">▶</span></div>
     </div>
     <div class="card-body" id="body-mod"></div>
   </div>
 
-  <!-- ========== P1: 其他 ========== -->
-  <div class="card" id="card-p1">
+  <!-- Step 4: 業助 SOP -->
+  <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p1">P1</span> 第一個月其他任務</div>
-      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-p1">0/5</span><span class="chevron">▶</span></div>
+      <div class="card-title"><span class="badge p1">P1</span> Step 4：業助 SOP</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-sop">0/3</span><span class="chevron">▶</span></div>
     </div>
-    <div class="card-body" id="body-p1"></div>
+    <div class="card-body" id="body-sop"></div>
   </div>
 
-  <!-- ========== P2 ========== -->
-  <div class="card" id="card-p2">
+  <!-- Step 5: 自動化 -->
+  <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p2">P2</span> 第二個月完成</div>
-      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-p2">0/2</span><span class="chevron">▶</span></div>
+      <div class="card-title"><span class="badge p1">P1</span> Step 5：CCW 自動化腳本</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-auto">0/3</span><span class="chevron">▶</span></div>
     </div>
-    <div class="card-body" id="body-p2"></div>
+    <div class="card-body" id="body-auto"></div>
+  </div>
+
+  <!-- Step 6: 第一份報告 -->
+  <div class="card">
+    <div class="card-head" onclick="tog(this)">
+      <div class="card-title"><span class="badge p0">P0</span> Step 6：第一份真實報告（驗收）</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-first">0/4</span><span class="chevron">▶</span></div>
+    </div>
+    <div class="card-body" id="body-first"></div>
+  </div>
+
+  <!-- ========== PHASE 1 ========== -->
+  <div class="phase-label">── Phase 1：正式啟動（月 1-4）──</div>
+
+  <!-- 系統建置 -->
+  <div class="card">
+    <div class="card-head" onclick="tog(this)">
+      <div class="card-title"><span class="badge p0">P0</span> 系統建置</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-sys">0/3</span><span class="chevron">▶</span></div>
+    </div>
+    <div class="card-body" id="body-sys"></div>
+  </div>
+
+  <!-- 品牌與收款 -->
+  <div class="card">
+    <div class="card-head" onclick="tog(this)">
+      <div class="card-title"><span class="badge p1">P1</span> 品牌設立 + 收款</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-brand">0/4</span><span class="chevron">▶</span></div>
+    </div>
+    <div class="card-body" id="body-brand"></div>
+  </div>
+
+  <!-- 行銷啟動 -->
+  <div class="card">
+    <div class="card-head" onclick="tog(this)">
+      <div class="card-title"><span class="badge p2">P2</span> 行銷與市場驗證</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-mkt">0/3</span><span class="chevron">▶</span></div>
+    </div>
+    <div class="card-body" id="body-mkt"></div>
   </div>
 
   <hr class="div">
@@ -198,17 +227,17 @@
   <!-- 決策區 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title">🎯 本週決策</div><span class="chevron open">▶</span>
+      <div class="card-title">🎯 決策區</div><span class="chevron open">▶</span>
     </div>
     <div class="card-body open">
       <div class="dec">
         <div class="dec-q">1. 預定啟動日期</div>
-        <div class="dec-hint">確認法律前提後才能正式開跑，目前預設 4/1</div>
+        <div class="dec-hint">Phase 0 完成後才正式計算月份。目前預設 4 月中</div>
         <div class="dec-opts" data-f="d_launch">
-          <div class="dec-opt" onclick="selD(this)" data-v="2026-04-01">4/1 如期</div>
-          <div class="dec-opt" onclick="selD(this)" data-v="2026-04-07">延到 4/7</div>
-          <div class="dec-opt" onclick="selD(this)" data-v="2026-04-14">延到 4/14</div>
-          <div class="dec-opt" onclick="selD(this)" data-v="pending">待定</div>
+          <div class="dec-opt" onclick="selD(this)" data-v="2026-04-14">4/14</div>
+          <div class="dec-opt" onclick="selD(this)" data-v="2026-04-21">4/21</div>
+          <div class="dec-opt" onclick="selD(this)" data-v="2026-05-01">5/1</div>
+          <div class="dec-opt" onclick="selD(this)" data-v="pending">Phase 0 完成再定</div>
         </div>
       </div>
       <div class="dec">
@@ -222,17 +251,16 @@
       </div>
       <div class="dec">
         <div class="dec-q">3. 業助招募時間</div>
-        <div class="dec-hint">月薪 NT$2 萬，按 SOP 執行資料蒐集和客戶聯繫</div>
+        <div class="dec-hint">月薪 NT$2 萬。查驗標準化完成後，SOP 才有東西教他</div>
         <div class="dec-opts" data-f="d_asst">
-          <div class="dec-opt" onclick="selD(this)" data-v="w2">第 2 週找</div>
-          <div class="dec-opt" onclick="selD(this)" data-v="w3">第 3 週找</div>
-          <div class="dec-opt" onclick="selD(this)" data-v="m2">月 2 再說</div>
+          <div class="dec-opt" onclick="selD(this)" data-v="after_p0">Phase 0 完成後招</div>
+          <div class="dec-opt" onclick="selD(this)" data-v="phase1_w2">Phase 1 第2週</div>
           <div class="dec-opt" onclick="selD(this)" data-v="have">已有人選</div>
         </div>
       </div>
       <div class="dec">
-        <div class="dec-q">4. 第一個測試標的</div>
-        <div class="dec-hint">選一個你熟悉的住宅地址，CCW 用來建立報告模板</div>
+        <div class="dec-q">4. 第一個測試標的地址</div>
+        <div class="dec-hint">選一個你熟悉的住宅地址，Step 6 驗收時用</div>
         <div class="inp-group"><input id="d_test_addr" placeholder="例：台北市信義區松仁路100號" onchange="D.d_test_addr=this.value;save()"></div>
       </div>
     </div>
@@ -248,7 +276,6 @@
     </div>
   </div>
 
-  <!-- Buttons -->
   <div class="btn-row">
     <button class="btn btn-pri" onclick="manualSync()" style="padding:12px 28px">💾 同步到 Google Sheet</button>
     <button class="btn btn-sec" onclick="exportJ()">📋 匯出 JSON</button>
@@ -259,65 +286,79 @@
 <div class="toast hidden" id="toast"></div>
 
 <script>
-// ===== Data =====
-const CK='retcp_cfg', DK='retcp_data';
+const CK='retcp_cfg', DK='retcp_data_v2';
 let C=JSON.parse(localStorage.getItem(CK)||'{}');
-let D=JSON.parse(localStorage.getItem(DK)||'null')||defaultData();
-
-function defaultData(){return{
-  ts:new Date().toISOString(), week:'W0', phase:'Phase 1',
+let D=JSON.parse(localStorage.getItem(DK)||'null')||{
+  ts:new Date().toISOString(), week:'W0', phase:'Phase 0',
   light:'green', lightR:'專案尚未正式啟動，投入成本=0',
   tasks:{}, decisions:{}, d_test_addr:'', notes:''
-}}
+};
 
-// ===== Task Definitions =====
+// ===== ALL TASKS =====
 const TASKS = {
-  p0: [
-    {id:'p0_legal_1', text:'查看自己的雇傭合約', hint:'找出合約中「競業禁止」「副業限制」相關條款，拍照或截圖備用', owner:'mac'},
-    {id:'p0_legal_2', text:'預約律師諮詢（或自行判斷）', hint:'CCW 已產出問律師的 7 個問題清單，帶去問。費用約 NT$3-5K', owner:'mac'},
-    {id:'p0_legal_3', text:'法律確認結果回填', hint:'在備註寫上結論，例如「無競業限制」或「有限制但不涵蓋資訊服務」', owner:'mac'},
-    {id:'p0_sheet_1', text:'下載 RETCP_STATUS_欄位規格.xlsx', hint:'檔案在 ~/Documents/Claude-MM4/RETCP-2026/ 資料夾', owner:'mac'},
-    {id:'p0_sheet_2', text:'上傳到 Google Drive 轉為 Google Sheet', hint:'上傳後右鍵 → 開啟方式 → Google 試算表，會自動轉換', owner:'mac'},
-    {id:'p0_sheet_3', text:'回填 Sheet ID 到控場面板設定', hint:'Sheet 網址中 /d/ 和 /edit 之間那段就是 ID，點上方 ⚙️ 填入', owner:'mac'},
-    {id:'p0_cfg_1', text:'閱讀專案設定檔', hint:'~/Documents/Claude-MM4/RETCP-2026/retcp-2026_config.md，確認內容正確', owner:'mac'},
-    {id:'p0_cfg_2', text:'確認啟動日期', hint:'在上方決策區選擇預定啟動日', owner:'mac'},
-    {id:'p0_cfg_3', text:'確認 2025 創業大聯盟提案文件流通範圍', hint:'那份文件有你的名字，確認誰看過、是否公開', owner:'mac'},
+  legal: [
+    {id:'leg1', text:'查看雇傭合約', hint:'找出「競業禁止」「副業限制」條款，拍照或截圖留存。重點看：是否禁止副業？範圍是否涵蓋「資訊服務」？', owner:'mac'},
+    {id:'leg2', text:'諮詢律師或自行判斷', hint:'CCW 已備好 7 個問題清單。費用約 NT$3-5K 一次。如果合約明確無限制可自行判斷跳過', owner:'mac'},
+    {id:'leg3', text:'回填法律確認結果', hint:'在下方備註寫結論，例如「無競業限制，可執行」或「有限制但不涵蓋資訊服務」。這決定整個專案能不能做', owner:'mac'},
   ],
-
+  verify: [
+    {id:'vfy1', text:'上傳 2-3 份不動產說明書給 CCW', hint:'住宅、土地、商用各一份最理想。這些是法規規定「必須記載」的標準文件，CCW 需要它來摘要所有查驗項目', owner:'mac 提供'},
+    {id:'vfy2', text:'CCW 摘要所有查驗項目清單', hint:'CCW 分析說明書，提取每一個「必須記載」和「需要查驗」的項目，產出完整清單讓你確認有沒有遺漏', owner:'CCW 產出 → mac 確認'},
+    {id:'vfy3', text:'CCW 研究每個項目的資料來源與查詢方式', hint:'每個查驗項目對應到哪個政府網站、怎麼查、查詢步驟是什麼。這是最花時間的步驟', owner:'CCW 研究'},
+    {id:'vfy4', text:'CCW 產出「查驗項目標準表」', hint:'核心文件：項目編號 / 名稱 / 歸屬模組 / 資料來源 / 查詢網站 / 操作步驟 / 自動化程度。mac 最終確認', owner:'CCW 產出 → mac 確認'},
+    {id:'vfy5', text:'CCW 評估自動化可行性', hint:'哪些項目可以寫腳本自動查（API/爬蟲），哪些只能業助手動查，哪些需要 mac 專業判斷', owner:'CCW 評估'},
+  ],
   mod: [
-    {id:'mod_1', text:'① 封面摘要模組', hint:'CCW 自動產生：標的地址、查詢日期、紅綠燈評分總覽。你不用動，CCW 做好後勾選', owner:'CCW 產出 → mac 確認'},
-    {id:'mod_2', text:'② 產權透視模組', hint:'CCW 整理謄本摘要、所有權、抵押設定、共有人。你需要審核法規判斷是否正確', owner:'CCW 產出 → mac 審核法規'},
-    {id:'mod_3', text:'③ 法規分析模組', hint:'CCW 整理使用分區、建蔽/容積率、特殊限制（航高/斷層等）。你確認關鍵點', owner:'CCW 產出 → mac 確認關鍵點'},
-    {id:'mod_4', text:'④ 市場行情模組', hint:'業助蒐集實價登錄，CCW 分析周邊成交、公告地價。你看數字合理性', owner:'業助蒐集 → CCW 分析 → mac 看'},
-    {id:'mod_5', text:'⑤ 環境評分模組', hint:'CCW 自動查詢嫌惡設施、淹水風險、學區、生活機能。你不用動', owner:'CCW 全自動'},
-    {id:'mod_6', text:'⑥ AI 白話摘要模組', hint:'CCW 生成 3 大優點、3 大風險、給買方建議（白話文）。你微調措辭語氣', owner:'CCW 產出 → mac 微調'},
-    {id:'mod_7', text:'⑦ 免責聲明模組', hint:'CCW 自動產出：「本報告為公開資訊彙整，非不動產估價報告」+ 資料來源', owner:'CCW 全自動'},
+    {id:'mod1', text:'① 封面摘要模組', hint:'標的地址、查詢日期、紅綠燈評分總覽。CCW 根據標準表自動產生模板，你不用動', owner:'CCW 全自動'},
+    {id:'mod2', text:'② 產權透視模組', hint:'謄本摘要、所有權現況、抵押設定、共有人。CCW 產出模板，你審核法規相關的措辭是否正確', owner:'CCW 產出 → mac 審核法規'},
+    {id:'mod3', text:'③ 法規分析模組', hint:'使用分區、建蔽/容積率、特殊限制（航高/斷層）。CCW 產出模板，你確認關鍵判斷點', owner:'CCW 產出 → mac 確認'},
+    {id:'mod4', text:'④ 市場行情模組', hint:'實價登錄比較、周邊成交、公告地價。業助蒐集原始資料，CCW 分析產出模板，你看數字合理性', owner:'業助蒐集 → CCW 分析'},
+    {id:'mod5', text:'⑤ 環境評分模組', hint:'嫌惡設施、淹水風險、學區、生活機能。CCW 根據標準表的查詢方式全自動產出', owner:'CCW 全自動'},
+    {id:'mod6', text:'⑥ AI 白話摘要模組', hint:'3 大優點、3 大風險、給買方建議（白話文）。CCW 生成初稿，你微調語氣和措辭', owner:'CCW 產出 → mac 微調'},
+    {id:'mod7', text:'⑦ 免責聲明模組', hint:'「本報告為公開資訊彙整，非不動產估價報告」+ 資料來源標示。CCW 全自動，法律諮詢時確認措辭即可', owner:'CCW 全自動'},
   ],
-
-  p1: [
-    {id:'p1_sop_1', text:'列出業助每天要做的任務清單', hint:'不用寫 SOP，只要列出清單，例如「查實價登錄」「填 Sheet」等。CCW 會展開成完整 SOP 手冊', owner:'mac 列清單'},
-    {id:'p1_sop_2', text:'CCW 產出完整業助 SOP 手冊', hint:'CCW 根據你的清單，自動生成含步驟截圖說明的 SOP 文件（約 30 頁）', owner:'CCW 產出'},
-    {id:'p1_sop_3', text:'審核 SOP 手冊', hint:'看過 CCW 產出的 SOP，確認流程合理、沒有遺漏', owner:'mac 審核'},
-    {id:'p1_report', text:'第一份真實報告完成', hint:'選定測試標的後：業助蒐集資料 → CCW 生成初稿 → 你審核品質（約 30 分鐘）', owner:'全員'},
-    {id:'p1_payment', text:'設定收款流程（綠界/藍新）', hint:'需要品牌法人設立後才能申請。先選好金流平台', owner:'mac'},
+  sop: [
+    {id:'sop1', text:'mac 列出業助每天任務清單', hint:'不用寫 SOP，只要一句話列出：例如「查實價登錄」「蒐集謄本資料」「填 Sheet」「回覆客戶 FAQ」', owner:'mac 列清單'},
+    {id:'sop2', text:'CCW 展開成完整 SOP 手冊', hint:'CCW 根據你的清單 + 查驗標準表，自動生成含每個步驟截圖說明的 SOP 文件（約 30 頁）', owner:'CCW 產出'},
+    {id:'sop3', text:'mac 審核 SOP 手冊', hint:'看過 CCW 產出的 SOP，確認流程合理、沒有遺漏、業助能看懂', owner:'mac 審核'},
   ],
-
-  p2: [
-    {id:'p2_brand', text:'品牌名稱確認', hint:'告訴 CCW「幫我想 10 個品牌名」，CCW 會產出方案讓你挑', owner:'CCW 提案 → mac 選'},
-    {id:'p2_feedback', text:'給 5 人看樣本報告收集回饋', hint:'找 5 個信任的人（朋友/同業），問「這份報告值 NT$1,500-2,800 嗎？」', owner:'mac + 業助追蹤'},
+  auto: [
+    {id:'aut1', text:'CCW 建立自動查詢腳本（可自動化項目）', hint:'根據標準表中「CCW 全自動」的項目，寫 Python 腳本自動查詢政府網站', owner:'CCW 開發'},
+    {id:'aut2', text:'CCW 建立報告生成流程', hint:'輸入標的地址 → 自動跑全部腳本 → 組合七模組 → 產出 Word 初稿。目標：一鍵生成', owner:'CCW 開發'},
+    {id:'aut3', text:'測試自動化流程（用測試標的）', hint:'拿第一個測試標的跑一次完整流程，記錄哪裡卡住、哪裡需要人工介入', owner:'CCW + mac'},
+  ],
+  first: [
+    {id:'fst1', text:'選定測試標的地址', hint:'在上方決策區填入你熟悉的住宅地址。選你了解行情的地方，這樣審核時能判斷報告品質', owner:'mac'},
+    {id:'fst2', text:'跑完整流程產出報告初稿', hint:'業助（或 mac 暫代）蒐集資料 → CCW 自動化 + 手動補齊 → 生成完整 7 模組 Word 報告', owner:'全員'},
+    {id:'fst3', text:'mac 品質審核（30 分鐘）', hint:'逐模組檢查：數字對不對、法規判斷對不對、白話摘要語氣好不好、免責聲明夠不夠', owner:'mac 審核'},
+    {id:'fst4', text:'修正問題，確認報告可交付水準', hint:'根據審核結果修正模板、調整流程。這份報告就是未來所有報告的品質標準', owner:'CCW + mac'},
+  ],
+  sys: [
+    {id:'sys1', text:'上傳 xlsx 建立 RETCP_STATUS Google Sheet', hint:'下載 ~/Documents/Claude-MM4/RETCP-2026/ 裡的 xlsx 檔 → 上傳 Google Drive → 右鍵轉為 Google 試算表', owner:'mac'},
+    {id:'sys2', text:'回填 Sheet ID 到控場面板', hint:'Sheet 網址中 /d/ 和 /edit 之間那串就是 ID。點上方 ⚙️ 填入', owner:'mac'},
+    {id:'sys3', text:'OC cron 設定確認', hint:'已建立 3 個 RETCP cron job（週度/月度/每日進度）。確認 Telegram 有收到測試通知', owner:'mac 確認'},
+  ],
+  brand: [
+    {id:'brd1', text:'品牌名稱確認', hint:'告訴 CCW「幫我想 10 個品牌名」，會產出方案讓你選。名稱要跟本業完全區隔', owner:'CCW 提案 → mac 選'},
+    {id:'brd2', text:'設立有限公司', hint:'個人持股但對外不露出。需要：公司名稱、營業項目、登記地址。可找記帳士代辦', owner:'mac'},
+    {id:'brd3', text:'設定收款流程', hint:'綠界或藍新二擇一。需要公司統編才能申請。申請到上線約 1-2 週', owner:'mac'},
+    {id:'brd4', text:'確認 2025 創業大聯盟提案文件流通範圍', hint:'那份文件有你的名字，確認誰看過、是否公開，評估身份曝光風險', owner:'mac'},
+  ],
+  mkt: [
+    {id:'mkt1', text:'給 5 人看樣本報告收集回饋', hint:'找 5 個信任的人（朋友/同業），問「這份報告值 NT$1,500-2,800 嗎？有什麼建議？」', owner:'mac + 業助'},
+    {id:'mkt2', text:'CCW 產出官網文案 + 落地頁', hint:'CCW 根據品牌名稱和報告樣本，產出一頁式官網。mac 審核文案', owner:'CCW 產出 → mac 審核'},
+    {id:'mkt3', text:'正式開始收費', hint:'所有流程確認 OK → 公開接單。業助接單填 Sheet → OC 通知 → CCW 生成報告 → mac 審核 → 交付', owner:'全員'},
   ],
 };
 
 // ===== Render =====
 function renderSteps(containerId, items, group) {
-  const c = document.getElementById(containerId);
-  c.innerHTML = '';
-  items.forEach(t => {
-    const td = D.tasks[t.id] || {done:false, note:''};
-    const d = document.createElement('div');
-    d.className = 'step';
-    d.innerHTML = `
-      <div class="step-check"><input type="checkbox" ${td.done?'checked':''} onchange="ck('${t.id}',this)"></div>
+  const c=document.getElementById(containerId); c.innerHTML='';
+  items.forEach(t=>{
+    const td=D.tasks[t.id]||{done:false,note:''};
+    const d=document.createElement('div'); d.className='step';
+    d.innerHTML=`
+      <div class="step-check"><input type="checkbox" ${td.done?'checked':''} onchange="ck('${t.id}',this,'${group}')"></div>
       <div class="step-body">
         <div class="step-main">
           <div>
@@ -334,72 +375,59 @@ function renderSteps(containerId, items, group) {
 }
 
 function updProg(group) {
-  const items = TASKS[group];
-  const done = items.filter(t => (D.tasks[t.id]||{}).done).length;
-  const el = document.getElementById('prog-'+group);
-  if(el) el.textContent = `${done}/${items.length}`;
+  const items=TASKS[group];
+  const done=items.filter(t=>(D.tasks[t.id]||{}).done).length;
+  const el=document.getElementById('prog-'+group);
+  if(el) el.textContent=`${done}/${items.length}`;
+}
+
+function updTotal() {
+  let total=0, done=0;
+  Object.values(TASKS).forEach(arr=>{ total+=arr.length; arr.forEach(t=>{ if((D.tasks[t.id]||{}).done) done++; }); });
+  document.getElementById('sTotal').textContent=total?Math.round(done/total*100)+'%':'0%';
 }
 
 function renderAll() {
-  renderSteps('body-p0', TASKS.p0, 'p0');
-  renderSteps('body-mod', TASKS.mod, 'mod');
-  renderSteps('body-p1', TASKS.p1, 'p1');
-  renderSteps('body-p2', TASKS.p2, 'p2');
-
-  document.getElementById('lightR').value = D.lightR||'';
-  document.getElementById('notes').value = D.notes||'';
-  document.getElementById('d_test_addr').value = D.d_test_addr||'';
-
-  // Traffic light
-  document.querySelectorAll('.light').forEach(b => {
-    const v = b.classList.contains('g')?'green':b.classList.contains('y')?'yellow':'red';
-    b.classList.toggle('on', v===D.light);
+  Object.keys(TASKS).forEach(g=>renderSteps('body-'+g, TASKS[g], g));
+  document.getElementById('lightR').value=D.lightR||'';
+  document.getElementById('notes').value=D.notes||'';
+  document.getElementById('d_test_addr').value=D.d_test_addr||'';
+  document.querySelectorAll('.light').forEach(b=>{
+    const v=b.classList.contains('g')?'green':b.classList.contains('y')?'yellow':'red';
+    b.classList.toggle('on',v===D.light);
   });
-  document.getElementById('sLight').textContent = D.light==='green'?'🟢':D.light==='yellow'?'🟡':'🔴';
-
-  // Decisions
+  document.getElementById('sLight').textContent=D.light==='green'?'🟢':D.light==='yellow'?'🟡':'🔴';
   Object.entries(D.decisions||{}).forEach(([f,v])=>{
     const g=document.querySelector(`[data-f="${f}"]`);
     if(g) g.querySelectorAll('.dec-opt').forEach(o=>o.classList.toggle('sel',o.dataset.v===v));
   });
-
-  // Setup
   if(C.sid&&C.url){ document.getElementById('setupBox').style.display='none'; updSync('ok','已連線'); }
   if(C.sid) document.getElementById('cfgSid').value=C.sid;
   if(C.url) document.getElementById('cfgUrl').value=C.url;
+  updTotal();
 }
 
 // ===== Interactions =====
-function ck(id,el){
+function ck(id,el,group){
   D.tasks[id]=D.tasks[id]||{done:false,note:''};
   D.tasks[id].done=el.checked;
   document.getElementById('txt-'+id).classList.toggle('done',el.checked);
-  // find group
-  for(const g of ['p0','mod','p1','p2']){
-    if(TASKS[g].find(t=>t.id===id)){ updProg(g); break; }
-  }
-  save();
+  updProg(group); updTotal(); save();
 }
 function nt(id,v){ D.tasks[id]=D.tasks[id]||{done:false,note:''}; D.tasks[id].note=v; save(); }
 function setL(el,v){
   document.querySelectorAll('.light').forEach(b=>b.classList.remove('on'));
   el.classList.add('on'); D.light=v;
-  document.getElementById('sLight').textContent=v==='green'?'🟢':v==='yellow'?'🟡':'🔴';
-  save();
+  document.getElementById('sLight').textContent=v==='green'?'🟢':v==='yellow'?'🟡':'🔴'; save();
 }
 function selD(el){
   const g=el.closest('.dec-opts');
   g.querySelectorAll('.dec-opt').forEach(o=>o.classList.remove('sel'));
-  el.classList.add('sel');
-  D.decisions=D.decisions||{};
-  D.decisions[g.dataset.f]=el.dataset.v;
-  save();
+  el.classList.add('sel'); D.decisions=D.decisions||{}; D.decisions[g.dataset.f]=el.dataset.v; save();
 }
 function tog(head){
-  const body=head.nextElementSibling;
-  const chev=head.querySelector('.chevron');
-  body.classList.toggle('open');
-  if(chev) chev.classList.toggle('open');
+  const body=head.nextElementSibling, chev=head.querySelector('.chevron');
+  body.classList.toggle('open'); if(chev) chev.classList.toggle('open');
 }
 
 // ===== Save =====
@@ -410,13 +438,10 @@ function save(){
   D.notes=document.getElementById('notes').value;
   D.d_test_addr=document.getElementById('d_test_addr').value;
   localStorage.setItem(DK,JSON.stringify(D));
-  if(timer)clearTimeout(timer);
-  timer=setTimeout(()=>sync(),3000);
+  if(timer)clearTimeout(timer); timer=setTimeout(()=>sync(),3000);
   updSync('pending','待同步...');
 }
-
 function manualSync(){ save(); sync(); }
-
 async function sync(){
   if(!C.url){ updSync('error','未設定 Apps Script'); return; }
   updSync('pending','同步中...');
@@ -429,15 +454,12 @@ async function sync(){
     toast('✅ 已同步','success');
   }catch(e){ updSync('error','同步失敗'); toast('❌ '+e.message,'error'); }
 }
-
 function exportJ(){
   const b=new Blob([JSON.stringify(D,null,2)],{type:'application/json'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(b);
   a.download='retcp_'+new Date().toISOString().slice(0,10)+'.json'; a.click();
   toast('📋 已匯出','success');
 }
-
-// ===== Config =====
 function saveCfg(){
   C.sid=document.getElementById('cfgSid').value.trim();
   C.url=document.getElementById('cfgUrl').value.trim();
@@ -445,18 +467,11 @@ function saveCfg(){
   document.getElementById('setupBox').style.display='none';
   updSync('ok','已連線'); toast('✅ 設定已儲存','success'); sync();
 }
-function toggleSetup(){
-  const s=document.getElementById('setupBox');
-  s.style.display=s.style.display==='none'?'block':'none';
-}
-
-// ===== UI =====
+function toggleSetup(){ const s=document.getElementById('setupBox'); s.style.display=s.style.display==='none'?'block':'none'; }
 function updSync(s,t){ document.getElementById('sDot').className='sync-dot '+s; document.getElementById('sTxt').textContent=t; }
 function toast(m,t){ const e=document.getElementById('toast'); e.textContent=m; e.className='toast '+t; setTimeout(()=>e.classList.add('hidden'),2500); }
 
-// ===== Init =====
 renderAll();
-// Auto-open P0 on load
 </script>
 </body>
 </html>
