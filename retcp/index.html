@@ -11,6 +11,7 @@
     --accent: #3b82f6; --accent2: #60a5fa;
     --green: #22c55e; --yellow: #eab308; --red: #ef4444;
     --green-bg: #052e16; --yellow-bg: #422006; --red-bg: #450a0a;
+    --purple: #a78bfa; --purple-bg: rgba(139,92,246,.15);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: -apple-system,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
@@ -38,7 +39,8 @@
   .badge.p0 { background:var(--red-bg); color:var(--red); }
   .badge.p1 { background:var(--yellow-bg); color:var(--yellow); }
   .badge.p2 { background:rgba(59,130,246,.15); color:var(--accent2); }
-  .badge.phase { background:rgba(139,92,246,.15); color:#a78bfa; }
+  .badge.phase { background:var(--purple-bg); color:var(--purple); }
+  .badge.info { background:rgba(34,197,94,.12); color:var(--green); }
   .step { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid rgba(71,85,105,.3); }
   .step:last-child { border-bottom:none; }
   .step-check { flex-shrink:0; margin-top:2px; }
@@ -88,8 +90,24 @@
   .toast.error { background:var(--red-bg); color:var(--red); border:1px solid var(--red); }
   .toast.hidden { opacity:0; pointer-events:none; }
   hr.div { border:none; border-top:1px solid var(--border); margin:20px 0; }
-  .phase-label { font-size:0.75rem; color:#a78bfa; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; margin-top:16px; }
-  @media(max-width:600px) { .stats{grid-template-columns:repeat(2,1fr);} .lights{flex-direction:column;} }
+  .phase-label { font-size:0.75rem; color:var(--purple); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; margin-top:16px; }
+  .info-card { background:linear-gradient(135deg,#1e293b,#0f172a); border:1px solid var(--purple); border-radius:12px; padding:16px; margin-bottom:16px; }
+  .info-card h3 { color:var(--purple); margin-bottom:10px; font-size:1rem; }
+  .info-card .quote { font-size:1.05rem; font-weight:600; color:var(--green); padding:8px 12px; border-left:3px solid var(--green); margin:10px 0; }
+  .info-card .clients { display:grid; grid-template-columns:1fr; gap:6px; margin:10px 0; }
+  .info-card .client { padding:8px 12px; background:var(--surface2); border-radius:8px; font-size:0.88rem; }
+  .info-card .client b { color:var(--accent2); }
+  .info-card .pricing { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:10px 0; }
+  .info-card .price-box { text-align:center; padding:10px; border-radius:8px; background:var(--surface); border:1px solid var(--border); }
+  .info-card .price-box .amount { font-size:1.2rem; font-weight:700; color:var(--accent2); }
+  .info-card .price-box .label { font-size:0.72rem; color:var(--text2); }
+  .info-card .price-box .anchor { font-size:0.7rem; color:var(--text3); margin-top:2px; }
+  .pro-table { width:100%; border-collapse:collapse; font-size:0.82rem; margin:10px 0; }
+  .pro-table th { text-align:left; padding:6px 8px; background:var(--surface2); color:var(--text2); font-weight:600; border-bottom:1px solid var(--border); }
+  .pro-table td { padding:6px 8px; border-bottom:1px solid rgba(71,85,105,.3); }
+  .pro-table .fee { color:var(--yellow); font-weight:600; }
+  .pro-note { font-size:0.78rem; color:var(--text3); margin-top:6px; padding:6px 10px; background:var(--surface2); border-radius:6px; border-left:3px solid var(--yellow); }
+  @media(max-width:600px) { .stats{grid-template-columns:repeat(2,1fr);} .lights{flex-direction:column;} .info-card .pricing{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
@@ -120,6 +138,41 @@
     <div class="stat"><div class="stat-val" id="sWeek">W0</div><div class="stat-lbl">啟動準備週</div></div>
     <div class="stat"><div class="stat-val" id="sLight">🟢</div><div class="stat-lbl">停損燈號</div></div>
     <div class="stat"><div class="stat-val" id="sTotal">0%</div><div class="stat-lbl">總完成率</div></div>
+  </div>
+
+  <!-- ========== 市場定位 ========== -->
+  <div class="info-card">
+    <h3>🎯 市場定位與核心精神</h3>
+    <div class="quote">「免費的那份是他們的保護，這份是你的保護。」</div>
+    <p style="font-size:0.85rem;color:var(--text2);margin:6px 0">不動產說明書從來不是免費的 — 消費者用 4-6% 佣金買到的，是對手方替自己寫的文件。<br>RETCP = 買方在整個交易中，<b style="color:var(--text)">唯一一份站在他這邊的文件</b>。</p>
+    <div style="font-size:0.78rem;color:var(--text3);margin:8px 0 4px">三個真實客群（依優先順序）</div>
+    <div class="clients">
+      <div class="client"><b>① 自售自購 (FSBO/FIBO)</b> — 正在省 40-90 萬佣金，花 2-3K 買風險保護，ROI 極度明顯</div>
+      <div class="client"><b>② 不信任仲介的買方</b> — 加盟體系下感覺被應付，需要獨立確認，時機在簽約前</div>
+      <div class="client"><b>③ 投資客與換屋族</b> — 習慣為決策數據付費，NT$4,500 是合理工具成本</div>
+    </div>
+    <div style="font-size:0.78rem;color:var(--text3);margin:8px 0 4px">定價方案</div>
+    <div class="pricing">
+      <div class="price-box"><div class="amount">$1,500</div><div class="label">基礎版</div><div class="anchor">≈ 一次代書諮詢</div></div>
+      <div class="price-box"><div class="amount">$2,800</div><div class="label">標準版</div><div class="anchor">≈ 驗屋費的 1/5</div></div>
+      <div class="price-box"><div class="amount">$4,500</div><div class="label">專業版</div><div class="anchor">≈ 銀行鑑價水準</div></div>
+    </div>
+  </div>
+
+  <!-- ========== 專業簽證串接 ========== -->
+  <div class="info-card" style="border-color:var(--yellow)">
+    <h3 style="color:var(--yellow)">🔗 專業簽證串接架構</h3>
+    <p style="font-size:0.85rem;color:var(--text2);margin-bottom:8px">RETCP 報告 = 資訊彙整（無簽證責任）。專業簽證 = 獨立專業人士（各自負責）。<b style="color:var(--text)">責任隔離 + 計費隔離</b>，RETCP 不代收不抽成。</p>
+    <table class="pro-table">
+      <tr><th>專業</th><th>簽證內容</th><th>費用</th><th>串接時機</th></tr>
+      <tr><td>建築師</td><td>結構安全/違建判斷</td><td class="fee">$5K-15K</td><td>要求結構保證時</td></tr>
+      <tr><td>經紀人</td><td>價格合理性意見書</td><td class="fee">$3K-8K</td><td>質疑定價時</td></tr>
+      <tr><td>估價師</td><td>正式估價報告</td><td class="fee">$8K-25K</td><td>貸款/訴訟需要時</td></tr>
+      <tr><td>驗屋公司</td><td>現場驗屋報告</td><td class="fee">$8K-20K</td><td>要求實地查驗時</td></tr>
+      <tr><td>代書</td><td>產權移轉/登記</td><td class="fee">$15K-30K</td><td>進入簽約階段時</td></tr>
+      <tr><td>律師</td><td>法律意見書/合約審閱</td><td class="fee">$5K-20K</td><td>有法律疑慮時</td></tr>
+    </table>
+    <div class="pro-note">報告中標注「⚠️ 本項目建議取得專業簽證確認」→ 消費者自然流向加購 → 報告成為「入口」</div>
   </div>
 
   <!-- 停損燈號 -->
@@ -213,6 +266,15 @@
     <div class="card-body" id="body-brand"></div>
   </div>
 
+  <!-- 專業簽證串接設定 -->
+  <div class="card">
+    <div class="card-head" onclick="tog(this)">
+      <div class="card-title"><span class="badge p1">P1</span> 專業簽證串接設定</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-cert">0/4</span><span class="chevron">▶</span></div>
+    </div>
+    <div class="card-body" id="body-cert"></div>
+  </div>
+
   <!-- 行銷啟動 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
@@ -259,7 +321,16 @@
         </div>
       </div>
       <div class="dec">
-        <div class="dec-q">4. 第一個測試標的地址</div>
+        <div class="dec-q">4. 定價策略確認</div>
+        <div class="dec-hint">放棄 NT$150 舊定價。低價不帶來信任，只帶來不信任</div>
+        <div class="dec-opts" data-f="d_pricing">
+          <div class="dec-opt" onclick="selD(this)" data-v="1500_2800_4500">$1,500 / $2,800 / $4,500 三級制</div>
+          <div class="dec-opt" onclick="selD(this)" data-v="single_2800">統一 $2,800 先跑</div>
+          <div class="dec-opt" onclick="selD(this)" data-v="adjust">等樣本報告出來再定</div>
+        </div>
+      </div>
+      <div class="dec">
+        <div class="dec-q">5. 第一個測試標的地址</div>
         <div class="dec-hint">選一個你熟悉的住宅地址，Step 6 驗收時用</div>
         <div class="inp-group"><input id="d_test_addr" placeholder="例：台北市信義區松仁路100號" onchange="D.d_test_addr=this.value;save()"></div>
       </div>
@@ -286,13 +357,20 @@
 <div class="toast hidden" id="toast"></div>
 
 <script>
-const CK='retcp_cfg', DK='retcp_data_v2';
+const CK='retcp_cfg', DK='retcp_data_v3';
 let C=JSON.parse(localStorage.getItem(CK)||'{}');
-let D=JSON.parse(localStorage.getItem(DK)||'null')||{
+let D=JSON.parse(localStorage.getItem(DK)||'null')||migrateV2()||{
   ts:new Date().toISOString(), week:'W0', phase:'Phase 0',
   light:'green', lightR:'專案尚未正式啟動，投入成本=0',
   tasks:{}, decisions:{}, d_test_addr:'', notes:''
 };
+
+// Migrate v2 data if exists
+function migrateV2(){
+  const old=localStorage.getItem('retcp_data_v2');
+  if(!old) return null;
+  try { const d=JSON.parse(old); d.ts=new Date().toISOString(); return d; } catch(e){ return null; }
+}
 
 // ===== ALL TASKS =====
 const TASKS = {
@@ -303,23 +381,23 @@ const TASKS = {
   ],
   verify: [
     {id:'vfy1', text:'上傳 2-3 份不動產說明書給 CCW', hint:'住宅、土地、商用各一份最理想。這些是法規規定「必須記載」的標準文件，CCW 需要它來摘要所有查驗項目', owner:'mac 提供'},
-    {id:'vfy2', text:'CCW 摘要所有查驗項目清單', hint:'CCW 分析說明書，提取每一個「必須記載」和「需要查驗」的項目，產出完整清單讓你確認有沒有遺漏', owner:'CCW 產出 → mac 確認'},
+    {id:'vfy2', text:'CCW 摘要所有查驗項目清單', hint:'CCW 分析說明書，提取每一個「必須記載」和「需要查驗」的項目，產出完整清單讓你確認有沒有遺漏', owner:'CCW → mac 確認'},
     {id:'vfy3', text:'CCW 研究每個項目的資料來源與查詢方式', hint:'每個查驗項目對應到哪個政府網站、怎麼查、查詢步驟是什麼。這是最花時間的步驟', owner:'CCW 研究'},
-    {id:'vfy4', text:'CCW 產出「查驗項目標準表」', hint:'核心文件：項目編號 / 名稱 / 歸屬模組 / 資料來源 / 查詢網站 / 操作步驟 / 自動化程度。mac 最終確認', owner:'CCW 產出 → mac 確認'},
+    {id:'vfy4', text:'CCW 產出「查驗項目標準表」', hint:'核心文件：項目編號 / 名稱 / 歸屬模組 / 資料來源 / 查詢網站 / 操作步驟 / 自動化程度。mac 最終確認', owner:'CCW → mac 確認'},
     {id:'vfy5', text:'CCW 評估自動化可行性', hint:'哪些項目可以寫腳本自動查（API/爬蟲），哪些只能業助手動查，哪些需要 mac 專業判斷', owner:'CCW 評估'},
   ],
   mod: [
-    {id:'mod1', text:'① 封面摘要模組', hint:'標的地址、查詢日期、紅綠燈評分總覽。CCW 根據標準表自動產生模板，你不用動', owner:'CCW 全自動'},
-    {id:'mod2', text:'② 產權透視模組', hint:'謄本摘要、所有權現況、抵押設定、共有人。CCW 產出模板，你審核法規相關的措辭是否正確', owner:'CCW 產出 → mac 審核法規'},
-    {id:'mod3', text:'③ 法規分析模組', hint:'使用分區、建蔽/容積率、特殊限制（航高/斷層）。CCW 產出模板，你確認關鍵判斷點', owner:'CCW 產出 → mac 確認'},
-    {id:'mod4', text:'④ 市場行情模組', hint:'實價登錄比較、周邊成交、公告地價。業助蒐集原始資料，CCW 分析產出模板，你看數字合理性', owner:'業助蒐集 → CCW 分析'},
-    {id:'mod5', text:'⑤ 環境評分模組', hint:'嫌惡設施、淹水風險、學區、生活機能。CCW 根據標準表的查詢方式全自動產出', owner:'CCW 全自動'},
-    {id:'mod6', text:'⑥ AI 白話摘要模組', hint:'3 大優點、3 大風險、給買方建議（白話文）。CCW 生成初稿，你微調語氣和措辭', owner:'CCW 產出 → mac 微調'},
-    {id:'mod7', text:'⑦ 免責聲明模組', hint:'「本報告為公開資訊彙整，非不動產估價報告」+ 資料來源標示。CCW 全自動，法律諮詢時確認措辭即可', owner:'CCW 全自動'},
+    {id:'mod1', text:'① 封面摘要模組', hint:'標的地址、查詢日期、紅綠燈評分總覽。CCW 根據標準表自動產生模板', owner:'CCW 全自動'},
+    {id:'mod2', text:'② 產權透視模組', hint:'謄本摘要、所有權現況、抵押設定、共有人。CCW 產出模板，你審核法規相關措辭', owner:'CCW → mac 審核'},
+    {id:'mod3', text:'③ 法規分析模組', hint:'使用分區、建蔽/容積率、特殊限制（航高/斷層）。CCW 產出模板，你確認關鍵判斷點', owner:'CCW → mac 確認'},
+    {id:'mod4', text:'④ 市場行情模組', hint:'實價登錄比較、周邊成交、公告地價。業助蒐集原始資料，CCW 分析產出模板', owner:'業助蒐集 → CCW'},
+    {id:'mod5', text:'⑤ 環境評分模組', hint:'嫌惡設施、淹水風險、學區、生活機能。CCW 根據標準表全自動產出', owner:'CCW 全自動'},
+    {id:'mod6', text:'⑥ AI 白話摘要模組', hint:'3 大優點、3 大風險、給買方建議。CCW 生成初稿，你微調語氣和措辭', owner:'CCW → mac 微調'},
+    {id:'mod7', text:'⑦ 免責 + 簽證串接模組', hint:'免責聲明 +「如需專業簽證確認」轉介區塊。責任隔離 + 計費隔離的關鍵模組', owner:'CCW → 法律確認'},
   ],
   sop: [
-    {id:'sop1', text:'mac 列出業助每天任務清單', hint:'不用寫 SOP，只要一句話列出：例如「查實價登錄」「蒐集謄本資料」「填 Sheet」「回覆客戶 FAQ」', owner:'mac 列清單'},
-    {id:'sop2', text:'CCW 展開成完整 SOP 手冊', hint:'CCW 根據你的清單 + 查驗標準表，自動生成含每個步驟截圖說明的 SOP 文件（約 30 頁）', owner:'CCW 產出'},
+    {id:'sop1', text:'mac 列出業助每天任務清單', hint:'不用寫 SOP，只要一句話列出：例如「查實價登錄」「蒐集謄本資料」「填 Sheet」「回覆客戶 FAQ」', owner:'mac'},
+    {id:'sop2', text:'CCW 展開成完整 SOP 手冊', hint:'CCW 根據你的清單 + 查驗標準表，自動生成含每個步驟截圖說明的 SOP 文件', owner:'CCW 產出'},
     {id:'sop3', text:'mac 審核 SOP 手冊', hint:'看過 CCW 產出的 SOP，確認流程合理、沒有遺漏、業助能看懂', owner:'mac 審核'},
   ],
   auto: [
@@ -330,7 +408,7 @@ const TASKS = {
   first: [
     {id:'fst1', text:'選定測試標的地址', hint:'在上方決策區填入你熟悉的住宅地址。選你了解行情的地方，這樣審核時能判斷報告品質', owner:'mac'},
     {id:'fst2', text:'跑完整流程產出報告初稿', hint:'業助（或 mac 暫代）蒐集資料 → CCW 自動化 + 手動補齊 → 生成完整 7 模組 Word 報告', owner:'全員'},
-    {id:'fst3', text:'mac 品質審核（30 分鐘）', hint:'逐模組檢查：數字對不對、法規判斷對不對、白話摘要語氣好不好、免責聲明夠不夠', owner:'mac 審核'},
+    {id:'fst3', text:'mac 品質審核（30 分鐘）', hint:'逐模組檢查：數字對不對、法規判斷對不對、白話摘要語氣好不好、簽證串接標注合適嗎', owner:'mac 審核'},
     {id:'fst4', text:'修正問題，確認報告可交付水準', hint:'根據審核結果修正模板、調整流程。這份報告就是未來所有報告的品質標準', owner:'CCW + mac'},
   ],
   sys: [
@@ -339,21 +417,27 @@ const TASKS = {
     {id:'sys3', text:'OC cron 設定確認', hint:'已建立 3 個 RETCP cron job（週度/月度/每日進度）。確認 Telegram 有收到測試通知', owner:'mac 確認'},
   ],
   brand: [
-    {id:'brd1', text:'品牌名稱確認', hint:'告訴 CCW「幫我想 10 個品牌名」，會產出方案讓你選。名稱要跟本業完全區隔', owner:'CCW 提案 → mac 選'},
+    {id:'brd1', text:'品牌名稱確認', hint:'告訴 CCW「幫我想 10 個品牌名」。名稱要跟本業完全區隔，法人品牌對外、個人隱身', owner:'CCW 提案 → mac 選'},
     {id:'brd2', text:'設立有限公司', hint:'個人持股但對外不露出。需要：公司名稱、營業項目、登記地址。可找記帳士代辦', owner:'mac'},
     {id:'brd3', text:'設定收款流程', hint:'綠界或藍新二擇一。需要公司統編才能申請。申請到上線約 1-2 週', owner:'mac'},
     {id:'brd4', text:'確認 2025 創業大聯盟提案文件流通範圍', hint:'那份文件有你的名字，確認誰看過、是否公開，評估身份曝光風險', owner:'mac'},
   ],
+  cert: [
+    {id:'crt1', text:'擬定專業簽證合作架構', hint:'CCW 產出合作架構文件：轉介流程、責任歸屬、計費方式。mac 確認法律面沒問題', owner:'CCW → mac 確認'},
+    {id:'crt2', text:'建立專業人士名單（建築師/估價師/驗屋/律師）', hint:'每個類別至少找 2 位可合作的專業人士。可先從業界人脈或公會名錄開始', owner:'mac'},
+    {id:'crt3', text:'設計報告中的簽證串接標注格式', hint:'在第⑦模組中，當項目超出資訊彙整範圍時的標注樣式和文案。CCW 產出初稿', owner:'CCW → mac 審核'},
+    {id:'crt4', text:'確認轉介計費方式', hint:'RETCP 不代收不抽成 → 純轉介。或者收固定轉介費？需要決定並寫入合作架構', owner:'mac 決策'},
+  ],
   mkt: [
-    {id:'mkt1', text:'給 5 人看樣本報告收集回饋', hint:'找 5 個信任的人（朋友/同業），問「這份報告值 NT$1,500-2,800 嗎？有什麼建議？」', owner:'mac + 業助'},
-    {id:'mkt2', text:'CCW 產出官網文案 + 落地頁', hint:'CCW 根據品牌名稱和報告樣本，產出一頁式官網。mac 審核文案', owner:'CCW 產出 → mac 審核'},
+    {id:'mkt1', text:'給 5 人看樣本報告收集回饋', hint:'找 5 個信任的人，問「這份報告值 NT$1,500-2,800 嗎？」消費者必須一眼看出這跟仲介那份不是同一種東西', owner:'mac + 業助'},
+    {id:'mkt2', text:'CCW 產出官網文案 + 落地頁', hint:'核心話術：「免費的那份是他們的保護，這份是你的保護」。CCW 產出，mac 審核文案', owner:'CCW → mac 審核'},
     {id:'mkt3', text:'正式開始收費', hint:'所有流程確認 OK → 公開接單。業助接單填 Sheet → OC 通知 → CCW 生成報告 → mac 審核 → 交付', owner:'全員'},
   ],
 };
 
 // ===== Render =====
 function renderSteps(containerId, items, group) {
-  const c=document.getElementById(containerId); c.innerHTML='';
+  const c=document.getElementById(containerId); if(!c) return; c.innerHTML='';
   items.forEach(t=>{
     const td=D.tasks[t.id]||{done:false,note:''};
     const d=document.createElement('div'); d.className='step';
@@ -375,7 +459,7 @@ function renderSteps(containerId, items, group) {
 }
 
 function updProg(group) {
-  const items=TASKS[group];
+  const items=TASKS[group]; if(!items) return;
   const done=items.filter(t=>(D.tasks[t.id]||{}).done).length;
   const el=document.getElementById('prog-'+group);
   if(el) el.textContent=`${done}/${items.length}`;
