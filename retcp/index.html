@@ -134,8 +134,8 @@
 
   <!-- Stats -->
   <div class="stats">
-    <div class="stat"><div class="stat-val" id="sPhase">Phase 0</div><div class="stat-lbl">查驗標準化</div></div>
-    <div class="stat"><div class="stat-val" id="sWeek">W0</div><div class="stat-lbl">啟動準備週</div></div>
+    <div class="stat"><div class="stat-val" id="sPhase">Phase 0</div><div class="stat-lbl">Step 3 報告模板</div></div>
+    <div class="stat"><div class="stat-val" id="sWeek">W1</div><div class="stat-lbl">標準化完成</div></div>
     <div class="stat"><div class="stat-val" id="sLight">🟢</div><div class="stat-lbl">停損燈號</div></div>
     <div class="stat"><div class="stat-val" id="sTotal">0%</div><div class="stat-lbl">總完成率</div></div>
   </div>
@@ -157,6 +157,42 @@
       <div class="price-box"><div class="amount">$2,800</div><div class="label">標準版</div><div class="anchor">≈ 驗屋費的 1/5</div></div>
       <div class="price-box"><div class="amount">$4,500</div><div class="label">專業版</div><div class="anchor">≈ 銀行鑑價水準</div></div>
     </div>
+  </div>
+
+  <!-- ========== 合作架構 ========== -->
+  <div class="info-card" style="border-color:var(--green)">
+    <h3 style="color:var(--green)">🤝 合作架構</h3>
+    <div class="clients">
+      <div class="client"><b>經營主體</b> — 睦聚地產開發有限公司</div>
+      <div class="client"><b>現有合作</b> — 與瑞禾不動產成立「工業不動產事業部」（分潤 瑞禾30:睦聚70）</div>
+      <div class="client"><b>競業確認 ✅</b> — 合約第三條第6項：顧問/資訊整合等非仲介業務不列入合作範圍</div>
+    </div>
+    <div class="pro-note" style="border-left-color:var(--green)">RETCP 定位為第三方查驗報告服務（非仲介），不在合約競業範圍內</div>
+  </div>
+
+  <!-- ========== 查驗標準表成果 ========== -->
+  <div class="info-card" style="border-color:var(--accent)">
+    <h3 style="color:var(--accent2)">📋 查驗項目標準表 v1（已完成）</h3>
+    <p style="font-size:0.85rem;color:var(--text2);margin-bottom:8px">交叉比對 3 份不動產說明書（信義/信義全球/太平洋），提煉出 RETCP 完整查驗項目。</p>
+    <div class="pricing" style="grid-template-columns:repeat(4,1fr)">
+      <div class="price-box"><div class="amount">91</div><div class="label">查驗項目</div></div>
+      <div class="price-box"><div class="amount">9</div><div class="label">模組</div></div>
+      <div class="price-box"><div class="amount" style="color:var(--green)">66%</div><div class="label">可自動化</div></div>
+      <div class="price-box"><div class="amount">46</div><div class="label">建物版項目</div></div>
+    </div>
+    <table class="pro-table">
+      <tr><th>模組</th><th>項目數</th><th>自動化</th></tr>
+      <tr><td>A. 產權基本</td><td>10</td><td style="color:var(--green)">8 項</td></tr>
+      <tr><td>B. 所有權調查</td><td>5</td><td style="color:var(--green)">5 項</td></tr>
+      <tr><td>C. 他項權利</td><td>6</td><td style="color:var(--green)">6 項</td></tr>
+      <tr><td>D. 標的物現況 (46項)</td><td>46</td><td style="color:var(--yellow)">16 項</td></tr>
+      <tr><td>E. 重要注意事項</td><td>5</td><td style="color:var(--yellow)">2 項</td></tr>
+      <tr><td>F. 稅費估算</td><td>4</td><td style="color:var(--green)">3 項</td></tr>
+      <tr><td>G. 行情資訊</td><td>4</td><td style="color:var(--green)">3 項</td></tr>
+      <tr><td>H. 附件文件</td><td>6</td><td style="color:var(--green)">4 項</td></tr>
+      <tr><td>I. 法令說明</td><td>5</td><td style="color:var(--green)">4 項</td></tr>
+    </table>
+    <div class="pro-note">建物版 46 項 vs 土地版 22 項（缺 24 項建物專屬）→ RETCP 需建物版+土地版兩套報告模板</div>
   </div>
 
   <!-- ========== 專業簽證串接 ========== -->
@@ -194,7 +230,7 @@
   <!-- Step 1: 法律前提 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p0">P0</span> Step 1：法律前提確認</div>
+      <div class="card-title"><span class="badge info">完成</span> Step 1：法律前提確認 ✅</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-legal">0/3</span><span class="chevron open">▶</span></div>
     </div>
     <div class="card-body open" id="body-legal"></div>
@@ -203,17 +239,17 @@
   <!-- Step 2: 查驗項目標準化 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p0">P0</span> Step 2：查驗項目標準化 ⭐ 最重要</div>
+      <div class="card-title"><span class="badge info">完成</span> Step 2：查驗項目標準化 ✅</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-verify">0/5</span><span class="chevron open">▶</span></div>
     </div>
     <div class="card-body open" id="body-verify"></div>
   </div>
 
-  <!-- Step 3: 七模組模板 -->
+  <!-- Step 3: 九模組模板 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p1">P1</span> Step 3：七模組報告模板</div>
-      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-mod">0/7</span><span class="chevron">▶</span></div>
+      <div class="card-title"><span class="badge p0">進行中</span> Step 3：九模組報告模板 ⭐ 下一步</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-mod">0/9</span><span class="chevron">▶</span></div>
     </div>
     <div class="card-body" id="body-mod"></div>
   </div>
@@ -360,9 +396,18 @@
 const CK='retcp_cfg', DK='retcp_data_v3';
 let C=JSON.parse(localStorage.getItem(CK)||'{}');
 let D=JSON.parse(localStorage.getItem(DK)||'null')||migrateV2()||{
-  ts:new Date().toISOString(), week:'W0', phase:'Phase 0',
-  light:'green', lightR:'專案尚未正式啟動，投入成本=0',
-  tasks:{}, decisions:{}, d_test_addr:'', notes:''
+  ts:new Date().toISOString(), week:'W1', phase:'Phase 0',
+  light:'green', lightR:'Step 1+2 完成，進入 Step 3 報告模板設計',
+  tasks:{
+    leg1:{done:true,note:'睦聚地產合約第三條第6項：非仲介業務不列入合作分潤'},
+    leg2:{done:true,note:'合約已確認，無競業限制問題'},
+    leg3:{done:true,note:'✅ 無競業限制，RETCP 為第三方查驗報告服務（非仲介），可執行'},
+    vfy1:{done:true,note:'已上傳 3 份：信義(NZ14645 建物+土地60頁)、信義全球(NZ73787 純土地54頁)、太平洋(AA6313442 建物+土地20頁)'},
+    vfy2:{done:true,note:'已完成：46項建物版 + 22項土地版 + 產權/稅費/行情/附件/法令全面摘要'},
+    vfy3:{done:true,note:'91項全部對應：資料來源+查詢方式+自動化程度'},
+    vfy4:{done:true,note:'✅ RETCP_查驗項目標準表_v1.xlsx（91項、9模組、3工作表）'},
+    vfy5:{done:true,note:'CCW全自動35項+CCW半自動25項=66%可自動化，人工31項（主要為賣方自填）'}
+  }, decisions:{d_legal:'self'}, d_test_addr:'', notes:''
 };
 
 // Migrate v2 data if exists
@@ -387,13 +432,15 @@ const TASKS = {
     {id:'vfy5', text:'CCW 評估自動化可行性', hint:'哪些項目可以寫腳本自動查（API/爬蟲），哪些只能業助手動查，哪些需要 mac 專業判斷', owner:'CCW 評估'},
   ],
   mod: [
-    {id:'mod1', text:'① 封面摘要模組', hint:'標的地址、查詢日期、紅綠燈評分總覽。CCW 根據標準表自動產生模板', owner:'CCW 全自動'},
-    {id:'mod2', text:'② 產權透視模組', hint:'謄本摘要、所有權現況、抵押設定、共有人。CCW 產出模板，你審核法規相關措辭', owner:'CCW → mac 審核'},
-    {id:'mod3', text:'③ 法規分析模組', hint:'使用分區、建蔽/容積率、特殊限制（航高/斷層）。CCW 產出模板，你確認關鍵判斷點', owner:'CCW → mac 確認'},
-    {id:'mod4', text:'④ 市場行情模組', hint:'實價登錄比較、周邊成交、公告地價。業助蒐集原始資料，CCW 分析產出模板', owner:'業助蒐集 → CCW'},
-    {id:'mod5', text:'⑤ 環境評分模組', hint:'嫌惡設施、淹水風險、學區、生活機能。CCW 根據標準表全自動產出', owner:'CCW 全自動'},
-    {id:'mod6', text:'⑥ AI 白話摘要模組', hint:'3 大優點、3 大風險、給買方建議。CCW 生成初稿，你微調語氣和措辭', owner:'CCW → mac 微調'},
-    {id:'mod7', text:'⑦ 免責 + 簽證串接模組', hint:'免責聲明 +「如需專業簽證確認」轉介區塊。責任隔離 + 計費隔離的關鍵模組', owner:'CCW → 法律確認'},
+    {id:'mod1', text:'A. 產權基本資訊模組（10項）', hint:'地址/坐落/面積/分區/建物構造/樓層/停車/完成日期。基於標準表 A-001~A-010', owner:'CCW 全自動'},
+    {id:'mod2', text:'B+C. 所有權+他項權利模組（11項）', hint:'所有權人/持分/取得原因/抵押權/地上權/查封預告。標準表 B+C 合併為產權透視', owner:'CCW → mac 審核'},
+    {id:'mod3', text:'D. 標的物現況模組（46項建物版/22項土地版）', hint:'政府規定應記載事項。兩套模板：建物版+土地版。標準表 D-001~D-046', owner:'CCW 半自動'},
+    {id:'mod4', text:'E. 重要注意事項模組（5項）', hint:'環境敏感/土壤污染/建築執照/氯離子/增建確認。標準表 E-001~E-005', owner:'CCW 半自動'},
+    {id:'mod5', text:'F. 稅費估算模組（4項）', hint:'增值稅/房地合一/契稅/規費概算。標準表 F-001~F-004', owner:'CCW 全自動'},
+    {id:'mod6', text:'G. 行情資訊模組（4項）', hint:'實價登錄同地址/同社區/周邊同類型+走勢圖。標準表 G-001~G-004', owner:'CCW 全自動'},
+    {id:'mod7', text:'H+I. 附件+法令模組（11項）', hint:'謄本/建照/分區證明/周邊圖+適用法令說明。標準表 H+I', owner:'CCW 半自動'},
+    {id:'mod8', text:'封面摘要+AI白話摘要', hint:'紅綠燈評分總覽+3大優點/3大風險/給買方建議。CCW 生成初稿 mac 微調', owner:'CCW → mac'},
+    {id:'mod9', text:'免責+專業簽證串接', hint:'免責聲明+「建議取得專業簽證」轉介區塊。責任隔離+計費隔離', owner:'CCW → 法律確認'},
   ],
   sop: [
     {id:'sop1', text:'mac 列出業助每天任務清單', hint:'不用寫 SOP，只要一句話列出：例如「查實價登錄」「蒐集謄本資料」「填 Sheet」「回覆客戶 FAQ」', owner:'mac'},
