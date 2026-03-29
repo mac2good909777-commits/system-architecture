@@ -116,12 +116,28 @@
 
   <div class="header">
     <h1>📊 <span>RETCP-2026</span> 控場面板</h1>
-    <div class="sync-row"><div class="sync-dot" id="sDot"></div><span id="sTxt">尚未連線</span></div>
+    <div class="sync-row" id="syncRow" style="display:none"><div class="sync-dot" id="sDot"></div><span id="sTxt"></span></div>
   </div>
 
-  <!-- Setup -->
+  <!-- Timestamps -->
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;font-size:0.78rem;color:var(--text3)">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 12px;flex:1;min-width:200px">
+      📋 面板架構更新：<span style="color:var(--text2)">2026-03-29 16:30</span>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 12px;flex:1;min-width:200px">
+      📊 資料輸入維護：<span style="color:var(--text2)" id="tsDataUpdate">—</span>
+    </div>
+  </div>
+
+  <!-- Action buttons + Setup -->
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+    <button class="btn btn-sec" onclick="toggleSetup()" style="font-size:0.82rem;padding:6px 14px">⚙️ Google Sheet 設定</button>
+    <button class="btn btn-sec" id="btnSync" onclick="manualSync()" style="font-size:0.82rem;padding:6px 14px;display:none">💾 同步</button>
+    <button class="btn btn-sec" onclick="exportJ()" style="font-size:0.82rem;padding:6px 14px">📋 匯出 JSON</button>
+  </div>
   <div class="setup" id="setupBox" style="display:none">
     <h3>⚙️ Google Sheet 連線設定</h3>
+    <p style="font-size:0.82rem;color:var(--text2);margin-bottom:10px">將面板上的勾選狀態、備註、燈號等資料同步到你的 Google Sheet，方便跨裝置查看和 OC cron 讀取。</p>
     <div class="setup-step"><strong>1.</strong> 建立 Google Sheet → 記下 Sheet ID</div>
     <div class="setup-step"><strong>2.</strong> <a href="https://script.google.com" target="_blank" style="color:var(--accent2)">script.google.com</a> → 新專案 → 貼 Apps Script → 部署為網頁應用程式</div>
     <div class="setup-step"><strong>3.</strong> 填入下面兩欄 → 儲存</div>
@@ -290,6 +306,17 @@
     <div class="card-body" id="body-first"></div>
   </div>
 
+  <!-- 怡樺工作分配 -->
+  <div class="card">
+    <div class="card-head" onclick="tog(this)">
+      <div class="card-title"><span class="badge p0">進行中</span> <code>AST</code> 怡樺工作分配</div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-asst">0/5</span><span class="chevron open">▶</span></div>
+    </div>
+    <div class="card-body open" id="body-asst">
+      <div style="font-size:0.82rem;color:var(--text3);margin-bottom:8px">派遣日期：2026-03-29 ｜ 派遣單：工作派遣單_怡樺_20260329.docx</div>
+    </div>
+  </div>
+
   <!-- ========== PHASE 1 ========== -->
   <div class="phase-label">── Phase 1：正式啟動（月 1-4）──</div>
 
@@ -392,11 +419,7 @@
     </div>
   </div>
 
-  <div class="btn-row">
-    <button class="btn btn-pri" onclick="manualSync()" style="padding:12px 28px">💾 同步到 Google Sheet</button>
-    <button class="btn btn-sec" onclick="exportJ()">📋 匯出 JSON</button>
-    <button class="btn btn-sec" onclick="toggleSetup()">⚙️ 設定</button>
-  </div>
+  <!-- buttons moved to top -->
 </div>
 
 <div class="toast hidden" id="toast"></div>
@@ -511,6 +534,13 @@ const TASKS = {
     {id:'mkt2', text:'<code>MKT-b</code> CCW 產出官網文案 + 落地頁', hint:'核心話術：「免費的那份是他們的保護，這份是你的保護」。CCW 產出，mac 審核文案', owner:'CCW → mac 審核'},
     {id:'mkt3', text:'<code>MKT-c</code> 正式開始收費', hint:'所有流程確認 OK → 公開接單。業助接單填 Sheet → OC 通知 → CCW 生成報告 → mac 審核 → 交付', owner:'全員'},
   ],
+  asst: [
+    {id:'ast1', text:'<code>AST-a</code> 蒐集社區透天謄本（LB4b）', hint:'有社區公設的透天，會有 4 張權狀。找一個社區型透天的地址調土地+建物謄本', owner:'怡樺'},
+    {id:'ast2', text:'<code>AST-b</code> 蒐集混合社區透天謄本（LB4c）', hint:'社區內有大樓也有透天別墅的，找其中一戶透天的地址調謄本', owner:'怡樺'},
+    {id:'ast3', text:'<code>AST-c</code> 蒐集多筆土地混合分區謄本', hint:'同一案子包含 2 筆以上土地且分區不同（如工業＋農地），全部地號都要調', owner:'怡樺'},
+    {id:'ast4', text:'<code>AST-d</code> 蒐集農地＋違規農舍謄本（L3）', hint:'農地上有蓋東西但沒做保存登記，只會有土地謄本', owner:'怡樺'},
+    {id:'ast5', text:'<code>AST-e</code> 謄本調閱 SOP 補充', hint:'繼續補充調閱步驟說明（土地謄本、建物謄本、批次調閱方法），用 Google 文件或 PPT', owner:'怡樺'},
+  ],
 };
 
 // ===== Render =====
@@ -563,9 +593,16 @@ function renderAll() {
     const g=document.querySelector(`[data-f="${f}"]`);
     if(g) g.querySelectorAll('.dec-opt').forEach(o=>o.classList.toggle('sel',o.dataset.v===v));
   });
-  if(C.sid&&C.url){ document.getElementById('setupBox').style.display='none'; updSync('ok','已連線'); }
+  if(C.sid&&C.url){
+    document.getElementById('setupBox').style.display='none';
+    document.getElementById('syncRow').style.display='flex';
+    document.getElementById('btnSync').style.display='';
+    updSync('ok','已連線');
+  }
   if(C.sid) document.getElementById('cfgSid').value=C.sid;
   if(C.url) document.getElementById('cfgUrl').value=C.url;
+  // Update data timestamp
+  if(D.ts) document.getElementById('tsDataUpdate').textContent=new Date(D.ts).toLocaleString('zh-TW',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
   updTotal();
 }
 
@@ -600,8 +637,12 @@ function save(){
   D.notes=document.getElementById('notes').value;
   D.d_test_addr=document.getElementById('d_test_addr').value;
   localStorage.setItem(DK,JSON.stringify(D));
-  if(timer)clearTimeout(timer); timer=setTimeout(()=>sync(),3000);
-  updSync('pending','待同步...');
+  document.getElementById('tsDataUpdate').textContent=new Date(D.ts).toLocaleString('zh-TW',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  if(C.sid&&C.url){
+    document.getElementById('syncRow').style.display='flex';
+    if(timer)clearTimeout(timer); timer=setTimeout(()=>sync(),3000);
+    updSync('pending','待同步...');
+  }
 }
 function manualSync(){ save(); sync(); }
 async function sync(){
@@ -627,6 +668,8 @@ function saveCfg(){
   C.url=document.getElementById('cfgUrl').value.trim();
   localStorage.setItem(CK,JSON.stringify(C));
   document.getElementById('setupBox').style.display='none';
+  document.getElementById('syncRow').style.display='flex';
+  document.getElementById('btnSync').style.display='';
   updSync('ok','已連線'); toast('✅ 設定已儲存','success'); sync();
 }
 function toggleSetup(){ const s=document.getElementById('setupBox'); s.style.display=s.style.display==='none'?'block':'none'; }
