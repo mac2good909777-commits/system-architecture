@@ -178,19 +178,17 @@
 
   <!-- ========== 合作架構 ========== -->
   <div class="info-card" style="border-color:var(--green)">
-    <h3 style="color:var(--green)">🤝 合作架構</h3>
+    <h3 style="color:var(--green)">🏢 經營主體</h3>
     <div class="clients">
       <div class="client"><b>經營主體</b> — 睦聚地產開發有限公司</div>
-      <div class="client"><b>現有合作</b> — 與瑞禾不動產成立「工業不動產事業部」（分潤 瑞禾30:睦聚70）</div>
-      <div class="client"><b>競業確認 ✅</b> — 合約第三條第6項：顧問/資訊整合等非仲介業務不列入合作範圍</div>
+      <div class="client"><b>專案定位</b> — 第三方不動產查驗報告服務，由睦聚獨立開發營運</div>
     </div>
-    <div class="pro-note" style="border-left-color:var(--green)">RETCP 定位為第三方查驗報告服務（非仲介），不在合約競業範圍內</div>
   </div>
 
   <!-- ========== 查驗標準表成果 ========== -->
   <div class="info-card" style="border-color:var(--accent)">
     <h3 style="color:var(--accent2)">📋 查驗項目標準表 v1（已完成）</h3>
-    <p style="font-size:0.85rem;color:var(--text2);margin-bottom:8px">交叉比對 3 份不動產說明書（信義/信義全球/太平洋），提煉出 RETCP 完整查驗項目。</p>
+    <p style="font-size:0.85rem;color:var(--text2);margin-bottom:8px">交叉比對 3 份不動產說明書，提煉出 RETCP 完整查驗項目。</p>
     <div class="pricing" style="grid-template-columns:repeat(4,1fr)">
       <div class="price-box"><div class="amount">91</div><div class="label">查驗項目</div></div>
       <div class="price-box"><div class="amount">9</div><div class="label">模組</div></div>
@@ -433,7 +431,7 @@ const DONE_S1S2 = {
   leg1:{done:true,note:'S1a ✅ 睦聚地產合約第三條第6項：非仲介業務不列入合作分潤'},
   leg2:{done:true,note:'S1b ✅ 合約已確認，無競業限制問題'},
   leg3:{done:true,note:'S1c ✅ 無競業限制，RETCP 為第三方查驗報告服務（非仲介），可執行'},
-  vfy1:{done:true,note:'S2a ✅ 已上傳 3 份：信義(NZ14645 建物+土地60頁)、信義全球(NZ73787 純土地54頁)、太平洋(AA6313442 建物+土地20頁)'},
+  vfy1:{done:true,note:'S2a ✅ 已上傳 3 份不動產說明書（建物+土地60頁、純土地54頁、建物+土地20頁）'},
   vfy2:{done:true,note:'S2b ✅ 已完成：46項建物版 + 22項土地版 + 產權/稅費/行情/附件/法令全面摘要'},
   vfy3:{done:true,note:'S2c ✅ 91項全部對應：資料來源+查詢方式+自動化程度'},
   vfy4:{done:true,note:'S2d ✅ 標準表 v1.xlsx（91項、9模組）→ 已演進：標的分類系統 v1（L/B/LB 三大類 15 型態，對標實價登錄）'},
@@ -610,6 +608,7 @@ function renderAll() {
 function ck(id,el,group){
   D.tasks[id]=D.tasks[id]||{done:false,note:''};
   D.tasks[id].done=el.checked;
+  D.tasks[id].doneAt=el.checked?new Date().toISOString():null;
   document.getElementById('txt-'+id).classList.toggle('done',el.checked);
   updProg(group); updTotal(); save();
 }
@@ -649,12 +648,31 @@ async function sync(){
   if(!C.url){ updSync('error','未設定 Apps Script'); return; }
   updSync('pending','同步中...');
   const flat={timestamp:D.ts, phase:D.phase, week:D.week, traffic_light:D.light, light_reason:D.lightR, notes:D.notes, test_address:D.d_test_addr, sheetId:C.sid};
-  Object.entries(D.tasks).forEach(([k,v])=>{ flat['task_'+k]=v.done?'✅':'⬜'; flat['note_'+k]=v.note||''; });
+  Object.entries(D.tasks).forEach(([k,v])=>{ flat['task_'+k]=v.done?'✅':'⬜'; flat['note_'+k]=v.note||''; flat['doneAt_'+k]=v.doneAt||''; });
   Object.entries(D.decisions||{}).forEach(([k,v])=>{ flat['dec_'+k]=v; });
+  // 計算分項及總進度
+  const groupNames={legal:'S1 法規前提',verify:'S2 查驗標準化',mod:'S3 模組開發',sop:'S4 SOP',auto:'S5 自動化',first:'S6 首份報告',sys:'SYS 系統',brand:'BRD 品牌',cert:'CRT 簽證',mkt:'MKT 行銷',asst:'AST 助理'};
+  let totalAll=0,doneAll=0;
+  const groupProgress={};
+  Object.entries(TASKS).forEach(([g,arr])=>{
+    const d=arr.filter(t=>(D.tasks[t.id]||{}).done).length;
+    groupProgress[g]={done:d,total:arr.length,pct:arr.length?Math.round(d/arr.length*100):0,label:groupNames[g]||g};
+    totalAll+=arr.length; doneAll+=d;
+  });
+  flat.groupProgress=JSON.stringify(groupProgress);
+  flat.totalProgress=totalAll?Math.round(doneAll/totalAll*100):0;
+  flat.totalDone=doneAll;
+  flat.totalCount=totalAll;
   try{
-    await fetch(C.url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(flat)});
-    updSync('ok','已同步 '+new Date().toLocaleTimeString('zh-TW'));
-    toast('✅ 已同步','success');
+    const resp=await fetch(C.url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(flat)});
+    const result=await resp.json();
+    if(result.status==='ok'){
+      updSync('ok','已同步 '+new Date().toLocaleTimeString('zh-TW'));
+      toast('✅ 已同步','success');
+    }else{
+      updSync('error','同步失敗：'+result.message);
+      toast('❌ '+result.message,'error');
+    }
   }catch(e){ updSync('error','同步失敗'); toast('❌ '+e.message,'error'); }
 }
 function exportJ(){
