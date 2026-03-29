@@ -41,6 +41,7 @@
   .badge.p2 { background:rgba(59,130,246,.15); color:var(--accent2); }
   .badge.phase { background:var(--purple-bg); color:var(--purple); }
   .badge.info { background:rgba(34,197,94,.12); color:var(--green); }
+  .card-title code, .step-text code { font-family:monospace; font-size:0.82em; background:var(--surface2); color:var(--accent2); padding:1px 6px; border-radius:4px; font-weight:700; }
   .step { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid rgba(71,85,105,.3); }
   .step:last-child { border-bottom:none; }
   .step-check { flex-shrink:0; margin-top:2px; }
@@ -230,7 +231,7 @@
   <!-- Step 1: 法律前提 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge info">完成</span> Step 1：法律前提確認 ✅</div>
+      <div class="card-title"><span class="badge info">完成</span> <code>S1</code> 法律前提確認 ✅</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-legal">0/3</span><span class="chevron open">▶</span></div>
     </div>
     <div class="card-body open" id="body-legal"></div>
@@ -239,7 +240,7 @@
   <!-- Step 2: 查驗項目標準化 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge info">完成</span> Step 2：查驗項目標準化 ✅</div>
+      <div class="card-title"><span class="badge info">完成</span> <code>S2</code> 查驗項目標準化 ✅</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-verify">0/5</span><span class="chevron open">▶</span></div>
     </div>
     <div class="card-body open" id="body-verify"></div>
@@ -248,7 +249,7 @@
   <!-- Step 3: 九模組模板 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p0">進行中</span> Step 3：九模組報告模板 ⭐ 下一步</div>
+      <div class="card-title"><span class="badge p0">進行中</span> <code>S3</code> 九模組報告模板 ⭐ 下一步</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-mod">0/9</span><span class="chevron">▶</span></div>
     </div>
     <div class="card-body" id="body-mod"></div>
@@ -257,7 +258,7 @@
   <!-- Step 4: 業助 SOP -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p1">P1</span> Step 4：業助 SOP</div>
+      <div class="card-title"><span class="badge p1">P1</span> <code>S4</code> 業助 SOP</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-sop">0/3</span><span class="chevron">▶</span></div>
     </div>
     <div class="card-body" id="body-sop"></div>
@@ -266,7 +267,7 @@
   <!-- Step 5: 自動化 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p1">P1</span> Step 5：CCW 自動化腳本</div>
+      <div class="card-title"><span class="badge p1">P1</span> <code>S5</code> CCW 自動化腳本</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-auto">0/3</span><span class="chevron">▶</span></div>
     </div>
     <div class="card-body" id="body-auto"></div>
@@ -275,7 +276,7 @@
   <!-- Step 6: 第一份報告 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p0">P0</span> Step 6：第一份真實報告（驗收）</div>
+      <div class="card-title"><span class="badge p0">P0</span> <code>S6</code> 第一份真實報告（驗收）</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-first">0/4</span><span class="chevron">▶</span></div>
     </div>
     <div class="card-body" id="body-first"></div>
@@ -287,7 +288,7 @@
   <!-- 系統建置 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p0">P0</span> 系統建置</div>
+      <div class="card-title"><span class="badge p0">P0</span> <code>SYS</code> 系統建置</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-sys">0/3</span><span class="chevron">▶</span></div>
     </div>
     <div class="card-body" id="body-sys"></div>
@@ -296,7 +297,7 @@
   <!-- 品牌與收款 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p1">P1</span> 品牌設立 + 收款</div>
+      <div class="card-title"><span class="badge p1">P1</span> <code>BRD</code> 品牌設立 + 收款</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-brand">0/4</span><span class="chevron">▶</span></div>
     </div>
     <div class="card-body" id="body-brand"></div>
@@ -305,7 +306,7 @@
   <!-- 專業簽證串接設定 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p1">P1</span> 專業簽證串接設定</div>
+      <div class="card-title"><span class="badge p1">P1</span> <code>CRT</code> 專業簽證串接設定</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-cert">0/4</span><span class="chevron">▶</span></div>
     </div>
     <div class="card-body" id="body-cert"></div>
@@ -314,7 +315,7 @@
   <!-- 行銷啟動 -->
   <div class="card">
     <div class="card-head" onclick="tog(this)">
-      <div class="card-title"><span class="badge p2">P2</span> 行銷與市場驗證</div>
+      <div class="card-title"><span class="badge p2">P2</span> <code>MKT</code> 行銷與市場驗證</div>
       <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-mkt">0/3</span><span class="chevron">▶</span></div>
     </div>
     <div class="card-body" id="body-mkt"></div>
@@ -393,92 +394,114 @@
 <div class="toast hidden" id="toast"></div>
 
 <script>
-const CK='retcp_cfg', DK='retcp_data_v3';
+const CK='retcp_cfg', DK='retcp_data_v4';
 let C=JSON.parse(localStorage.getItem(CK)||'{}');
-let D=JSON.parse(localStorage.getItem(DK)||'null')||migrateV2()||{
-  ts:new Date().toISOString(), week:'W1', phase:'Phase 0',
-  light:'green', lightR:'Step 1+2 完成，進入 Step 3 報告模板設計',
-  tasks:{
-    leg1:{done:true,note:'睦聚地產合約第三條第6項：非仲介業務不列入合作分潤'},
-    leg2:{done:true,note:'合約已確認，無競業限制問題'},
-    leg3:{done:true,note:'✅ 無競業限制，RETCP 為第三方查驗報告服務（非仲介），可執行'},
-    vfy1:{done:true,note:'已上傳 3 份：信義(NZ14645 建物+土地60頁)、信義全球(NZ73787 純土地54頁)、太平洋(AA6313442 建物+土地20頁)'},
-    vfy2:{done:true,note:'已完成：46項建物版 + 22項土地版 + 產權/稅費/行情/附件/法令全面摘要'},
-    vfy3:{done:true,note:'91項全部對應：資料來源+查詢方式+自動化程度'},
-    vfy4:{done:true,note:'✅ RETCP_查驗項目標準表_v1.xlsx（91項、9模組、3工作表）'},
-    vfy5:{done:true,note:'CCW全自動35項+CCW半自動25項=66%可自動化，人工31項（主要為賣方自填）'}
-  }, decisions:{d_legal:'self'}, d_test_addr:'', notes:''
+
+// === Completed tasks (S1+S2) — source of truth ===
+const DONE_S1S2 = {
+  leg1:{done:true,note:'S1a ✅ 睦聚地產合約第三條第6項：非仲介業務不列入合作分潤'},
+  leg2:{done:true,note:'S1b ✅ 合約已確認，無競業限制問題'},
+  leg3:{done:true,note:'S1c ✅ 無競業限制，RETCP 為第三方查驗報告服務（非仲介），可執行'},
+  vfy1:{done:true,note:'S2a ✅ 已上傳 3 份：信義(NZ14645 建物+土地60頁)、信義全球(NZ73787 純土地54頁)、太平洋(AA6313442 建物+土地20頁)'},
+  vfy2:{done:true,note:'S2b ✅ 已完成：46項建物版 + 22項土地版 + 產權/稅費/行情/附件/法令全面摘要'},
+  vfy3:{done:true,note:'S2c ✅ 91項全部對應：資料來源+查詢方式+自動化程度'},
+  vfy4:{done:true,note:'S2d ✅ RETCP_查驗項目標準表_v1.xlsx（91項、9模組、3工作表）'},
+  vfy5:{done:true,note:'S2e ✅ CCW全自動35項+CCW半自動25項=66%可自動化，人工31項（主要為賣方自填）'},
 };
 
-// Migrate v2 data if exists
-function migrateV2(){
-  const old=localStorage.getItem('retcp_data_v2');
-  if(!old) return null;
-  try { const d=JSON.parse(old); d.ts=new Date().toISOString(); return d; } catch(e){ return null; }
+// Migrate from v3/v2 → v4: preserve user data but force-complete S1+S2
+function migratePrev(){
+  const v3=localStorage.getItem('retcp_data_v3');
+  const v2=localStorage.getItem('retcp_data_v2');
+  const raw=v3||v2;
+  if(!raw) return null;
+  try {
+    const d=JSON.parse(raw);
+    d.ts=new Date().toISOString();
+    // Force S1+S2 tasks to done with notes
+    d.tasks=Object.assign(d.tasks||{}, DONE_S1S2);
+    d.week='W1';
+    d.light='green';
+    d.lightR='Step 1+2 完成，進入 Step 3 報告模板設計';
+    // Clean up old keys
+    if(v3) localStorage.removeItem('retcp_data_v3');
+    if(v2) localStorage.removeItem('retcp_data_v2');
+    return d;
+  } catch(e){ return null; }
 }
+
+let D=JSON.parse(localStorage.getItem(DK)||'null')||migratePrev()||{
+  ts:new Date().toISOString(), week:'W1', phase:'Phase 0',
+  light:'green', lightR:'Step 1+2 完成，進入 Step 3 報告模板設計',
+  tasks: Object.assign({}, DONE_S1S2),
+  decisions:{d_legal:'self'}, d_test_addr:'', notes:''
+};
+
+// Safety: always ensure S1+S2 are done (even on existing v4 data)
+Object.assign(D.tasks, DONE_S1S2);
 
 // ===== ALL TASKS =====
 const TASKS = {
   legal: [
-    {id:'leg1', text:'查看雇傭合約', hint:'找出「競業禁止」「副業限制」條款，拍照或截圖留存。重點看：是否禁止副業？範圍是否涵蓋「資訊服務」？', owner:'mac'},
-    {id:'leg2', text:'諮詢律師或自行判斷', hint:'CCW 已備好 7 個問題清單。費用約 NT$3-5K 一次。如果合約明確無限制可自行判斷跳過', owner:'mac'},
-    {id:'leg3', text:'回填法律確認結果', hint:'在下方備註寫結論，例如「無競業限制，可執行」或「有限制但不涵蓋資訊服務」。這決定整個專案能不能做', owner:'mac'},
+    {id:'leg1', text:'<code>S1a</code> 查看雇傭合約', hint:'找出「競業禁止」「副業限制」條款，拍照或截圖留存。重點看：是否禁止副業？範圍是否涵蓋「資訊服務」？', owner:'mac'},
+    {id:'leg2', text:'<code>S1b</code> 諮詢律師或自行判斷', hint:'CCW 已備好 7 個問題清單。費用約 NT$3-5K 一次。如果合約明確無限制可自行判斷跳過', owner:'mac'},
+    {id:'leg3', text:'<code>S1c</code> 回填法律確認結果', hint:'在下方備註寫結論，例如「無競業限制，可執行」或「有限制但不涵蓋資訊服務」。這決定整個專案能不能做', owner:'mac'},
   ],
   verify: [
-    {id:'vfy1', text:'上傳 2-3 份不動產說明書給 CCW', hint:'住宅、土地、商用各一份最理想。這些是法規規定「必須記載」的標準文件，CCW 需要它來摘要所有查驗項目', owner:'mac 提供'},
-    {id:'vfy2', text:'CCW 摘要所有查驗項目清單', hint:'CCW 分析說明書，提取每一個「必須記載」和「需要查驗」的項目，產出完整清單讓你確認有沒有遺漏', owner:'CCW → mac 確認'},
-    {id:'vfy3', text:'CCW 研究每個項目的資料來源與查詢方式', hint:'每個查驗項目對應到哪個政府網站、怎麼查、查詢步驟是什麼。這是最花時間的步驟', owner:'CCW 研究'},
-    {id:'vfy4', text:'CCW 產出「查驗項目標準表」', hint:'核心文件：項目編號 / 名稱 / 歸屬模組 / 資料來源 / 查詢網站 / 操作步驟 / 自動化程度。mac 最終確認', owner:'CCW → mac 確認'},
-    {id:'vfy5', text:'CCW 評估自動化可行性', hint:'哪些項目可以寫腳本自動查（API/爬蟲），哪些只能業助手動查，哪些需要 mac 專業判斷', owner:'CCW 評估'},
+    {id:'vfy1', text:'<code>S2a</code> 上傳 2-3 份不動產說明書給 CCW', hint:'住宅、土地、商用各一份最理想。這些是法規規定「必須記載」的標準文件，CCW 需要它來摘要所有查驗項目', owner:'mac 提供'},
+    {id:'vfy2', text:'<code>S2b</code> CCW 摘要所有查驗項目清單', hint:'CCW 分析說明書，提取每一個「必須記載」和「需要查驗」的項目，產出完整清單讓你確認有沒有遺漏', owner:'CCW → mac 確認'},
+    {id:'vfy3', text:'<code>S2c</code> CCW 研究每個項目的資料來源與查詢方式', hint:'每個查驗項目對應到哪個政府網站、怎麼查、查詢步驟是什麼。這是最花時間的步驟', owner:'CCW 研究'},
+    {id:'vfy4', text:'<code>S2d</code> CCW 產出「查驗項目標準表」', hint:'核心文件：項目編號 / 名稱 / 歸屬模組 / 資料來源 / 查詢網站 / 操作步驟 / 自動化程度。mac 最終確認', owner:'CCW → mac 確認'},
+    {id:'vfy5', text:'<code>S2e</code> CCW 評估自動化可行性', hint:'哪些項目可以寫腳本自動查（API/爬蟲），哪些只能業助手動查，哪些需要 mac 專業判斷', owner:'CCW 評估'},
   ],
   mod: [
-    {id:'mod1', text:'A. 產權基本資訊模組（10項）', hint:'地址/坐落/面積/分區/建物構造/樓層/停車/完成日期。基於標準表 A-001~A-010', owner:'CCW 全自動'},
-    {id:'mod2', text:'B+C. 所有權+他項權利模組（11項）', hint:'所有權人/持分/取得原因/抵押權/地上權/查封預告。標準表 B+C 合併為產權透視', owner:'CCW → mac 審核'},
-    {id:'mod3', text:'D. 標的物現況模組（46項建物版/22項土地版）', hint:'政府規定應記載事項。兩套模板：建物版+土地版。標準表 D-001~D-046', owner:'CCW 半自動'},
-    {id:'mod4', text:'E. 重要注意事項模組（5項）', hint:'環境敏感/土壤污染/建築執照/氯離子/增建確認。標準表 E-001~E-005', owner:'CCW 半自動'},
-    {id:'mod5', text:'F. 稅費估算模組（4項）', hint:'增值稅/房地合一/契稅/規費概算。標準表 F-001~F-004', owner:'CCW 全自動'},
-    {id:'mod6', text:'G. 行情資訊模組（4項）', hint:'實價登錄同地址/同社區/周邊同類型+走勢圖。標準表 G-001~G-004', owner:'CCW 全自動'},
-    {id:'mod7', text:'H+I. 附件+法令模組（11項）', hint:'謄本/建照/分區證明/周邊圖+適用法令說明。標準表 H+I', owner:'CCW 半自動'},
-    {id:'mod8', text:'封面摘要+AI白話摘要', hint:'紅綠燈評分總覽+3大優點/3大風險/給買方建議。CCW 生成初稿 mac 微調', owner:'CCW → mac'},
-    {id:'mod9', text:'免責+專業簽證串接', hint:'免責聲明+「建議取得專業簽證」轉介區塊。責任隔離+計費隔離', owner:'CCW → 法律確認'},
+    {id:'mod1', text:'<code>S3a</code> A. 產權基本資訊模組（10項）', hint:'地址/坐落/面積/分區/建物構造/樓層/停車/完成日期。基於標準表 A-001~A-010', owner:'CCW 全自動'},
+    {id:'mod2', text:'<code>S3b</code> B+C. 所有權+他項權利模組（11項）', hint:'所有權人/持分/取得原因/抵押權/地上權/查封預告。標準表 B+C 合併為產權透視', owner:'CCW → mac 審核'},
+    {id:'mod3', text:'<code>S3c</code> D. 標的物現況模組（46項建物版/22項土地版）', hint:'政府規定應記載事項。兩套模板：建物版+土地版。標準表 D-001~D-046', owner:'CCW 半自動'},
+    {id:'mod4', text:'<code>S3d</code> E. 重要注意事項模組（5項）', hint:'環境敏感/土壤污染/建築執照/氯離子/增建確認。標準表 E-001~E-005', owner:'CCW 半自動'},
+    {id:'mod5', text:'<code>S3e</code> F. 稅費估算模組（4項）', hint:'增值稅/房地合一/契稅/規費概算。標準表 F-001~F-004', owner:'CCW 全自動'},
+    {id:'mod6', text:'<code>S3f</code> G. 行情資訊模組（4項）', hint:'實價登錄同地址/同社區/周邊同類型+走勢圖。標準表 G-001~G-004', owner:'CCW 全自動'},
+    {id:'mod7', text:'<code>S3g</code> H+I. 附件+法令模組（11項）', hint:'謄本/建照/分區證明/周邊圖+適用法令說明。標準表 H+I', owner:'CCW 半自動'},
+    {id:'mod8', text:'<code>S3h</code> 封面摘要+AI白話摘要', hint:'紅綠燈評分總覽+3大優點/3大風險/給買方建議。CCW 生成初稿 mac 微調', owner:'CCW → mac'},
+    {id:'mod9', text:'<code>S3i</code> 免責+專業簽證串接', hint:'免責聲明+「建議取得專業簽證」轉介區塊。責任隔離+計費隔離', owner:'CCW → 法律確認'},
   ],
   sop: [
-    {id:'sop1', text:'mac 列出業助每天任務清單', hint:'不用寫 SOP，只要一句話列出：例如「查實價登錄」「蒐集謄本資料」「填 Sheet」「回覆客戶 FAQ」', owner:'mac'},
-    {id:'sop2', text:'CCW 展開成完整 SOP 手冊', hint:'CCW 根據你的清單 + 查驗標準表，自動生成含每個步驟截圖說明的 SOP 文件', owner:'CCW 產出'},
-    {id:'sop3', text:'mac 審核 SOP 手冊', hint:'看過 CCW 產出的 SOP，確認流程合理、沒有遺漏、業助能看懂', owner:'mac 審核'},
+    {id:'sop1', text:'<code>S4a</code> mac 列出業助每天任務清單', hint:'不用寫 SOP，只要一句話列出：例如「查實價登錄」「蒐集謄本資料」「填 Sheet」「回覆客戶 FAQ」', owner:'mac'},
+    {id:'sop2', text:'<code>S4b</code> CCW 展開成完整 SOP 手冊', hint:'CCW 根據你的清單 + 查驗標準表，自動生成含每個步驟截圖說明的 SOP 文件', owner:'CCW 產出'},
+    {id:'sop3', text:'<code>S4c</code> mac 審核 SOP 手冊', hint:'看過 CCW 產出的 SOP，確認流程合理、沒有遺漏、業助能看懂', owner:'mac 審核'},
   ],
   auto: [
-    {id:'aut1', text:'CCW 建立自動查詢腳本（可自動化項目）', hint:'根據標準表中「CCW 全自動」的項目，寫 Python 腳本自動查詢政府網站', owner:'CCW 開發'},
-    {id:'aut2', text:'CCW 建立報告生成流程', hint:'輸入標的地址 → 自動跑全部腳本 → 組合七模組 → 產出 Word 初稿。目標：一鍵生成', owner:'CCW 開發'},
-    {id:'aut3', text:'測試自動化流程（用測試標的）', hint:'拿第一個測試標的跑一次完整流程，記錄哪裡卡住、哪裡需要人工介入', owner:'CCW + mac'},
+    {id:'aut1', text:'<code>S5a</code> CCW 建立自動查詢腳本（可自動化項目）', hint:'根據標準表中「CCW 全自動」的項目，寫 Python 腳本自動查詢政府網站', owner:'CCW 開發'},
+    {id:'aut2', text:'<code>S5b</code> CCW 建立報告生成流程', hint:'輸入標的地址 → 自動跑全部腳本 → 組合九模組 → 產出 Word 初稿。目標：一鍵生成', owner:'CCW 開發'},
+    {id:'aut3', text:'<code>S5c</code> 測試自動化流程（用測試標的）', hint:'拿第一個測試標的跑一次完整流程，記錄哪裡卡住、哪裡需要人工介入', owner:'CCW + mac'},
   ],
   first: [
-    {id:'fst1', text:'選定測試標的地址', hint:'在上方決策區填入你熟悉的住宅地址。選你了解行情的地方，這樣審核時能判斷報告品質', owner:'mac'},
-    {id:'fst2', text:'跑完整流程產出報告初稿', hint:'業助（或 mac 暫代）蒐集資料 → CCW 自動化 + 手動補齊 → 生成完整 7 模組 Word 報告', owner:'全員'},
-    {id:'fst3', text:'mac 品質審核（30 分鐘）', hint:'逐模組檢查：數字對不對、法規判斷對不對、白話摘要語氣好不好、簽證串接標注合適嗎', owner:'mac 審核'},
-    {id:'fst4', text:'修正問題，確認報告可交付水準', hint:'根據審核結果修正模板、調整流程。這份報告就是未來所有報告的品質標準', owner:'CCW + mac'},
+    {id:'fst1', text:'<code>S6a</code> 選定測試標的地址', hint:'在上方決策區填入你熟悉的住宅地址。選你了解行情的地方，這樣審核時能判斷報告品質', owner:'mac'},
+    {id:'fst2', text:'<code>S6b</code> 跑完整流程產出報告初稿', hint:'業助（或 mac 暫代）蒐集資料 → CCW 自動化 + 手動補齊 → 生成完整九模組 Word 報告', owner:'全員'},
+    {id:'fst3', text:'<code>S6c</code> mac 品質審核（30 分鐘）', hint:'逐模組檢查：數字對不對、法規判斷對不對、白話摘要語氣好不好、簽證串接標注合適嗎', owner:'mac 審核'},
+    {id:'fst4', text:'<code>S6d</code> 修正問題，確認報告可交付水準', hint:'根據審核結果修正模板、調整流程。這份報告就是未來所有報告的品質標準', owner:'CCW + mac'},
   ],
   sys: [
-    {id:'sys1', text:'上傳 xlsx 建立 RETCP_STATUS Google Sheet', hint:'下載 ~/Documents/Claude-MM4/RETCP-2026/ 裡的 xlsx 檔 → 上傳 Google Drive → 右鍵轉為 Google 試算表', owner:'mac'},
-    {id:'sys2', text:'回填 Sheet ID 到控場面板', hint:'Sheet 網址中 /d/ 和 /edit 之間那串就是 ID。點上方 ⚙️ 填入', owner:'mac'},
-    {id:'sys3', text:'OC cron 設定確認', hint:'已建立 3 個 RETCP cron job（週度/月度/每日進度）。確認 Telegram 有收到測試通知', owner:'mac 確認'},
+    {id:'sys1', text:'<code>SYS-a</code> 上傳 xlsx 建立 RETCP_STATUS Google Sheet', hint:'下載 ~/Documents/Claude-MM4/RETCP-2026/ 裡的 xlsx 檔 → 上傳 Google Drive → 右鍵轉為 Google 試算表', owner:'mac'},
+    {id:'sys2', text:'<code>SYS-b</code> 回填 Sheet ID 到控場面板', hint:'Sheet 網址中 /d/ 和 /edit 之間那串就是 ID。點上方 ⚙️ 填入', owner:'mac'},
+    {id:'sys3', text:'<code>SYS-c</code> OC cron 設定確認', hint:'已建立 3 個 RETCP cron job（週度/月度/每日進度）。確認 Telegram 有收到測試通知', owner:'mac 確認'},
   ],
   brand: [
-    {id:'brd1', text:'品牌名稱確認', hint:'告訴 CCW「幫我想 10 個品牌名」。名稱要跟本業完全區隔，法人品牌對外、個人隱身', owner:'CCW 提案 → mac 選'},
-    {id:'brd2', text:'設立有限公司', hint:'個人持股但對外不露出。需要：公司名稱、營業項目、登記地址。可找記帳士代辦', owner:'mac'},
-    {id:'brd3', text:'設定收款流程', hint:'綠界或藍新二擇一。需要公司統編才能申請。申請到上線約 1-2 週', owner:'mac'},
-    {id:'brd4', text:'確認 2025 創業大聯盟提案文件流通範圍', hint:'那份文件有你的名字，確認誰看過、是否公開，評估身份曝光風險', owner:'mac'},
+    {id:'brd1', text:'<code>BRD-a</code> 品牌名稱確認', hint:'告訴 CCW「幫我想 10 個品牌名」。名稱要跟本業完全區隔，法人品牌對外、個人隱身', owner:'CCW 提案 → mac 選'},
+    {id:'brd2', text:'<code>BRD-b</code> 設立有限公司', hint:'個人持股但對外不露出。需要：公司名稱、營業項目、登記地址。可找記帳士代辦', owner:'mac'},
+    {id:'brd3', text:'<code>BRD-c</code> 設定收款流程', hint:'綠界或藍新二擇一。需要公司統編才能申請。申請到上線約 1-2 週', owner:'mac'},
+    {id:'brd4', text:'<code>BRD-d</code> 確認 2025 創業大聯盟提案文件流通範圍', hint:'那份文件有你的名字，確認誰看過、是否公開，評估身份曝光風險', owner:'mac'},
   ],
   cert: [
-    {id:'crt1', text:'擬定專業簽證合作架構', hint:'CCW 產出合作架構文件：轉介流程、責任歸屬、計費方式。mac 確認法律面沒問題', owner:'CCW → mac 確認'},
-    {id:'crt2', text:'建立專業人士名單（建築師/估價師/驗屋/律師）', hint:'每個類別至少找 2 位可合作的專業人士。可先從業界人脈或公會名錄開始', owner:'mac'},
-    {id:'crt3', text:'設計報告中的簽證串接標注格式', hint:'在第⑦模組中，當項目超出資訊彙整範圍時的標注樣式和文案。CCW 產出初稿', owner:'CCW → mac 審核'},
-    {id:'crt4', text:'確認轉介計費方式', hint:'RETCP 不代收不抽成 → 純轉介。或者收固定轉介費？需要決定並寫入合作架構', owner:'mac 決策'},
+    {id:'crt1', text:'<code>CRT-a</code> 擬定專業簽證合作架構', hint:'CCW 產出合作架構文件：轉介流程、責任歸屬、計費方式。mac 確認法律面沒問題', owner:'CCW → mac 確認'},
+    {id:'crt2', text:'<code>CRT-b</code> 建立專業人士名單（建築師/估價師/驗屋/律師）', hint:'每個類別至少找 2 位可合作的專業人士。可先從業界人脈或公會名錄開始', owner:'mac'},
+    {id:'crt3', text:'<code>CRT-c</code> 設計報告中的簽證串接標注格式', hint:'在第⑦模組中，當項目超出資訊彙整範圍時的標注樣式和文案。CCW 產出初稿', owner:'CCW → mac 審核'},
+    {id:'crt4', text:'<code>CRT-d</code> 確認轉介計費方式', hint:'RETCP 不代收不抽成 → 純轉介。或者收固定轉介費？需要決定並寫入合作架構', owner:'mac 決策'},
   ],
   mkt: [
-    {id:'mkt1', text:'給 5 人看樣本報告收集回饋', hint:'找 5 個信任的人，問「這份報告值 NT$1,500-2,800 嗎？」消費者必須一眼看出這跟仲介那份不是同一種東西', owner:'mac + 業助'},
-    {id:'mkt2', text:'CCW 產出官網文案 + 落地頁', hint:'核心話術：「免費的那份是他們的保護，這份是你的保護」。CCW 產出，mac 審核文案', owner:'CCW → mac 審核'},
-    {id:'mkt3', text:'正式開始收費', hint:'所有流程確認 OK → 公開接單。業助接單填 Sheet → OC 通知 → CCW 生成報告 → mac 審核 → 交付', owner:'全員'},
+    {id:'mkt1', text:'<code>MKT-a</code> 給 5 人看樣本報告收集回饋', hint:'找 5 個信任的人，問「這份報告值 NT$1,500-2,800 嗎？」消費者必須一眼看出這跟仲介那份不是同一種東西', owner:'mac + 業助'},
+    {id:'mkt2', text:'<code>MKT-b</code> CCW 產出官網文案 + 落地頁', hint:'核心話術：「免費的那份是他們的保護，這份是你的保護」。CCW 產出，mac 審核文案', owner:'CCW → mac 審核'},
+    {id:'mkt3', text:'<code>MKT-c</code> 正式開始收費', hint:'所有流程確認 OK → 公開接單。業助接單填 Sheet → OC 通知 → CCW 生成報告 → mac 審核 → 交付', owner:'全員'},
   ],
 };
 
