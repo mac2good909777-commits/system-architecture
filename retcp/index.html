@@ -250,9 +250,17 @@
   <div class="card">
     <div class="card-head" onclick="tog(this)">
       <div class="card-title"><span class="badge p0">進行中</span> <code>S3</code> 九模組報告模板 ⭐ 下一步</div>
-      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-mod">0/9</span><span class="chevron">▶</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><span class="card-progress" id="prog-mod">0/9</span><span class="chevron open">▶</span></div>
     </div>
-    <div class="card-body" id="body-mod"></div>
+    <div class="card-body open" id="body-mod">
+      <div style="background:#f0fdf4;border-left:3px solid #22c55e;padding:8px 12px;margin-bottom:12px;border-radius:4px;font-size:0.85rem">
+        <strong>🏗️ 基礎工程已完成（03-29）</strong><br>
+        標的分類系統 v1 定案（L/B/LB 三大類 × 15 型態 × 9 屬性標記）<br>
+        5 類謄本欄位完整拆解（含 110+ 欄位 mapping）<br>
+        Domain Knowledge：混合分區比例計算、混合所有權、透天三子型、違建實務、鄰地調查邏輯<br>
+        <span style="color:#6b7280">→ 下一步：逐模組設計輸出模板</span>
+      </div>
+    </div>
   </div>
 
   <!-- Step 4: 業助 SOP -->
@@ -405,7 +413,7 @@ const DONE_S1S2 = {
   vfy1:{done:true,note:'S2a ✅ 已上傳 3 份：信義(NZ14645 建物+土地60頁)、信義全球(NZ73787 純土地54頁)、太平洋(AA6313442 建物+土地20頁)'},
   vfy2:{done:true,note:'S2b ✅ 已完成：46項建物版 + 22項土地版 + 產權/稅費/行情/附件/法令全面摘要'},
   vfy3:{done:true,note:'S2c ✅ 91項全部對應：資料來源+查詢方式+自動化程度'},
-  vfy4:{done:true,note:'S2d ✅ RETCP_查驗項目標準表_v1.xlsx（91項、9模組、3工作表）'},
+  vfy4:{done:true,note:'S2d ✅ 標準表 v1.xlsx（91項、9模組）→ 已演進：標的分類系統 v1（L/B/LB 三大類 15 型態，對標實價登錄）'},
   vfy5:{done:true,note:'S2e ✅ CCW全自動35項+CCW半自動25項=66%可自動化，人工31項（主要為賣方自填）'},
 };
 
@@ -422,7 +430,7 @@ function migratePrev(){
     d.tasks=Object.assign(d.tasks||{}, DONE_S1S2);
     d.week='W1';
     d.light='green';
-    d.lightR='Step 1+2 完成，進入 Step 3 報告模板設計';
+    d.lightR='S1+S2 完成 → S3 基礎工程完成（分類系統 v1 + 5 類謄本欄位 + Domain Knowledge），進入模組模板設計';
     // Clean up old keys
     if(v3) localStorage.removeItem('retcp_data_v3');
     if(v2) localStorage.removeItem('retcp_data_v2');
@@ -432,7 +440,7 @@ function migratePrev(){
 
 let D=JSON.parse(localStorage.getItem(DK)||'null')||migratePrev()||{
   ts:new Date().toISOString(), week:'W1', phase:'Phase 0',
-  light:'green', lightR:'Step 1+2 完成，進入 Step 3 報告模板設計',
+  light:'green', lightR:'S1+S2 完成 → S3 基礎工程完成（分類系統 v1 + 5 類謄本欄位 + Domain Knowledge），進入模組模板設計',
   tasks: Object.assign({}, DONE_S1S2),
   decisions:{d_legal:'self'}, d_test_addr:'', notes:''
 };
