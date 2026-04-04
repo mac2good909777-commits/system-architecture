@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETCP 謄本拆解參考 v1</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2e3350;
+    --text: #e2e8f0;
+    --muted: #8892b0;
+    --accent: #64b5f6;
+    --accent2: #80cbc4;
+    --red: #ef5350;
+    --orange: #ffa726;
+    --yellow: #ffee58;
+    --green: #66bb6a;
+    --gray: #78909c;
+    --tag-bg: #1e3a5f;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --mono: 'Fira Mono', 'Cascadia Code', monospace;
+    --sidebar-w: 240px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.7;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── Sidebar ───────────────────────────────── */
+  #sidebar {
+    width: var(--sidebar-w);
+    min-height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0; left: 0;
+    overflow-y: auto;
+    padding: 20px 0 40px;
+    z-index: 100;
+  }
+
+  #sidebar .logo {
+    padding: 0 16px 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  #sidebar .logo h1 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  #sidebar .logo p {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  #sidebar nav a {
+    display: block;
+    padding: 6px 16px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12.5px;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  #sidebar nav a:hover,
+  #sidebar nav a.active {
+    color: var(--text);
+    background: var(--surface2);
+    border-left-color: var(--accent);
+  }
+
+  #sidebar nav .section-label {
+    padding: 14px 16px 4px;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  /* ── Main Content ──────────────────────────── */
+  #main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: calc(100% - var(--sidebar-w));
+  }
+
+  section {
+    margin-bottom: 56px;
+    scroll-margin-top: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent2);
+    margin: 24px 0 12px;
+  }
+
+  p { margin-bottom: 10px; color: var(--text); }
+
+  /* ── Tables ────────────────────────────────── */
+  .table-wrap { overflow-x: auto; margin-bottom: 20px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    background: var(--surface2);
+    color: var(--accent);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:hover { background: var(--surface2); }
+
+  tbody td {
+    padding: 9px 14px;
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+  /* ── Type Badge ────────────────────────────── */
+  .type-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: var(--mono);
+    background: var(--tag-bg);
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* ── Pressure Levels ───────────────────────── */
+  .p-red    { color: var(--red); font-weight: 700; }
+  .p-orange { color: var(--orange); font-weight: 600; }
+  .p-yellow { color: var(--yellow); }
+  .p-green  { color: var(--green); }
+  .p-gray   { color: var(--gray); }
+
+  /* ── Callout / Tip ─────────────────────────── */
+  .tip {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    margin: 12px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .tip strong { color: var(--text); }
+
+  .warn {
+    background: rgba(255,167,38,0.08);
+    border-left: 3px solid var(--orange);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    margin: 12px 0;
+    font-size: 13px;
+    color: var(--orange);
+  }
+
+  /* ── Code ──────────────────────────────────── */
+  code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--surface2);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--accent2);
+  }
+
+  /* ── Meta bar ──────────────────────────────── */
+  .meta-bar {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .meta-bar span {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .meta-bar strong { color: var(--accent); }
+
+  /* ── Type grid ─────────────────────────────── */
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .type-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: border-color 0.2s;
+  }
+
+  .type-card:hover { border-color: var(--accent); }
+
+  .type-card .head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .type-card .name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .type-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .type-card li {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .type-card li:last-child { border-bottom: none; }
+
+  .type-card li strong { color: var(--text); }
+
+  /* ── Search ─────────────────────────────────── */
+  #search-wrap {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  #search {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: var(--text);
+    font-size: 12px;
+    outline: none;
+  }
+
+  #search:focus { border-color: var(--accent); }
+
+  .highlight { background: rgba(100,181,246,0.2); border-radius: 2px; }
+
+  /* ── Scrollbar ──────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 768px) {
+    #sidebar { display: none; }
+    #main { margin-left: 0; padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<div id="sidebar">
+  <div class="logo">
+    <h1>RETCP 謄本</h1>
+    <p>參考手冊 v1 · 2026-04-01</p>
+  </div>
+
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="搜尋…" autocomplete="off">
+  </div>
+
+  <nav id="nav">
+    <div class="section-label">概覽</div>
+    <a href="#overview">全類型概覽</a>
+
+    <div class="section-label">土地謄本</div>
+    <a href="#land-mark">標示部（11欄）</a>
+    <a href="#land-own">所有權部（12欄）</a>
+    <a href="#land-other">他項權利部（17欄）</a>
+
+    <div class="section-label">建物謄本</div>
+    <a href="#bld-mark">標示部</a>
+    <a href="#bld-own">所有權部</a>
+    <a href="#bld-other">他項權利部</a>
+
+    <div class="section-label">對照表</div>
+    <a href="#reg-reason">登記原因</a>
+    <a href="#mortgage">抵押類型</a>
+    <a href="#urban">都市 vs 非都市（空白2種情形）</a>
+
+    <div class="section-label">各類型識別</div>
+    <a href="#type-tips">識別要點（A~K）</a>
+    <a href="#id-code">身分證首碼↔縣市</a>
+
+    <div class="section-label">查驗邏輯</div>
+    <a href="#tax-rate">房地合一稅率</a>
+    <a href="#pressure">資金壓力評分</a>
+    <a href="#permit">建照查驗</a>
+    <a href="#module-a">A模組欄位對應</a>
+    <a href="#upload">上傳規則</a>
+  </nav>
+</div>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div id="main">
+
+  <div class="meta-bar">
+    <span><strong>版本</strong> v1</span>
+    <span><strong>建立</strong> 2026-04-01</span>
+    <span><strong>涵蓋</strong> Type A ~ K，共 13 種型態</span>
+    <span><strong>用途</strong> RETCP 查驗系統 Domain Knowledge</span>
+    <span><strong>Google Doc</strong> <code>1oBjZOUrHhi-bCYK5j7xcRwNWtpfcPKA4kitw85y-oBU</code></span>
+  </div>
+
+  <!-- ──── 1. 全類型概覽 ──── -->
+  <section id="overview">
+    <h2>一、全類型概覽</h2>
+    <div class="type-grid">
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">A</span><span class="name">電梯大樓</span></div>
+        <ul>
+          <li><strong>地址</strong> 崇德二路</li>
+          <li><strong>分區</strong> 住宅區</li>
+          <li><strong>所有</strong> 自然人</li>
+          <li><strong>負債</strong> 一般抵押</li>
+          <li><strong>特徵</strong> 土地持分均分，共有部分 ≥2，1戶1建號</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">B</span><span class="name">獨棟廠房透天</span></div>
+        <ul>
+          <li><strong>地址</strong> 仁化路125巷10號</li>
+          <li><strong>分區</strong> 工業區</li>
+          <li><strong>所有</strong> 混合</li>
+          <li><strong>負債</strong> 一般抵押</li>
+          <li><strong>特徵</strong> 土地全部持有 1/1，無共有部分，1棟1使照</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">C</span><span class="name">複合廠房</span></div>
+        <ul>
+          <li><strong>地址</strong> 工業區37路</li>
+          <li><strong>分區</strong> 工業區</li>
+          <li><strong>所有</strong> 自然人</li>
+          <li><strong>負債</strong> 一般抵押</li>
+          <li><strong>特徵</strong> 同地號多建號，各建號各自使照</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">D</span><span class="name">地上權廠房</span></div>
+        <ul>
+          <li><strong>地址</strong> 梧棲港加段</li>
+          <li><strong>分區</strong> 港區</li>
+          <li><strong>所有</strong> 法人</li>
+          <li><strong>負債</strong> 無</li>
+          <li><strong>特徵</strong> <span style="color:var(--orange)">無土地所有權</span>，只有地上權</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">E</span><span class="name">舊式公寓 1F</span></div>
+        <ul>
+          <li><strong>地址</strong> 健行路922號</li>
+          <li><strong>坪數</strong> 44.7坪（主+共有）</li>
+          <li><strong>分區</strong> 住宅區三種</li>
+          <li><strong>負債</strong> 一般（擔保物增加）</li>
+          <li><strong>特徵</strong> 1F持分83%；含騎樓+B1；先蓋後貸</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">F</span><span class="name">非都市廠房</span></div>
+        <ul>
+          <li><strong>地址</strong> 光正段1096</li>
+          <li><strong>坪數</strong> 208.5坪</li>
+          <li><strong>分區</strong> <span style="color:var(--orange)">特定農業區＋丁建</span></li>
+          <li><strong>所有</strong> 法人（公司）</li>
+          <li><strong>負債</strong> 最高限額 5,280萬</li>
+          <li><strong>特徵</strong> 地籍圖重測；最高限額30年</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">G1</span><span class="name">社區透天（整批）</span></div>
+        <ul>
+          <li><strong>地址</strong> 北屯路298巷47號</li>
+          <li><strong>坪數</strong> 70.2坪</li>
+          <li><strong>分區</strong> 住宅區</li>
+          <li><strong>負債</strong> 最高限額 240萬（跨多標）</li>
+          <li><strong>特徵</strong> 1使照多棟；投資客打包；跨行重複擔保風險</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">G2</span><span class="name">連棟透天（各自建照）</span></div>
+        <ul>
+          <li><strong>地址</strong> 太平新興二街12號</li>
+          <li><strong>坪數</strong> 96.2坪</li>
+          <li><strong>分區</strong> 住宅區</li>
+          <li><strong>負債</strong> 無</li>
+          <li><strong>特徵</strong> 各棟獨立建照；共同壁；面積遞增=出挑</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">H</span><span class="name">高矮混合社區透天</span></div>
+        <ul>
+          <li><strong>地址</strong> 西區存中街7之2號</li>
+          <li><strong>坪數</strong> 146.7坪</li>
+          <li><strong>分區</strong> 二種＋三種（跨分區）</li>
+          <li><strong>負債</strong> 無</li>
+          <li><strong>特徵</strong> 逕為地目變更；未保存登記；3共有部分；土地三批取得</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">I-a</span><span class="name">都市農業區素地</span></div>
+        <ul>
+          <li><strong>地址</strong> 北屯大興段492-6</li>
+          <li><strong>坪數</strong> 426.2坪</li>
+          <li><strong>分區</strong> <span style="color:var(--yellow)">農業區（都市）</span></li>
+          <li><strong>所有</strong> 夫妻各1/2</li>
+          <li><strong>負債</strong> 無</li>
+          <li><strong>特徵</strong> 謄本無分區記載；逕為分割；農地承諾書</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">I-b</span><span class="name">都市農業區大地塊</span></div>
+        <ul>
+          <li><strong>地址</strong> 龍井忠和段1944</li>
+          <li><strong>坪數</strong> 2,144坪</li>
+          <li><strong>分區</strong> <span style="color:var(--yellow)">農業區（都市）</span></li>
+          <li><strong>負債</strong> 無</li>
+          <li><strong>特徵</strong> 地目等則調整057年；前次現值45.4元/㎡；世代傳承</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">J</span><span class="name">同地號雙建照舊透天</span></div>
+        <ul>
+          <li><strong>地址</strong> 潭子中興段1230</li>
+          <li><strong>坪數</strong> 73.1坪</li>
+          <li><strong>分區</strong> 住宅區一之一種</li>
+          <li><strong>負債</strong> 無</li>
+          <li><strong>特徵</strong> 套匯圖雙建照（075＋080）；含未保存登記；分割轉載</li>
+        </ul>
+      </div>
+
+      <div class="type-card">
+        <div class="head"><span class="type-badge">K</span><span class="name">老舊加強磚造透天</span></div>
+        <ul>
+          <li><strong>地址</strong> 北區乾溝子段90-335</li>
+          <li><strong>坪數</strong> 土地22.99 / 建物27.5坪</li>
+          <li><strong>分區</strong> 住宅區二種</li>
+          <li><strong>負債</strong> 最高限額 1,000萬（中小企銀）</li>
+          <li><strong>特徵</strong> <span style="color:var(--orange)">建物>土地</span>（2F出挑）；交換登記；集體建照059年；屋齡54年</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ──── 2. 土地謄本 ──── -->
+  <section id="land-mark">
+    <h2>二、土地謄本欄位全解析</h2>
+    <h3>2.1 土地標示部（11個欄位）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>欄位</th><th>說明</th><th>查驗重點</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>總公告現值</td><td>面積 × 公告土地現值</td><td>估算底價基準</td></tr>
+          <tr><td>2</td><td>總公告地價</td><td>面積 × 公告地價</td><td>地價稅計算基礎</td></tr>
+          <tr><td>3</td><td>登記日期</td><td>本次登記的日期（非買賣日期）</td><td>搭配登記原因解讀</td></tr>
+          <tr><td>4</td><td>登記原因</td><td>本次謄本登記的原因</td><td>見登記原因對照表</td></tr>
+          <tr><td>5</td><td>面積</td><td>土地面積（㎡/坪）</td><td>核對地籍圖量尺是否吻合</td></tr>
+          <tr><td>6</td><td>使用分區</td><td>都市土地 <strong>空白</strong>；非都市填入（特農區等）</td><td><span class="p-orange">兩欄空白 ≠ 無限制！</span></td></tr>
+          <tr><td>7</td><td>使用地類別</td><td>都市土地 <strong>空白</strong>；非都市填入（農牧/甲建/丁建等）</td><td>丁種建築用地可建廠</td></tr>
+          <tr><td>8</td><td>公告土地現值</td><td>年份＋元/㎡（萬/坪）</td><td>土增稅計算基礎</td></tr>
+          <tr><td>9</td><td>公告地價</td><td>年份＋元/㎡</td><td>地價稅計算基礎</td></tr>
+          <tr><td>10</td><td>地上建物建號</td><td>該土地上的合法登記建物</td><td><span class="p-orange">空白不代表無建物</span>（舊屋/未登記）</td></tr>
+          <tr><td>11</td><td>其他登記事項</td><td>分割自、重測前地段地號、合併等歷史</td><td>追溯前地號的關鍵欄位</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="land-own">
+    <h3>2.2 土地所有權部（12個欄位）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>欄位</th><th>說明</th><th>查驗重點</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>共N位所有權人</td><td>土地所有人數</td><td>&gt;1人 = 需確認全體同意出售</td></tr>
+          <tr><td>2</td><td>登記次序</td><td>本次登記的順序號</td><td>非0001 = 有更早歷史，可調舊謄本</td></tr>
+          <tr><td>3</td><td>登記日期</td><td>本次所有權登記日期</td><td>—</td></tr>
+          <tr><td>4</td><td>登記原因</td><td>取得原因（買賣/贈與/交換/繼承等）</td><td>—</td></tr>
+          <tr><td>5</td><td>原因發生日期</td><td>契約或事實發生日期</td><td>比登記日期早，是實際交易日</td></tr>
+          <tr><td>6</td><td>所有權人</td><td>姓名（遮蔽）+ 統一編號（部分遮蔽）</td><td>L開頭=自然人；B/C等=法人</td></tr>
+          <tr><td>7</td><td>地址</td><td>所有人戶籍地址</td><td>與建物門牌相同=自住；不同=非自住</td></tr>
+          <tr><td>8</td><td>權利範圍</td><td>持分比例</td><td>1/1=全部；1/2=共有各半</td></tr>
+          <tr><td>9</td><td>權狀字號</td><td>土地所有權狀字號</td><td>—</td></tr>
+          <tr><td>10</td><td>相關他項權利登記次序</td><td>對應到他項權利部的登記</td><td>有值 = 有抵押或其他他項</td></tr>
+          <tr><td>11</td><td>當期申報地價</td><td>所有人自報地價（通常 &lt; 公告地價）</td><td>—</td></tr>
+          <tr><td>12</td><td>前次移轉現值或原規定地價</td><td>上次移轉時的公告現值</td><td><span class="p-orange">極低=農地傳承；時間久=土增稅重</span></td></tr>
+          <tr><td>附</td><td>歷次取得權利範圍</td><td>若曾分批取得，列出每次比例</td><td>Type H：分三批取得合計全部</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="land-other">
+    <h3>2.3 土地他項權利部（17個欄位）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>欄位</th><th>說明</th><th>查驗重點</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>登記次序</td><td>抵押次序（0001最優先）</td><td><span class="p-red">0002以上 = 有二胎，高資金壓力</span></td></tr>
+          <tr><td>2</td><td>收件年期</td><td>申請登記年度</td><td>—</td></tr>
+          <tr><td>3</td><td>登記日期</td><td>正式登記日期</td><td>—</td></tr>
+          <tr><td>4</td><td>權利種類</td><td>一般抵押/最高限額抵押</td><td>見抵押類型對照表</td></tr>
+          <tr><td>5</td><td>字號</td><td>證明書字號</td><td>同字號 = 同一筆抵押同時擔保土地+建物</td></tr>
+          <tr><td>6</td><td>登記原因</td><td>設定/塗銷/擔保物增加</td><td>擔保物增加 = 建物完工後追加</td></tr>
+          <tr><td>7</td><td>權利人</td><td>銀行/法人/自然人</td><td><span class="p-red">自然人 = 私人借貸，最高資金壓力</span></td></tr>
+          <tr><td>8</td><td>債權額比例</td><td>全部1/1 or 持分</td><td>—</td></tr>
+          <tr><td>9</td><td>擔保債權總金額</td><td>設定的最高限額或確定金額</td><td>通常 = 成交價 × 7~8成</td></tr>
+          <tr><td>10</td><td>擔保債權確定期日</td><td>最高限額抵押才有</td><td><span class="p-orange">≤2年內到期 = 急迫還款壓力</span></td></tr>
+          <tr><td>11</td><td>清償日期</td><td>依各契約約定</td><td>—</td></tr>
+          <tr><td>12~14</td><td>利息/違約金</td><td>依各契約約定</td><td>—</td></tr>
+          <tr><td>15</td><td>權利標的</td><td>所有權/地上權</td><td>—</td></tr>
+          <tr><td>16</td><td>設定權利範圍</td><td>抵押的持分範圍</td><td>—</td></tr>
+          <tr><td>17</td><td>共同擔保建號/地號</td><td>同一筆抵押擔保的其他不動產</td><td><span class="p-orange">多筆=投資客打包；跨行=重複擔保風險</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ──── 3. 建物謄本 ──── -->
+  <section id="bld-mark">
+    <h2>三、建物謄本欄位全解析</h2>
+    <h3>3.1 建物標示部</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>欄位</th><th>說明</th><th>查驗重點</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>所有面積（總）</td><td>主建物+附屬建物+共有部分持分面積合計</td><td>—</td></tr>
+          <tr><td>2</td><td>登記日期</td><td>本次建物登記日期</td><td>—</td></tr>
+          <tr><td>3</td><td>登記原因</td><td>第一次登記/門牌整編/基地號變更等</td><td>門牌整編=非新建，僅更新登記</td></tr>
+          <tr><td>4</td><td>建物門牌</td><td>建物地址</td><td>—</td></tr>
+          <tr><td>5</td><td>建物坐落地號</td><td>建物所在的土地地號</td><td>需與土地謄本地號核對</td></tr>
+          <tr><td>6</td><td>主要用途</td><td>住家用/廠房/辦公室等</td><td>廠房可列多種用途</td></tr>
+          <tr><td>7</td><td>主要建材</td><td>RC/加強磚造/鋼骨等</td><td>並列=混合構造（老舊常見）</td></tr>
+          <tr><td>8</td><td>層數</td><td>地上幾層</td><td>—</td></tr>
+          <tr><td>9</td><td>總面積</td><td>主建物各層次面積合計</td><td>—</td></tr>
+          <tr><td>10</td><td>層次面積</td><td>逐層登記（一層/二層/夾層/B1/騎樓/屋突）</td><td><span class="p-orange">2F&gt;1F=出挑；夾層=合法登記</span></td></tr>
+          <tr><td>11</td><td>建築完成日期</td><td>使照發照日期（民國年）</td><td>屋齡計算起點</td></tr>
+          <tr><td>12</td><td>共有部分建號/持分</td><td>公設持分</td><td>無=透天；有=大樓/公寓</td></tr>
+          <tr><td>13</td><td>附屬建物</td><td>陽台/雨遮/平台/露台</td><td>廠房有平台；舊公寓無</td></tr>
+          <tr><td>14</td><td>使用執照字號</td><td>建物合法性來源</td><td>與建照查詢系統核對</td></tr>
+          <tr><td>15</td><td>其他登記事項</td><td>重測前建號、建照字號等</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="bld-own">
+    <h3>3.2 建物所有權部</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>欄位</th><th>說明</th><th>查驗重點</th></tr></thead>
+        <tbody>
+          <tr><td>登記次序</td><td>0001=第一次；0002=轉手後</td><td>—</td></tr>
+          <tr><td>登記原因</td><td>第一次登記/買賣/交換/贈與等</td><td>—</td></tr>
+          <tr><td>所有權人</td><td>姓名+統編</td><td>是否與土地所有人相同</td></tr>
+          <tr><td>權利範圍</td><td>全部1/1 or 持分</td><td>—</td></tr>
+          <tr><td>相關他項權利登記次序</td><td>對應建物他項權利部</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="bld-other">
+    <h3>3.3 建物他項權利部</h3>
+    <div class="tip">
+      結構同土地他項權利部，需核對：
+      <ul style="margin-top:8px;padding-left:18px;">
+        <li>共同擔保建號/地號 與土地謄本一致</li>
+        <li>字號與土地他項相同 = 同一筆貸款</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ──── 4. 登記原因 ──── -->
+  <section id="reg-reason">
+    <h2>四、登記原因完整對照表</h2>
+
+    <h3>4.1 土地標示部登記原因</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>登記原因</th><th>觸發情境</th><th>典型案例</th></tr></thead>
+        <tbody>
+          <tr><td>買賣</td><td>正常交易</td><td>大多數案例</td></tr>
+          <tr><td>地籍圖重測</td><td>台中大規模重測（多在091年）</td><td>中興段1230、光正段1096</td></tr>
+          <tr><td><strong>地目等則調整</strong></td><td>057年前地目制度遺存（1968前）</td><td>忠和段1944（057年，最古老）</td></tr>
+          <tr><td><strong>地目變更</strong></td><td>所有人申請地目從田/旱改建</td><td>乾溝子段90-335（062年）</td></tr>
+          <tr><td><strong>逕為地目變更</strong></td><td>政府主動變更地目（農→建）</td><td>土庫段55-87 Type H</td></tr>
+          <tr><td><strong>逕為分割</strong></td><td>政府主動分割地號</td><td>大興段492-6</td></tr>
+          <tr><td>分割</td><td>大基地依申請分割各戶</td><td>北屯路G1社區透天</td></tr>
+          <tr><td>合併</td><td>多筆地號合併為一筆</td><td>乾溝子段98-1 Type E</td></tr>
+          <tr><td>繼承</td><td>被繼承人死亡後辦理</td><td>—</td></tr>
+          <tr><td>第一次登記</td><td>未登記土地首次辦理</td><td>部分早期土地</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip"><strong>「逕為」</strong> = 政府主動辦理；無「逕為」= 所有人申請</div>
+
+    <h3>4.2 所有權部登記原因</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>登記原因</th><th>說明</th><th>查驗注意</th></tr></thead>
+        <tbody>
+          <tr><td>買賣</td><td>一般買賣</td><td>—</td></tr>
+          <tr><td>贈與</td><td>他人無償給予（含家族傳承）</td><td>農地傳承最常見</td></tr>
+          <tr><td><strong>配偶贈與</strong></td><td>夫妻間贈與</td><td>免贈與稅，兩人地址通常相同</td></tr>
+          <tr><td><strong>分割轉載</strong></td><td>因地號分割，所有權資料轉入新地號</td><td><span class="p-orange">非新買賣</span>，所有人不變</td></tr>
+          <tr><td><strong>交換</strong></td><td>以不動產換不動產</td><td>需查換了什麼；稅以公告現值計</td></tr>
+          <tr><td>繼承</td><td>遺產繼承</td><td>注意是否有其他繼承人同意</td></tr>
+          <tr><td>法院判決</td><td>訴訟結果</td><td><span class="p-red">高風險，需了解訴訟背景</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>4.3 他項權利部登記原因</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>登記原因</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>設定</td><td>新設定抵押</td></tr>
+          <tr><td>塗銷</td><td>抵押已清償，移除</td></tr>
+          <tr><td><strong>擔保物增加</strong></td><td>建物完工後追加進原有土地抵押（先蓋後貸）</td></tr>
+          <tr><td>權利變更</td><td>抵押條件更改</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ──── 5. 抵押類型 ──── -->
+  <section id="mortgage">
+    <h2>五、抵押類型對照表</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>類型</th><th>典型用途</th><th>確定期日</th><th>擔保範圍</th><th>典型案例</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>一般抵押</strong></td>
+            <td>一般房貸</td>
+            <td>無</td>
+            <td>固定金額</td>
+            <td><span class="type-badge">A</span> <span class="type-badge">B</span> <span class="type-badge">C</span> <span class="type-badge">E</span></td>
+          </tr>
+          <tr>
+            <td><strong>最高限額抵押</strong></td>
+            <td>企業融資/循環信用</td>
+            <td><span class="p-orange">有（通常30年）</span></td>
+            <td>廣（借款+票據+信用卡+保證…）</td>
+            <td><span class="type-badge">F</span> <span class="type-badge">G1</span> <span class="type-badge">K</span></td>
+          </tr>
+          <tr>
+            <td><strong>擔保物增加</strong></td>
+            <td>先蓋土地+後追加建物</td>
+            <td>無（依原契約）</td>
+            <td>原土地設定後追加建物</td>
+            <td><span class="type-badge">E</span>（081年土地+084年建物追加）</td>
+          </tr>
+          <tr>
+            <td><span class="p-red"><strong>私人設定</strong></span></td>
+            <td>地下借貸</td>
+            <td>可能有</td>
+            <td>依契約</td>
+            <td>資金壓力最高指標</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ──── 6. 都市 vs 非都市 ──── -->
+  <section id="urban">
+    <h2>六、都市土地 vs 非都市土地 謄本識別</h2>
+
+    <h3>6.1 有填寫 → 直接判斷</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>謄本欄位</th><th>代表</th><th>範例</th></tr></thead>
+        <tbody>
+          <tr><td>使用分區＋使用地類別 <strong>均有值</strong></td><td>非都市土地，已編定</td><td>特定農業區／農牧用地</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>6.2 兩欄均空白 → 兩種可能</h3>
+    <div class="warn">⚠️ 空白 ≠ 一定是都市土地！需進一步確認</div>
+    <div class="table-wrap" style="margin-top:10px">
+      <table>
+        <thead><tr><th>情形</th><th>說明</th><th>確認方式</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>情形1<br>都市土地</strong></td>
+            <td>都市計畫發布後，計畫內土地依都市計畫法重新給予身分，不再登載於謄本</td>
+            <td>向 <strong>區公所</strong> 或 <strong>都發局</strong> 申請使用分區證明</td>
+          </tr>
+          <tr>
+            <td><strong>情形2<br>非都市（未編定）</strong></td>
+            <td>土地屬非都市範圍，但尚未完成使用分區及類別的編定</td>
+            <td>向 <strong>土地所轄地政事務所</strong> 申請辦理編定；完成後謄本即有明確記載</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>6.3 本專案案例對照</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>類型</th><th>謄本分區</th><th>實際身分</th><th>確認方式</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="type-badge">I-a</span> 北屯大興段492-6</td>
+            <td><span class="p-orange">空白</span></td>
+            <td>都市土地（農業區）</td>
+            <td>都發局使用分區證明</td>
+          </tr>
+          <tr>
+            <td><span class="type-badge">I-b</span> 龍井忠和段1944</td>
+            <td><span class="p-orange">空白</span></td>
+            <td>都市土地（農業區）</td>
+            <td>都發局使用分區證明</td>
+          </tr>
+          <tr>
+            <td><span class="type-badge">F</span> 光正段1096</td>
+            <td><strong>特定農業區／丁建</strong></td>
+            <td>非都市土地，已編定</td>
+            <td>謄本直接讀</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>6.4 其他識別參考</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>判斷</th><th>都市土地</th><th>非都市土地</th></tr></thead>
+        <tbody>
+          <tr><td>農業保護依據</td><td>都市計畫法（農業區不可建）</td><td>農發條例 + 非都市土地使用管制</td></tr>
+          <tr><td>工廠合法性</td><td>工業區才可（其他分區違法）</td><td>丁種建築用地可建廠</td></tr>
+          <tr><td>查分區方式</td><td>區公所 / 都發局</td><td>謄本直接讀（已編定）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ──── 7. 各類型識別 ──── -->
+  <section id="type-tips">
+    <h2>七、各類型特殊識別要點</h2>
+
+    <h3><span class="type-badge">A</span> 電梯大樓</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>土地持分按比例均分</li>
+      <li>共有部分 2 個以上（管理室/機房/停車場）</li>
+      <li>1戶1建號</li>
+    </ul>
+
+    <h3><span class="type-badge">B</span> 獨棟廠房透天</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>土地全部持有（1/1）</li>
+      <li>無共有部分</li>
+      <li>1棟1戶1使照</li>
+    </ul>
+
+    <h3><span class="type-badge">C</span> 複合廠房</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>同一地號多個建號（一地多建物）</li>
+      <li>各建號各自有使照</li>
+      <li>面積驗算：地號面積需與各棟建照基地面積核對</li>
+    </ul>
+
+    <h3><span class="type-badge">D</span> 地上權廠房</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li><span class="p-orange">無土地所有權</span>，只有地上權</li>
+      <li>土地所有人（多為國有或港務局等）另行設定</li>
+      <li>他項權利部可能有地上權登記</li>
+    </ul>
+
+    <h3><span class="type-badge">E</span> 舊式公寓 1F</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>1F持分遠高於上層（含騎樓+B1）→ 1F持83%</li>
+      <li>層次含「騎樓」→ 1F商業用</li>
+      <li>擔保物增加登記 → 先蓋後貸</li>
+      <li>共同擔保建號少於地上建號總數 → 確認所有權分散</li>
+    </ul>
+
+    <h3><span class="type-badge">F</span> 非都市廠房</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>謄本使用分區：特定農業區 + 使用地類別：丁種建築用地</li>
+      <li>最高限額抵押確定期日 30 年</li>
+      <li>地籍圖重測前後地段名稱+地號均不同</li>
+    </ul>
+
+    <h3><span class="type-badge">G1</span> 社區透天（整批）</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>建照 1 筆使照 = 多棟（社區規模）</li>
+      <li>土地分割後各戶各自 1/1 持有</li>
+      <li>無共有部分</li>
+      <li>投資客可能持多戶「打包」最高限額抵押</li>
+      <li><span class="p-orange">跨行重複擔保風險</span>：同一建號被兩不同銀行的不同借款人共同擔保</li>
+    </ul>
+
+    <h3><span class="type-badge">G2</span> 連棟透天（各自建照）</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>各棟獨立申請建照（1幢1戶）</li>
+      <li>基地地號 1 筆（各棟獨立）</li>
+      <li>「共同壁」在建照備註中明確記載</li>
+      <li>面積遞增 = 有騎樓，上層向前出挑</li>
+    </ul>
+
+    <h3><span class="type-badge">H</span> 高矮混合社區透天</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>同一使照涵蓋高層大樓+低層透天</li>
+      <li>有 3 個共有部分（公設比 26.2%）</li>
+      <li>逕為地目變更（農→建）</li>
+      <li>跨使用分區（二種+三種住宅區）</li>
+      <li>未保存登記並存</li>
+      <li>土地三批取得</li>
+    </ul>
+
+    <h3><span class="type-badge">I-a</span> 都市農業區素地</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>謄本無分區記載（須查都市計畫圖）</li>
+      <li>逕為分割登記（政府主動）</li>
+      <li>夫妻共有識別：地址相同 + 配偶贈與</li>
+      <li>農地移轉需農業使用承諾書</li>
+    </ul>
+
+    <h3><span class="type-badge">I-b</span> 都市農業區大地塊</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>地目等則調整（057年）= 最古老登記類型</li>
+      <li>前次移轉現值極低（064年：45.4元/㎡）= 農地世代傳承</li>
+      <li>登記次序非0001 → 有更早移轉歷史</li>
+      <li>大面積完整地塊（2,144坪）</li>
+    </ul>
+
+    <h3><span class="type-badge">J</span> 同地號雙建照舊透天</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>套匯圖顯示<strong>兩個不同年代建照號</strong>（075建＋080建）</li>
+      <li>系統顯示「含未保存登記」</li>
+      <li>謄本標示部地上建物建號欄空白（舊屋常見）</li>
+      <li>分割轉載 = 因地號分割，資料轉入，非新買賣</li>
+    </ul>
+
+    <h3><span class="type-badge">K</span> 老舊加強磚造透天</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li><span class="p-orange">建物面積 &gt; 土地面積</span>（2F出挑，建蔽率只算1F）</li>
+      <li>交換登記（以不動產換不動產）</li>
+      <li>集體建照（059年，15筆地號共同申請）</li>
+      <li>加強磚造+RC並列 = 1950-70年代混合構造</li>
+      <li>門牌整編 = 老建物門牌重整後更新登記</li>
+      <li>高LTV抵押（1,000萬/估算成交價1,042~1,190萬）</li>
+    </ul>
+  </section>
+
+  <!-- ──── 7b. 身分證字號對照 ──── -->
+  <section id="id-code">
+    <h2>七之一、身分證字號首碼 ↔ 戶籍縣市對照</h2>
+    <p style="color:var(--muted);margin-bottom:14px;">謄本所有權人欄位可透過身分證首碼推算戶籍登記縣市，協助判斷是否為本地持有或異地投資。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>代碼</th><th>縣市</th><th>代碼</th><th>縣市</th><th>代碼</th><th>縣市</th><th>代碼</th><th>縣市</th></tr></thead>
+        <tbody>
+          <tr><td><strong>A</strong></td><td>台北市</td><td><strong>K</strong></td><td>苗栗縣</td><td><strong>U</strong></td><td>花蓮縣</td><td><strong>I</strong></td><td>嘉義市</td></tr>
+          <tr><td><strong>B</strong></td><td>台中市</td><td><strong>L</strong></td><td>台中縣</td><td><strong>V</strong></td><td>台東縣</td><td><strong>O</strong></td><td>新竹市</td></tr>
+          <tr><td><strong>C</strong></td><td>基隆市</td><td><strong>M</strong></td><td>南投縣</td><td><strong>X</strong></td><td>澎湖縣</td><td><strong>S</strong></td><td>高雄縣</td></tr>
+          <tr><td><strong>D</strong></td><td>台南市</td><td><strong>N</strong></td><td>彰化縣</td><td><strong>Y</strong></td><td>陽明山</td><td><strong>T</strong></td><td>屏東縣</td></tr>
+          <tr><td><strong>E</strong></td><td>高雄市</td><td><strong>P</strong></td><td>雲林縣</td><td><strong>W</strong></td><td>金門縣</td><td><strong>F</strong></td><td>臺北縣／新北市</td></tr>
+          <tr><td><strong>G</strong></td><td>宜蘭縣</td><td><strong>Q</strong></td><td>嘉義縣</td><td><strong>Z</strong></td><td>連江縣</td><td><strong>H</strong></td><td>桃園縣／桃園市</td></tr>
+          <tr><td><strong>J</strong></td><td>新竹縣</td><td><strong>R</strong></td><td>台南縣</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip">
+      <strong>查驗應用：</strong>
+      <ul style="margin-top:6px;padding-left:18px;">
+        <li>首碼 A/B/F/H → 台北/台中/新北/桃園，大都會區戶籍，常見投資客</li>
+        <li>首碼與不動產所在縣市相同 → 推測本地人自用或在地持有</li>
+        <li>首碼與不動產所在縣市不同 → 非本地持有，注意是否為人頭或投資佈局</li>
+        <li>法人（公司）統一編號為 8 位數字，無字母首碼，直接可辨別</li>
+        <li>謄本僅顯示部分遮蔽統編，通常可見首碼字母</li>
+      </ul>
+    </div>
+    <div class="tip" style="border-left-color:var(--muted);margin-top:8px;">
+      <strong>注意：</strong> 台北縣升格為新北市後代碼仍為 <code>F</code>；桃園縣升格桃園市後代碼仍為 <code>H</code>；台中縣市合併後舊台中縣代碼 <code>L</code> 仍存在於舊戶籍身分證中。
+    </div>
+  </section>
+
+  <!-- ──── 8. 資金壓力 ──── -->
+  <section id="pressure">
+    <h2>八、資金壓力評分指標（RETCP S3 模組）</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>等級</th><th>指標</th><th>查驗欄位</th></tr></thead>
+        <tbody>
+          <tr><td class="p-red">🔴 最高</td><td><strong>私人設定（自然人抵押）</strong></td><td>他項權利部：權利人為自然人</td></tr>
+          <tr><td class="p-red">🔴 高</td><td><strong>二胎/多胎</strong></td><td>他項權利部登記次序 0002 以上</td></tr>
+          <tr><td class="p-orange">🟠 中高</td><td>最高限額確定期日近（≤2年）</td><td>擔保債權確定期日</td></tr>
+          <tr><td class="p-orange">🟠 中高</td><td>高LTV（貸款&gt;8成）</td><td>擔保金額/估算成交價推算</td></tr>
+          <tr><td class="p-yellow">🟡 中</td><td>擔保物增加</td><td>登記原因欄：擔保物增加</td></tr>
+          <tr><td class="p-yellow">🟡 中</td><td>跨行重複擔保</td><td>共同擔保建號/地號出現在多筆抵押</td></tr>
+          <tr><td class="p-yellow">🟡 中</td><td>共同擔保資產池龐大</td><td>共同擔保建號/地號筆數多</td></tr>
+          <tr><td class="p-green">🟢 低</td><td>銀行一般房貸（一胎）</td><td>一般抵押+無確定期日</td></tr>
+          <tr><td class="p-gray">⚪ 無</td><td>零負債</td><td>他項權利部空白</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ──── 8b. 房地合一稅率 ──── -->
+  <section id="tax-rate">
+    <h2>八之一、房地合一稅 適用稅率（修法後）</h2>
+    <p style="color:var(--muted);margin-bottom:14px;">按<strong style="color:var(--text)">持有期間</strong>決定稅率，修法後短期重稅門檻從2年延長至5年。持有期間可從謄本所有權部「原因發生日期」推算。</p>
+
+    <h3>個人・境內居住者</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>持有期間（修法後）</th><th>持有期間（修法前）</th><th>稅率</th></tr></thead>
+        <tbody>
+          <tr><td><span class="p-red"><strong>2年以內</strong></span></td><td>1年以內</td><td class="p-red"><strong>45%</strong></td></tr>
+          <tr><td><span class="p-red"><strong>超過2年未逾5年</strong></span></td><td>超過1年未逾2年</td><td class="p-red"><strong>35%</strong></td></tr>
+          <tr><td>超過5年未逾10年</td><td>超過2年未逾10年</td><td><strong>20%</strong></td></tr>
+          <tr><td>超過10年</td><td>超過10年</td><td class="p-green"><strong>15%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>個人・非境內居住者</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>持有期間（修法後）</th><th>持有期間（修法前）</th><th>稅率</th></tr></thead>
+        <tbody>
+          <tr><td><span class="p-red"><strong>2年以內</strong></span></td><td>1年以內</td><td class="p-red"><strong>45%</strong></td></tr>
+          <tr><td><span class="p-red"><strong>超過2年</strong></span></td><td>超過1年</td><td class="p-red"><strong>35%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>特殊情形</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>情形</th><th>稅率</th></tr></thead>
+        <tbody>
+          <tr><td>非自願因素（如調職）；以自有土地與建商合建分回後出售</td><td><strong>20%</strong></td></tr>
+          <tr><td>自住房地持有並設籍滿6年出售</td><td class="p-green">免稅額 <strong>400萬</strong>，超過部分 <strong>10%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip">
+      <strong>查驗應用（謄本欄位對應）：</strong>
+      <ul style="margin-top:6px;padding-left:18px;">
+        <li>持有期間 = 今日 − 所有權部「原因發生日期」</li>
+        <li>持有 &lt;2年 → 賣方須繳45%重稅，急售動機強，可能有讓利空間</li>
+        <li>持有 2~5年 → 35% 稅率，仍屬高稅區間，短期投資客常見</li>
+        <li>持有 &gt;10年 + 戶籍地址與物件相同 → 自住可能性高，免稅優惠大</li>
+        <li>謄本登記原因「分割轉載」→ 原因發生日期應往前追溯原始取得時間</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ──── 9. 建照查驗 ──── -->
+  <section id="permit">
+    <h2>九、建照查驗要點</h2>
+
+    <h3>9.1 建照號與套匯圖標示對應</h3>
+    <div class="tip">
+      套匯圖格式：<code>YYY建NNNNN</code> = 民國YYY年建字第NNNNN號<br>
+      例：<code>092建00922</code> = 92年中工建<strong>建字</strong>第00922號（建字，非使字）<br>
+      同一社區共用相同標示
+    </div>
+
+    <h3>9.2 舊建照字號前綴</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>字號前綴</th><th>主管機關</th><th>年代</th></tr></thead>
+        <tbody>
+          <tr><td><code>中工建</code></td><td>台中市工務局（舊台中市）</td><td>1945–2010</td></tr>
+          <tr><td><code>府都建</code> / <code>府授都建</code></td><td>台中市政府都市發展局（合併後）</td><td>2010後</td></tr>
+          <tr><td><code>中建都</code></td><td>台中縣/市</td><td>1950–70年代</td></tr>
+          <tr><td><code>工建管</code></td><td>台中縣政府工務局</td><td>1970–2010</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>9.3 建照 vs 謄本面積差異正常範圍</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>謄本面積 &gt; 建照面積：因丈量方式不同（謄本含外牆厚度），差值 1–3㎡/層屬正常</li>
+      <li><span class="p-orange">謄本面積 &gt;&gt; 建照面積</span>：需查是否有違建增建</li>
+      <li>建物坐落地號 ≠ 建照基地地號：查是否有地籍重測合併或分割</li>
+    </ul>
+
+    <h3>9.4 層次面積特殊情況</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>現象</th><th>原因</th><th>查驗</th></tr></thead>
+        <tbody>
+          <tr><td>面積逐層遞減</td><td>一般透天（停車在1F）</td><td>正常</td></tr>
+          <tr><td><strong>面積逐層遞增</strong></td><td>騎樓地+上層出挑</td><td>確認出挑在建照範圍內</td></tr>
+          <tr><td><strong>2F &gt; 1F</strong></td><td>2F懸挑出去（老屋常見）</td><td>套匯圖核對</td></tr>
+          <tr><td>有「夾層」層次</td><td>建照有申請夾層（合法）</td><td>若謄本無夾層但現場有 → 違建</td></tr>
+          <tr><td>有「騎樓」層次</td><td>1F商業用+騎樓面積另計</td><td>查1F土地持分是否偏高</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ──── 10. A模組 ──── -->
+  <section id="module-a">
+    <h2>十、RETCP 查驗 A 模組：產權基本 10 項</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>查驗項目</th><th>謄本來源</th><th>自動化</th></tr></thead>
+        <tbody>
+          <tr><td>A1 地號/段名</td><td>土地標示部第1行</td><td>✅ 全自動</td></tr>
+          <tr><td>A2 土地面積</td><td>土地標示部：面積欄</td><td>✅ 全自動</td></tr>
+          <tr><td>A3 使用分區</td><td>標示部：使用分區欄（空=都市，有值=非都市）</td><td>✅ 全自動</td></tr>
+          <tr><td>A4 公告現值</td><td>標示部：公告土地現值欄</td><td>✅ 全自動</td></tr>
+          <tr><td>A5 建物地號</td><td>建物標示部：建物坐落地號</td><td>✅ 全自動</td></tr>
+          <tr><td>A6 建物面積</td><td>建物標示部：所有面積（總）</td><td>✅ 全自動</td></tr>
+          <tr><td>A7 屋齡</td><td>建物標示部：建築完成日期 → 換算</td><td>✅ 全自動</td></tr>
+          <tr><td>A8 主要建材</td><td>建物標示部：主要建材</td><td>✅ 全自動</td></tr>
+          <tr><td>A9 層數</td><td>建物標示部：層數</td><td>✅ 全自動</td></tr>
+          <tr><td>A10 使照字號</td><td>建物標示部：使用執照字號</td><td>✅ 全自動</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ──── 11. 上傳規則 ──── -->
+  <section id="upload">
+    <h2>十一、謄本資料上傳規則（RETCP v1）</h2>
+
+    <p><strong>上傳單位</strong>：以標的為單位（同一物件的資料一起上傳）</p>
+
+    <h3>資料優先順序</h3>
+    <ol style="padding-left:20px;margin-bottom:12px;">
+      <li>土地謄本（土地標示部 + 所有權部 + 他項權利部）</li>
+      <li>建物謄本（建物標示部 + 所有權部 + 他項權利部）</li>
+      <li>建照（使照基本資料 + 樓層概要）</li>
+      <li>套匯圖（建物輪廓，核查違建/越界）</li>
+    </ol>
+
+    <h3>重複處理規則</h3>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li>同使照號碼 / 同地號+地段 = 同一筆</li>
+      <li>重複上傳同類資料 → 自動合併，略過重複分析</li>
+    </ul>
+  </section>
+
+</div><!-- /main -->
+
+<script>
+// ── Active nav link ──────────────────────────
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+sections.forEach(s => observer.observe(s));
+
+// ── Search ───────────────────────────────────
+const searchInput = document.getElementById('search');
+const mainEl = document.getElementById('main');
+let originalHTML = mainEl.innerHTML;
+
+function clearHighlights() {
+  mainEl.innerHTML = originalHTML;
+  // Re-attach observer after DOM reset
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+}
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim();
+  if (!q) { clearHighlights(); return; }
+  clearHighlights();
+  if (q.length < 2) return;
+
+  const walk = (node) => {
+    if (node.nodeType === 3) { // text node
+      const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      if (re.test(node.textContent)) {
+        const span = document.createElement('span');
+        span.innerHTML = node.textContent.replace(re, '<mark class="highlight">$1</mark>');
+        node.parentNode.replaceChild(span, node);
+      }
+    } else if (node.nodeType === 1 && !['SCRIPT','STYLE'].includes(node.tagName)) {
+      [...node.childNodes].forEach(walk);
+    }
+  };
+  walk(mainEl);
+
+  // scroll to first match
+  const first = mainEl.querySelector('.highlight');
+  if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+</script>
+</body>
+</html>
