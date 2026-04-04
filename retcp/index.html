@@ -97,9 +97,17 @@
     </div>
   </div>
 
+  <!-- Quick Links -->
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+    <a href="https://docs.google.com/spreadsheets/d/1oF9Go3xittZNMeEbcNo3e_GSjxHBafLPpP5jNSxfHmw/edit" target="_blank" style="background:var(--surface);border:1px solid var(--border);color:var(--accent2);padding:5px 12px;border-radius:6px;font-size:0.78rem;text-decoration:none;">📊 RETCP_STATUS Sheet</a>
+    <a href="https://docs.google.com/document/d/1oBjZOUrHhi-bCYK5j7xcRwNWtpfcPKA4kitw85y-oBU/edit" target="_blank" style="background:var(--surface);border:1px solid var(--border);color:var(--accent2);padding:5px 12px;border-radius:6px;font-size:0.78rem;text-decoration:none;">📄 謄本拆解總歸納 Doc</a>
+    <a href="https://mac2good909777-commits.github.io/system-architecture/retcp/ref/" target="_blank" style="background:var(--surface);border:1px solid var(--border);color:var(--accent2);padding:5px 12px;border-radius:6px;font-size:0.78rem;text-decoration:none;">📖 謄本參考手冊</a>
+    <a href="https://github.com/mac2good909777-commits/system-architecture/tree/main/retcp" target="_blank" style="background:var(--surface);border:1px solid var(--border);color:var(--text3);padding:5px 12px;border-radius:6px;font-size:0.78rem;text-decoration:none;">⚙️ GitHub Repo</a>
+  </div>
+
   <!-- Timestamps -->
   <div class="ts-bar">
-    <div>📋 面板架構更新：<span style="color:var(--text2)">2026-03-31 08:00</span></div>
+    <div>📋 面板架構更新：<span style="color:var(--text2)">2026-04-04 07:00</span></div>
     <div>📊 資料輸入維護：<span style="color:var(--text2)" id="tsDataUpdate">—</span></div>
   </div>
 
@@ -113,7 +121,7 @@
   <!-- Setup Box -->
   <div id="setupBox" class="setup-box">
     <label>Google Sheet ID</label>
-    <input id="cfgSid" placeholder="試算表網址中 /d/ 和 /edit 之間那串">
+    <input id="cfgSid" placeholder="試算表網址中 /d/ 和 /edit 之間那串" value="1oF9Go3xittZNMeEbcNo3e_GSjxHBafLPpP5jNSxfHmw">
     <label>Apps Script Web App URL</label>
     <input id="cfgUrl" placeholder="https://script.google.com/macros/s/...">
     <button onclick="saveCfg()" style="background:var(--accent);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;">儲存設定</button>
