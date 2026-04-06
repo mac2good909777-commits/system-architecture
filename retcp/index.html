@@ -107,7 +107,7 @@
 
   <!-- Timestamps -->
   <div class="ts-bar">
-    <div>📋 面板架構更新：<span style="color:var(--text2)">2026-04-04 07:00</span></div>
+    <div>📋 面板架構更新：<span style="color:var(--text2)">2026-04-06 Task A 完成</span></div>
     <div>📊 資料輸入維護：<span style="color:var(--text2)" id="tsDataUpdate">—</span></div>
   </div>
 
@@ -221,7 +221,7 @@
   <div class="card">
     <div class="card-head" onclick="tog(this)"><span class="card-title"><span class="badge p1">S3</span> 模組開發</span><span class="card-progress" id="prog-mod">0/9</span></div>
     <div class="card-body open" id="body-mod">
-      <div class="foundation-banner">🧱 S3 基礎工程已完成：標的分類系統 v1（L/B/LB 三大類 15 型態）、四類謄本欄位拆解（A/B/C/D）、9 項 domain knowledge 系統化</div>
+      <div class="foundation-banner">🧱 S3 基礎工程已完成：標的分類系統 v1（L/B/LB 三大類 15 型態）、<strong>八種謄本類型拆解（A~H）</strong>、9 項 domain knowledge 系統化。2026-04-01 Task A 完成。</div>
     </div>
   </div>
 
@@ -297,7 +297,9 @@ if(!D._init){
     vfy2:{done:true,note:'S2b ✅ 已完成摘要'},
     vfy3:{done:true,note:'S2c ✅ 已完成資料來源研究'},
     vfy4:{done:true,note:'S2d ✅ 標準表 v1（91項、9模組、66%可自動化）→ 已演進為標的分類系統 v1'},
-    vfy5:{done:true,note:'S2e ✅ 已完成自動化評估'}
+    vfy5:{done:true,note:'S2e ✅ 已完成自動化評估'},
+    ast1:{done:true,note:'AST-a ✅ Type G1 社區透天（北屯路298巷47/62號）完成，LB4b 含公設、投資客跨行重複擔保案例'},
+    ast2:{done:true,note:'AST-b ✅ Type H 高矮混合社區透天（西區存中街7之2號）完成，LB4c 含3共有部分、逕為地目變更、跨分區'}
   };
   Object.entries(preDone).forEach(([k,v])=>{
     if(!D.tasks[k]) D.tasks[k]=v;
