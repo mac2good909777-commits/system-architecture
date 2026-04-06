@@ -107,7 +107,7 @@
 
   <!-- Timestamps -->
   <div class="ts-bar">
-    <div>📋 面板架構更新：<span style="color:var(--text2)">2026-04-06 Task A 完成</span></div>
+    <div>📋 面板架構更新：<span style="color:var(--text2)">2026-04-07 Task A 完成 + 欄位對應表 v1</span></div>
     <div>📊 資料輸入維護：<span style="color:var(--text2)" id="tsDataUpdate">—</span></div>
   </div>
 
@@ -159,6 +159,7 @@
   <!-- S2d note -->
   <div class="info-card" style="border-color:var(--purple); border-left-color:var(--purple);">
     <p style="font-size:0.82rem;color:var(--purple)">S2d ✅ 標準表 v1.xlsx（91項、9模組）→ 已演進：標的分類系統 v1（L/B/LB 三大類 15 型態，對標實價登錄）</p>
+    <p style="font-size:0.82rem;color:var(--green);margin-top:4px">S3-基礎 ✅ 謄本欄位↔查驗項目對應表 v1.xlsx（正向68列+反向54項，覆蓋率：完全30/部分20/無法4）</p>
   </div>
 
   <!-- Decision Cards -->
@@ -221,7 +222,7 @@
   <div class="card">
     <div class="card-head" onclick="tog(this)"><span class="card-title"><span class="badge p1">S3</span> 模組開發</span><span class="card-progress" id="prog-mod">0/9</span></div>
     <div class="card-body open" id="body-mod">
-      <div class="foundation-banner">🧱 S3 基礎工程已完成：標的分類系統 v1（L/B/LB 三大類 15 型態）、<strong>八種謄本類型拆解（A~H）</strong>、9 項 domain knowledge 系統化。2026-04-01 Task A 完成。</div>
+      <div class="foundation-banner">🧱 S3 基礎工程已完成：標的分類系統 v1（L/B/LB 三大類 15 型態）、<strong>13種謄本類型拆解（A~K）</strong>、9 項 domain knowledge 系統化、<strong>謄本欄位↔查驗項目對應表 v1（54項，覆蓋率55.6%）</strong>。2026-04-07 更新。</div>
     </div>
   </div>
 
@@ -284,7 +285,7 @@ if(!D.tasks) D.tasks={};
 if(!D.decisions) D.decisions={};
 if(!D.light) D.light='green';
 if(!D.phase) D.phase='Phase 0';
-if(!D.week) D.week='W5';
+if(!D.week) D.week='W6';
 
 // Pre-populate completed tasks from previous sessions
 if(!D._init){
@@ -299,7 +300,8 @@ if(!D._init){
     vfy4:{done:true,note:'S2d ✅ 標準表 v1（91項、9模組、66%可自動化）→ 已演進為標的分類系統 v1'},
     vfy5:{done:true,note:'S2e ✅ 已完成自動化評估'},
     ast1:{done:true,note:'AST-a ✅ Type G1 社區透天（北屯路298巷47/62號）完成，LB4b 含公設、投資客跨行重複擔保案例'},
-    ast2:{done:true,note:'AST-b ✅ Type H 高矮混合社區透天（西區存中街7之2號）完成，LB4c 含3共有部分、逕為地目變更、跨分區'}
+    ast2:{done:true,note:'AST-b ✅ Type H 高矮混合社區透天（西區存中街7之2號）完成，LB4c 含3共有部分、逕為地目變更、跨分區'},
+    ast3:{done:true,note:'AST-c ✅ Type I-a/I-b 都市農業區素地（北屯大興段+龍井忠和段）、Type J 同地號雙建照舊透天（潭子中興段）、Type K 老舊加強磚造透天（北區乾溝子段）全部完成，A~K 13種類型拆解完畢'}
   };
   Object.entries(preDone).forEach(([k,v])=>{
     if(!D.tasks[k]) D.tasks[k]=v;
