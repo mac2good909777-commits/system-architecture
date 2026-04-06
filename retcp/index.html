@@ -287,28 +287,26 @@ if(!D.light) D.light='green';
 if(!D.phase) D.phase='Phase 0';
 if(!D.week) D.week='W6';
 
-// Pre-populate completed tasks from previous sessions
-if(!D._init){
-  D._init=true;
-  const preDone={
-    leg1:{done:true,note:'S1a ✅ 合約確認完成'},
-    leg2:{done:true,note:'S1b ✅ 自行判斷，無競業限制'},
-    leg3:{done:true,note:'S1c ✅ 結論：無競業限制，可執行'},
-    vfy1:{done:true,note:'S2a ✅ 已上傳 3 份不動產說明書（建物+土地60頁、純土地54頁、建物+土地20頁）'},
-    vfy2:{done:true,note:'S2b ✅ 已完成摘要'},
-    vfy3:{done:true,note:'S2c ✅ 已完成資料來源研究'},
-    vfy4:{done:true,note:'S2d ✅ 標準表 v1（91項、9模組、66%可自動化）→ 已演進為標的分類系統 v1'},
-    vfy5:{done:true,note:'S2e ✅ 已完成自動化評估'},
-    ast1:{done:true,note:'AST-a ✅ Type G1 社區透天（北屯路298巷47/62號）完成，LB4b 含公設、投資客跨行重複擔保案例'},
-    ast2:{done:true,note:'AST-b ✅ Type H 高矮混合社區透天（西區存中街7之2號）完成，LB4c 含3共有部分、逕為地目變更、跨分區'},
-    ast3:{done:true,note:'AST-c ✅ Type I-a/I-b 都市農業區素地（北屯大興段+龍井忠和段）、Type J 同地號雙建照舊透天（潭子中興段）、Type K 老舊加強磚造透天（北區乾溝子段）全部完成，A~K 13種類型拆解完畢'}
-  };
-  Object.entries(preDone).forEach(([k,v])=>{
-    if(!D.tasks[k]) D.tasks[k]=v;
-  });
-  D.decisions.d_legal='self';
-  localStorage.setItem(DK,JSON.stringify(D));
-}
+// Pre-populate completed tasks — always sync (overwrite outdated entries)
+const preDone={
+  leg1:{done:true,note:'S1a ✅ 合約確認完成'},
+  leg2:{done:true,note:'S1b ✅ 自行判斷，無競業限制'},
+  leg3:{done:true,note:'S1c ✅ 結論：無競業限制，可執行'},
+  vfy1:{done:true,note:'S2a ✅ 已上傳 3 份不動產說明書（建物+土地60頁、純土地54頁、建物+土地20頁）'},
+  vfy2:{done:true,note:'S2b ✅ 已完成摘要'},
+  vfy3:{done:true,note:'S2c ✅ 已完成資料來源研究'},
+  vfy4:{done:true,note:'S2d ✅ 標準表 v1（91項、9模組、66%可自動化）→ 已演進為標的分類系統 v1'},
+  vfy5:{done:true,note:'S2e ✅ 已完成自動化評估'},
+  ast1:{done:true,note:'AST-a ✅ Type G1 社區透天（北屯路298巷47/62號）完成，LB4b 含公設、投資客跨行重複擔保案例'},
+  ast2:{done:true,note:'AST-b ✅ Type H 高矮混合社區透天（西區存中街7之2號）完成，LB4c 含3共有部分、逕為地目變更、跨分區'},
+  ast3:{done:true,note:'AST-c ✅ Type I-a/I-b/J/K 全部完成，A~K 13種類型拆解完畢'}
+};
+Object.entries(preDone).forEach(([k,v])=>{
+  D.tasks[k]=v;
+});
+if(!D.decisions.d_legal) D.decisions.d_legal='self';
+D.week='W6';
+localStorage.setItem(DK,JSON.stringify(D));
 
 // ===== ALL TASKS =====
 const TASKS = {
