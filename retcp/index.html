@@ -132,7 +132,7 @@
     <div class="stat"><div class="stat-val" id="sLight">🟢</div><div class="stat-lbl">停損燈號</div></div>
     <div class="stat"><div class="stat-val">P0</div><div class="stat-lbl">Phase 0</div></div>
     <div class="stat"><div class="stat-val" id="sTotal">0%</div><div class="stat-lbl">總完成率</div></div>
-    <div class="stat"><div class="stat-val">W5</div><div class="stat-lbl">已啟動週數</div></div>
+    <div class="stat"><div class="stat-val">W7</div><div class="stat-lbl">已啟動週數</div></div>
   </div>
 
   <!-- Project Info -->
@@ -299,13 +299,17 @@ const preDone={
   vfy5:{done:true,note:'S2e ✅ 已完成自動化評估'},
   ast1:{done:true,note:'AST-a ✅ Type G1 社區透天（北屯路298巷47/62號）完成，LB4b 含公設、投資客跨行重複擔保案例'},
   ast2:{done:true,note:'AST-b ✅ Type H 高矮混合社區透天（西區存中街7之2號）完成，LB4c 含3共有部分、逕為地目變更、跨分區'},
-  ast3:{done:true,note:'AST-c ✅ Type I-a/I-b/J/K 全部完成，A~K 13種類型拆解完畢'}
+  ast3:{done:true,note:'AST-c ✅ Type I-a/I-b/J/K 全部完成，A~K 13種類型拆解完畢'},
+  mod1:{done:true,note:'S3a ✅ A.產權基本資訊模組完成（10項全自動，4案例測試通過：E/F/G1/I-a）'},
+  mod2:{done:true,note:'S3b ✅ B+C.所有權+他項權利模組完成（11項，4案例測試通過：F/E/D/I）'},
+  mod3:{done:true,note:'S3c ✅ D.標的物現況模組完成（46項建物版，3案例測試通過：F/E/I）+ S3c bug修復'},
+  mod5:{done:true,note:'S3e ✅ F.稅費估算模組完成（4項：土增稅/房地合一/契稅/規費，3案例PASS）'}
 };
 Object.entries(preDone).forEach(([k,v])=>{
   D.tasks[k]=v;
 });
 if(!D.decisions.d_legal) D.decisions.d_legal='self';
-D.week='W6';
+D.week='W7';
 localStorage.setItem(DK,JSON.stringify(D));
 
 // ===== ALL TASKS =====
