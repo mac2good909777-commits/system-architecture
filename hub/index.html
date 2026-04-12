@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Pages Portal｜睦聚開發</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* 睦聚 Dashboard 色盤 */
+      --bg:           #0F172A;
+      --card:         #1E293B;
+      --header-bg:    #0B1120;
+      --border:       #334155;
+      --border-light: #3E4F6A;
+
+      /* 文字 */
+      --text:         #F1F5F9;
+      --text-body:    #CBD5E1;
+      --text-dim:     #64748B;
+
+      /* 品牌藍（深底提亮版） */
+      --muju-blue:    #60A5FA;
+      --muju-dark:    #2B5A8C;
+      --muju-bright:  #93C5FD;
+
+      /* 功能色 */
+      --gold:         #FBBF24;
+      --green:        #4ADE80;
+      --red:          #F87171;
+      --purple:       #A78BFA;
+
+      /* 卡片左邊框 */
+      --accent-retcp:  #4ADE80;
+      --accent-oc:     #A78BFA;
+      --accent-market: #FBBF24;
+      --accent-system: #60A5FA;
+      --accent-other:  #64748B;
+
+      --font: "Noto Sans TC", "Inter", sans-serif;
+      --mono: "JetBrains Mono", "Fira Code", monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-body);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-badge {
+      background: var(--muju-dark);
+      border: 1px solid rgba(96,165,250,0.3);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muju-bright);
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    .logo-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+    }
+    .logo-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .logo-sub {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.5px;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .updated-badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      background: rgba(100,116,139,0.12);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 10px;
+      letter-spacing: 0.5px;
+    }
+    .gh-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muju-blue);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border: 1px solid rgba(96,165,250,0.3);
+      border-radius: 6px;
+      background: rgba(96,165,250,0.07);
+      transition: all 0.15s;
+      letter-spacing: 0.3px;
+    }
+    .gh-btn:hover {
+      background: rgba(96,165,250,0.14);
+      border-color: rgba(96,165,250,0.5);
+    }
+
+    /* ── Main ── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* ── KPI Stats ── */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--muju-blue), transparent);
+      opacity: 0.5;
+    }
+    .kpi-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+    }
+    .kpi-value {
+      font-family: var(--mono);
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--muju-blue);
+    }
+    .kpi-value.green  { color: var(--green); }
+    .kpi-value.gold   { color: var(--gold); }
+    .kpi-value.normal { color: var(--text); }
+    .kpi-trend {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: var(--mono);
+    }
+
+    /* ── Toolbar ── */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      padding: 14px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .toolbar-label {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-right: 4px;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      border-radius: 4px;
+      padding: 5px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: var(--font);
+      letter-spacing: 0.3px;
+    }
+    .filter-btn:hover {
+      border-color: var(--muju-blue);
+      color: var(--muju-blue);
+      background: rgba(96,165,250,0.07);
+    }
+    .filter-btn.active {
+      background: rgba(96,165,250,0.12);
+      border-color: rgba(96,165,250,0.5);
+      color: var(--muju-blue);
+      font-weight: 600;
+    }
+    .search-box {
+      margin-left: auto;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 6px 12px;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 13px;
+      width: 200px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .search-box::placeholder { color: var(--text-dim); }
+    .search-box:focus { border-color: var(--muju-blue); }
+
+    /* ── Section Header ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 32px 0 14px;
+    }
+    .section-icon { font-size: 14px; }
+    .section-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section-count {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      background: rgba(100,116,139,0.12);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 2px 8px;
+    }
+
+    /* ── Cards Grid ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .card:hover {
+      border-color: var(--border-light);
+      border-left-color: inherit;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .card.cat-retcp   { border-left-color: var(--accent-retcp); }
+    .card.cat-oc      { border-left-color: var(--accent-oc); }
+    .card.cat-market  { border-left-color: var(--accent-market); }
+    .card.cat-system  { border-left-color: var(--accent-system); }
+    .card.cat-other   { border-left-color: var(--accent-other); }
+    .card.status-unknown { opacity: 0.6; }
+
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .card-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .card-repo {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.3px;
+    }
+
+    /* Status Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: var(--mono);
+      font-weight: 600;
+      flex-shrink: 0;
+      letter-spacing: 0.3px;
+    }
+    .badge.live    { background: rgba(74,222,128,0.12); color: var(--green);  border: 1px solid rgba(74,222,128,0.25); }
+    .badge.pending { background: rgba(251,191,36,0.12);  color: var(--gold);   border: 1px solid rgba(251,191,36,0.25); }
+    .badge.unknown { background: rgba(100,116,139,0.12); color: var(--text-dim); border: 1px solid var(--border); }
+    .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-body);
+      line-height: 1.65;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .tag {
+      background: rgba(100,116,139,0.1);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 2px 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 0.3px;
+    }
+
+    .card-links {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .card-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 8px;
+      border-radius: 4px;
+      color: var(--muju-blue);
+      text-decoration: none;
+      font-size: 12px;
+      font-family: var(--mono);
+      transition: background 0.12s;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .card-link:hover { background: rgba(96,165,250,0.08); }
+    .card-link svg   { flex-shrink: 0; opacity: 0.7; }
+    .link-label {
+      font-size: 10px;
+      color: var(--text-dim);
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+    }
+    .link-url {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+      color: var(--muju-blue);
+    }
+    .card-link.primary .link-url { color: var(--muju-bright); font-weight: 600; }
+
+    /* ── How to Add ── */
+    .howto-section {
+      margin-top: 48px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--muju-dark);
+      border-radius: 8px;
+      padding: 24px 28px;
+    }
+    .howto-title {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .howto-desc {
+      font-size: 13px;
+      color: var(--text-body);
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+    .code-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 18px 20px;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.9;
+      overflow-x: auto;
+    }
+    .c-comment { color: var(--text-dim); }
+    .c-key     { color: var(--muju-blue); }
+    .c-str     { color: var(--green); }
+    .c-val     { color: var(--gold); }
+
+    /* ── Deploy Note ── */
+    .deploy-note {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: rgba(96,165,250,0.06);
+      border: 1px solid rgba(96,165,250,0.2);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+    .deploy-note code {
+      font-family: var(--mono);
+      color: var(--muju-blue);
+      background: rgba(96,165,250,0.1);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--header-bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 18px 24px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .footer-brand {
+      color: var(--muju-blue);
+      font-weight: 600;
+    }
+    .footer-sep { opacity: 0.3; }
+
+    /* ── Hidden ── */
+    .card.hidden            { display: none !important; }
+    .section-wrapper.hidden { display: none !important; }
+
+    @media (max-width: 700px) {
+      .kpi-row { grid-template-columns: repeat(2, 1fr); }
+      header { padding: 0 16px; }
+      main   { padding: 20px 16px 64px; }
+      .logo-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════════════╗
+     ║  ★  DATA CONFIG  ──  在這裡新增 / 修改連結  ★  ║
+     ╠══════════════════════════════════════════════════╣
+     ║  每個物件欄位說明：                              ║
+     ║  id       → 唯一識別碼（英文+連字號）            ║
+     ║  name     → 頁面顯示名稱                         ║
+     ║  repo     → GitHub repo 名（不含帳號）           ║
+     ║  category → retcp | oc | market | system | other ║
+     ║  status   → live | pending | unknown             ║
+     ║  icon     → Emoji                               ║
+     ║  desc     → 一到兩句說明                         ║
+     ║  tags     → 標籤陣列                             ║
+     ║  links    → [{ label, url, isPrimary }]          ║
+     ╚══════════════════════════════════════════════════╝ -->
+<script id="portal-data" type="application/json">
+[
+  {
+    "id": "system-arch",
+    "name": "系統架構總覽",
+    "repo": "system-architecture",
+    "category": "system",
+    "status": "live",
+    "icon": "🏗️",
+    "desc": "Mac 整體技術系統的 GitHub Pages 導覽入口，涵蓋 OC / CCW 架構圖、各專案連結。",
+    "tags": ["系統架構", "OC", "CCW", "總覽"],
+    "links": [
+      { "label": "主頁", "url": "https://mac2good909777-commits.github.io/system-architecture/", "isPrimary": true },
+      { "label": "Repo", "url": "https://github.com/mac2good909777-commits/system-architecture", "isPrimary": false }
+    ]
+  },
+  {
+    "id": "retcp-dashboard",
+    "name": "RETCP 模組 Dashboard",
+    "repo": "system-architecture",
+    "category": "retcp",
+    "status": "live",
+    "icon": "📊",
+    "desc": "不動產產權查核引擎進度看板。9 模組 91 項，目前 5/9 完成（76/91，84%），下一個 S4。",
+    "tags": ["RETCP", "產權查核", "進度看板", "模組"],
+    "links": [
+      { "label": "Dashboard", "url": "https://mac2good909777-commits.github.io/system-architecture/retcp/", "isPrimary": true },
+      { "label": "Repo",      "url": "https://github.com/mac2good909777-commits/system-architecture", "isPrimary": false }
+    ]
+  },
+  {
+    "id": "retcp-kb",
+    "name": "RETCP 知識庫 KB",
+    "repo": "retcp-kb",
+    "category": "retcp",
+    "status": "live",
+    "icon": "📚",
+    "desc": "不動產產權法規知識庫。45 部法規、4,790 條法條、Phase 2 QA 完成（640 問題模板、972 關聯）。",
+    "tags": ["RETCP", "知識庫", "法規", "QA", "Phase2"],
+    "links": [
+      { "label": "知識庫", "url": "https://mac2good909777-commits.github.io/retcp-kb/", "isPrimary": true },
+      { "label": "Repo",   "url": "https://github.com/mac2good909777-commits/retcp-kb", "isPrimary": false }
+    ]
+  },
+  {
+    "id": "retcp-ref",
+    "name": "RETCP 法規參考",
+    "repo": "retcp-ref",
+    "category": "retcp",
+    "status": "unknown",
+    "icon": "📋",
+    "desc": "RETCP 相關法規參考資料（待確認是否開啟 GitHub Pages）。",
+    "tags": ["RETCP", "法規", "參考"],
+    "links": [
+      { "label": "Repo", "url": "https://github.com/mac2good909777-commits/retcp-ref", "isPrimary": false }
+    ]
+  },
+  {
+    "id": "content-engine",
+    "name": "內容引擎 Dashboard",
+    "repo": "content-engine",
+    "category": "market",
+    "status": "live",
+    "icon": "✍️",
+    "desc": "工業不動產內容行銷引擎。Week 1 正式啟動 2026-04-14，5 大主題池、雙週輪替、燈號停損機制。",
+    "tags": ["內容行銷", "Dashboard", "CCW控場", "週報"],
+    "links": [
+      { "label": "Dashboard", "url": "https://mac2good909777-commits.github.io/content-engine/", "isPrimary": true },
+      { "label": "Repo",      "url": "https://github.com/mac2good909777-commits/content-engine", "isPrimary": false }
+    ]
+  },
+  {
+    "id": "real-price",
+    "name": "實價登錄平台",
+    "repo": "real-price-platform",
+    "category": "market",
+    "status": "pending",
+    "icon": "💹",
+    "desc": "台灣不動產實價登錄資料查詢平台（待確認 GitHub Pages 啟用狀態）。",
+    "tags": ["實價登錄", "不動產", "台灣"],
+    "links": [
+      { "label": "Pages（待確認）", "url": "https://mac2good909777-commits.github.io/real-price-platform/", "isPrimary": true },
+      { "label": "Repo",            "url": "https://github.com/mac2good909777-commits/real-price-platform", "isPrimary": false }
+    ]
+  },
+  {
+    "id": "housekeeper-mb",
+    "name": "大管家 Masterboard",
+    "repo": "housekeeper-masterboard",
+    "category": "oc",
+    "status": "pending",
+    "icon": "🤖",
+    "desc": "OC 大管家任務看板，由 update_masterboard.py 自動推送。顯示任務進度、行程、系統健康。",
+    "tags": ["OC", "大管家", "任務看板", "自動推送"],
+    "links": [
+      { "label": "Masterboard（待確認）", "url": "https://mac2good909777-commits.github.io/housekeeper-masterboard/", "isPrimary": true },
+      { "label": "Repo",                  "url": "https://github.com/mac2good909777-commits/housekeeper-masterboard", "isPrimary": false }
+    ]
+  },
+  {
+    "id": "ai-housekeeper",
+    "name": "AI Housekeeper",
+    "repo": "ai-housekeeper",
+    "category": "oc",
+    "status": "unknown",
+    "icon": "🏠",
+    "desc": "OC 大管家相關頁面（待確認是否開啟 GitHub Pages）。",
+    "tags": ["OC", "大管家"],
+    "links": [
+      { "label": "Repo", "url": "https://github.com/mac2good909777-commits/ai-housekeeper", "isPrimary": false }
+    ]
+  },
+  {
+    "id": "public-page",
+    "name": "Public 主頁",
+    "repo": "public",
+    "category": "other",
+    "status": "pending",
+    "icon": "🌐",
+    "desc": "GitHub 根目錄主頁（待確認內容）。可作為本 Portal 的部署目標。",
+    "tags": ["公開頁面", "根目錄"],
+    "links": [
+      { "label": "主頁", "url": "https://mac2good909777-commits.github.io/", "isPrimary": true },
+      { "label": "Repo", "url": "https://github.com/mac2good909777-commits/public", "isPrimary": false }
+    ]
+  },
+  {
+    "id": "zhang-family",
+    "name": "張家族譜",
+    "repo": "zhang-family-tree",
+    "category": "other",
+    "status": "unknown",
+    "icon": "🌳",
+    "desc": "家族族譜網站（待確認是否開啟 GitHub Pages）。",
+    "tags": ["族譜", "家族"],
+    "links": [
+      { "label": "Pages（待確認）", "url": "https://mac2good909777-commits.github.io/zhang-family-tree/", "isPrimary": true },
+      { "label": "Repo",            "url": "https://github.com/mac2good909777-commits/zhang-family-tree", "isPrimary": false }
+    ]
+  }
+]
+</script>
+<!-- ════════════════════════  END DATA  ════════════════════════ -->
+
+<!-- Header -->
+<header>
+  <div class="logo-area">
+    <div class="logo-badge">睦聚開發</div>
+    <div class="logo-divider"></div>
+    <div>
+      <div class="logo-title">GitHub Pages Portal</div>
+      <div class="logo-sub">mac2good909777-commits</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="updated-badge" id="updated-badge">─</span>
+    <a href="https://github.com/mac2good909777-commits" class="gh-btn" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+  </div>
+</header>
+
+<main>
+  <!-- KPI Row -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">Pages 總數</div>
+      <div class="kpi-value" id="kpi-total">─</div>
+      <div class="kpi-trend">10 個 Repos</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">已確認上線</div>
+      <div class="kpi-value green" id="kpi-live">─</div>
+      <div class="kpi-trend">● LIVE</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">待確認</div>
+      <div class="kpi-value gold" id="kpi-pending">─</div>
+      <div class="kpi-trend">● PENDING / UNKNOWN</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">最後更新</div>
+      <div class="kpi-value normal" style="font-size:22px; padding-top:6px;" id="kpi-date">─</div>
+      <div class="kpi-trend">自動填入</div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <span class="toolbar-label">Filter</span>
+    <button class="filter-btn active" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="live">✅ 上線中</button>
+    <button class="filter-btn" data-filter="retcp">RETCP</button>
+    <button class="filter-btn" data-filter="oc">OC / Agent</button>
+    <button class="filter-btn" data-filter="market">市場工具</button>
+    <button class="filter-btn" data-filter="system">系統架構</button>
+    <button class="filter-btn" data-filter="other">其他</button>
+    <input class="search-box" type="text" id="search-box" placeholder="搜尋名稱 / 標籤…" />
+  </div>
+
+  <!-- Cards injected by JS -->
+  <div id="portal-content"></div>
+
+  <!-- How to Add -->
+  <div class="howto-section">
+    <div class="howto-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      如何新增連結
+    </div>
+    <div class="howto-desc">
+      在這個 HTML 檔案最上方的 <code style="font-family:var(--mono);color:var(--gold)">&lt;script id="portal-data"&gt;</code> JSON 陣列中，
+      新增一個物件即可。儲存後推到 GitHub，Portal 立即更新。
+    </div>
+    <div class="code-block">
+<span class="c-comment">// 複製貼到 JSON 陣列最後（記得前一個物件結尾加逗號）</span>
+{
+  <span class="c-key">"id"</span>:       <span class="c-str">"new-page-id"</span>,               <span class="c-comment">// 唯一英文 ID</span>
+  <span class="c-key">"name"</span>:     <span class="c-str">"我的新頁面"</span>,
+  <span class="c-key">"repo"</span>:     <span class="c-str">"repo-name"</span>,                 <span class="c-comment">// GitHub repo 名</span>
+  <span class="c-key">"category"</span>: <span class="c-str">"retcp"</span>,                     <span class="c-comment">// retcp|oc|market|system|other</span>
+  <span class="c-key">"status"</span>:   <span class="c-str">"live"</span>,                      <span class="c-comment">// live|pending|unknown</span>
+  <span class="c-key">"icon"</span>:     <span class="c-str">"🔧"</span>,
+  <span class="c-key">"desc"</span>:     <span class="c-str">"頁面用途的一到兩句說明。"</span>,
+  <span class="c-key">"tags"</span>:     [<span class="c-str">"標籤1"</span>, <span class="c-str">"標籤2"</span>],
+  <span class="c-key">"links"</span>: [
+    { <span class="c-key">"label"</span>: <span class="c-str">"主頁"</span>,  <span class="c-key">"url"</span>: <span class="c-str">"https://mac2good909777-commits.github.io/repo-name/"</span>, <span class="c-key">"isPrimary"</span>: <span class="c-val">true</span> },
+    { <span class="c-key">"label"</span>: <span class="c-str">"Repo"</span>,  <span class="c-key">"url"</span>: <span class="c-str">"https://github.com/mac2good909777-commits/repo-name"</span>,  <span class="c-key">"isPrimary"</span>: <span class="c-val">false</span> }
+  ]
+}</div>
+    <div class="deploy-note">
+      💡 <strong>部署建議：</strong>把這個 <code>index.html</code> 推到
+      <code>mac2good909777-commits/public</code> repo 的根目錄，
+      即可從 <code>https://mac2good909777-commits.github.io/</code> 直接存取，作為你的 GitHub 首頁入口。
+      <br/><br/>
+      或推到 <code>system-architecture</code> repo 的 <code>/hub/</code> 子目錄，保持現有架構不變。
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span class="footer-brand">睦聚開發</span>
+  <span class="footer-sep">│</span>
+  <span>GitHub Pages Portal</span>
+  <span class="footer-sep">│</span>
+  <span id="footer-date" style="font-family:var(--mono)">─</span>
+</footer>
+
+<script>
+// ─── Data & Init ───────────────────────────────────
+const DATA  = JSON.parse(document.getElementById('portal-data').textContent);
+const TODAY = new Date().toLocaleDateString('zh-TW', { year:'numeric', month:'2-digit', day:'2-digit' });
+
+document.getElementById('updated-badge').textContent = 'UPDATED ' + TODAY;
+document.getElementById('footer-date').textContent   = TODAY;
+document.getElementById('kpi-date').textContent      = TODAY.slice(5); // MM/DD
+
+const live    = DATA.filter(d => d.status === 'live').length;
+const notLive = DATA.filter(d => d.status !== 'live').length;
+document.getElementById('kpi-total').textContent   = DATA.length;
+document.getElementById('kpi-live').textContent    = live;
+document.getElementById('kpi-pending').textContent = notLive;
+
+// ─── Category Config ──────────────────────────────
+const CATS = {
+  retcp:  { label: 'RETCP 產權查核' },
+  oc:     { label: 'OC / Agent 系統' },
+  market: { label: '市場工具' },
+  system: { label: '系統架構' },
+  other:  { label: '其他' },
+};
+const CAT_ORDER = ['retcp', 'system', 'market', 'oc', 'other'];
+
+const STATUS_CFG = {
+  live:    { label: 'LIVE',    cls: 'live' },
+  pending: { label: 'PENDING', cls: 'pending' },
+  unknown: { label: 'UNKNOWN', cls: 'unknown' },
+};
+
+// ─── Render ───────────────────────────────────────
+function renderPortal(data) {
+  const container = document.getElementById('portal-content');
+  container.innerHTML = '';
+
+  const groups = {};
+  CAT_ORDER.forEach(c => { groups[c] = []; });
+  data.forEach(d => { if (groups[d.category]) groups[d.category].push(d); });
+
+  const extIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+  const ghIcon  = `<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" opacity=".7"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>`;
+
+  CAT_ORDER.forEach(cat => {
+    const items = groups[cat];
+    if (!items.length) return;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'section-wrapper';
+    wrap.dataset.cat = cat;
+
+    const sh = document.createElement('div');
+    sh.className = 'section-header';
+    sh.innerHTML = `
+      <span class="section-title">${CATS[cat].label}</span>
+      <span class="section-line"></span>
+      <span class="section-count">${items.length}</span>
+    `;
+    wrap.appendChild(sh);
+
+    const grid = document.createElement('div');
+    grid.className = 'cards-grid';
+
+    items.forEach(d => {
+      const sc = STATUS_CFG[d.status] || STATUS_CFG.unknown;
+
+      const linksHtml = d.links.map(l => {
+        const icon = l.label === 'Repo' ? ghIcon : extIcon;
+        return `<a class="card-link${l.isPrimary ? ' primary' : ''}"
+                   href="${l.url}" target="_blank" rel="noopener">
+          ${icon}
+          <span class="link-label">${l.label}</span>
+          <span class="link-url">${l.url.replace('https://','')}</span>
+        </a>`;
+      }).join('');
+
+      const tagsHtml = d.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+      const card = document.createElement('div');
+      card.className = `card cat-${d.category} status-${d.status}`;
+      card.dataset.id  = d.id;
+      card.dataset.cat = d.category;
+      card.innerHTML = `
+        <div class="card-head">
+          <div>
+            <div class="card-name">${d.icon} ${d.name}</div>
+            <div class="card-repo">${d.repo}</div>
+          </div>
+          <span class="badge ${sc.cls}"><span class="badge-dot"></span>${sc.label}</span>
+        </div>
+        <div class="card-desc">${d.desc}</div>
+        <div class="card-tags">${tagsHtml}</div>
+        <div class="card-links">${linksHtml}</div>
+      `;
+      grid.appendChild(card);
+    });
+
+    wrap.appendChild(grid);
+    container.appendChild(wrap);
+  });
+}
+
+// ─── Filter + Search ──────────────────────────────
+let activeFilter = 'all';
+let query        = '';
+
+function applyFilter() {
+  const filtered = DATA.filter(d => {
+    const catMatch  = activeFilter === 'all'
+                   || activeFilter === d.category
+                   || (activeFilter === 'live' && d.status === 'live');
+    const q         = query.toLowerCase();
+    const txtMatch  = !q
+                   || d.name.toLowerCase().includes(q)
+                   || d.desc.toLowerCase().includes(q)
+                   || d.repo.toLowerCase().includes(q)
+                   || d.tags.some(t => t.toLowerCase().includes(q));
+    return catMatch && txtMatch;
+  });
+  renderPortal(filtered);
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    applyFilter();
+  });
+});
+document.getElementById('search-box').addEventListener('input', e => {
+  query = e.target.value;
+  applyFilter();
+});
+
+// Initial render
+renderPortal(DATA);
+</script>
+</body>
+</html>
