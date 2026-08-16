@@ -185,12 +185,31 @@ async function loadAll(){
     render(milestones, issues);
   }catch(e){
     if(e.auth){
-      content.innerHTML='<div class="msg err">Token 無效或權限不足（HTTP '+e.status+'）。請確認是 fine-grained token、勾選 retcp repo、Issues Read-only。</div>';
+      content.innerHTML='<div class="msg">診斷中…</div>';
+      const msg = await diagnose();
+      content.innerHTML='<div class="msg err">'+msg+'</div>';
       document.getElementById('setupBox').style.display='block';
     }else{
       content.innerHTML='<div class="msg err">載入失敗（HTTP '+(e.status||'?')+'），稍後再試。</div>';
     }
   }
+}
+
+async function diagnose(){
+  const h={'Authorization':'Bearer '+token(),'Accept':'application/vnd.github+json'};
+  try{
+    const u=await fetch('https://api.github.com/user',{headers:h});
+    if(!u.ok) return '❌ Token 本身無效或已過期／被撤銷（驗證身分失敗，HTTP '+u.status+'）。請重新產生一個 fine-grained token。';
+    const me=await u.json();
+    if(me.login!=='mac2good909777-commits') return '⚠️ 這個 token 屬於帳號「'+me.login+'」，不是 mac2good909777-commits——請用正確帳號登入 GitHub 後重新產生。';
+    const r=await fetch(API,{headers:h});
+    if(r.status===404) return '❌ Token 有效，但<b>沒有勾選 retcp repo</b>。<br>到 token 設定頁 → Repository access → 改成「Only select repositories」→ 勾選 <b>retcp</b> → 存檔後回來按「重新整理」。';
+    if(!r.ok) return '❌ 無法存取 retcp repo（HTTP '+r.status+'）。檢查 Repository access 是否勾選 retcp。';
+    const i=await fetch(API+'/issues?per_page=1',{headers:h});
+    if(i.status===403||i.status===404) return '❌ Token 能看到 retcp repo，但<b>Issues 權限沒開</b>。<br>到 token 設定頁 → Permissions → Repository permissions → 把 <b>Issues</b> 改成 <b>Read-only</b> → 存檔後回來按「重新整理」。';
+    if(!i.ok) return '❌ Issues 讀取失敗（HTTP '+i.status+'）。';
+    return '⚠️ 診斷都通過但載入仍失敗——請按「重新整理」再試一次，還是不行就截圖回報。';
+  }catch(x){ return '❌ 網路錯誤，無法連到 GitHub API。檢查網路後重試。'; }
 }
 
 function render(milestones, issues){
