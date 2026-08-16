@@ -21,9 +21,11 @@
   .btn{background:var(--surface);color:var(--text2);border:1px solid var(--border);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem}
   .btn:hover{background:var(--surface2);color:var(--text)}
   .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .links{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .links{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
   .links a{font-size:.78rem;color:var(--accent2);text-decoration:none;background:var(--surface);border:1px solid var(--border);padding:4px 12px;border-radius:6px}
   .links a:hover{background:var(--surface2)}
+  .links a .lock{font-size:.7rem;opacity:.75;margin-left:2px}
+  .linkhint{font-size:.7rem;color:var(--text3);margin-bottom:12px}
   .setup{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px}
   .setup h3{font-size:.9rem;margin-bottom:8px}
   .setup ol{font-size:.8rem;color:var(--text2);padding-left:20px;margin-bottom:10px}
@@ -64,11 +66,17 @@
   .lbl.PE{background:rgba(29,118,219,.2);color:#58a6ff}
   .lbl.人工{background:var(--red-bg);color:#f87171}
   .lbl.PM{background:rgba(83,25,231,.25);color:var(--purple)}
+  .lbl.進行中{background:rgba(14,138,22,.22);color:#3fb950}
   .lbl.other{background:var(--surface2);color:var(--text2)}
   .msg{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;color:var(--text2);font-size:.85rem;margin-bottom:14px}
   .msg.err{border-color:var(--red);color:var(--red)}
   .foot{font-size:.72rem;color:var(--text3);text-align:center;padding:16px 0}
-  @media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
+  /* 手機（375px 實測）：統計改兩欄，按鈕與卡片標題加大點擊區 */
+  @media(max-width:600px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .btn{padding:10px 14px}
+    .card-head{padding:14px 16px}
+  }
 </style>
 </head>
 <body>
@@ -85,12 +93,13 @@
   </div>
 
   <div class="links">
-    <a href="https://github.com/mac2good909777-commits/retcp/issues" target="_blank">📋 Issues</a>
-    <a href="https://github.com/mac2good909777-commits/retcp/milestones" target="_blank">🎯 Milestones</a>
-    <a href="https://github.com/mac2good909777-commits/retcp/blob/main/docs/RETCP_%E5%85%A8%E5%B1%80%E6%AA%A2%E8%A6%96%E8%88%87%E5%85%AD%E5%80%8B%E6%9C%88%E5%9F%B7%E8%A1%8C%E8%A8%88%E7%95%AB_2026H2.md" target="_blank">📖 戰略總綱 v4</a>
-    <a href="https://mac2good909777-commits.github.io/retcp-kb/" target="_blank">⚖️ 法規知識庫</a>
-    <a href="./ref/" target="_blank">📑 謄本參考手冊</a>
+    <a href="https://github.com/mac2good909777-commits/retcp/issues" target="_blank" title="private repo：需先以 mac2good909777-commits 登入 GitHub，未登入會顯示 404">📋 Issues<span class="lock">🔒</span></a>
+    <a href="https://github.com/mac2good909777-commits/retcp/milestones" target="_blank" title="private repo：需先以 mac2good909777-commits 登入 GitHub，未登入會顯示 404">🎯 Milestones<span class="lock">🔒</span></a>
+    <a href="https://github.com/mac2good909777-commits/retcp/blob/main/docs/RETCP_%E5%85%A8%E5%B1%80%E6%AA%A2%E8%A6%96%E8%88%87%E5%85%AD%E5%80%8B%E6%9C%88%E5%9F%B7%E8%A1%8C%E8%A8%88%E7%95%AB_2026H2.md" target="_blank" title="private repo：需先以 mac2good909777-commits 登入 GitHub，未登入會顯示 404">📖 戰略總綱 v4<span class="lock">🔒</span></a>
+    <a href="https://mac2good909777-commits.github.io/retcp-kb/" target="_blank" title="公開頁面，任何人可開">⚖️ 法規知識庫</a>
+    <a href="./ref/" target="_blank" title="公開頁面，任何人可開">📑 謄本參考手冊</a>
   </div>
+  <div class="linkhint">🔒 ＝ private repo，需先以 <b>mac2good909777-commits</b> 登入 GitHub 才開得起來（未登入的瀏覽器會顯示 404，不是連結壞掉）</div>
 
   <div class="setup" id="setupBox" style="display:none">
     <h3>設定 GitHub Token（只需一次，存在本機瀏覽器）</h3>
@@ -131,11 +140,22 @@
 const REPO = 'mac2good909777-commits/retcp';
 const API  = 'https://api.github.com/repos/' + REPO;
 
-// ===== 引擎進度（靜態設定，PM 於部署時更新）=====
+// ===== 引擎進度（靜態設定；GitHub 沒有這份資料，只能手動維護）=====
+// ⚠️ PM 維護點：每當一個引擎模組完成驗收（例如 S4／issue #3 驗收關單時），
+//    必須手動改下面 done / total / mods 三個欄位，否則面板數字會一直停在舊值。
+//    對照來源：retcp repo docs/RETCP_全局檢視與六個月執行計畫_2026H2.md
+//              §5「現況盤點」查核引擎那一列，以及 engine/ 目錄實際檔案。
+//    現況（2026-08-16 核對）：engine/ 有 s3a、s3b、s3c、s5、s8 五支模組，
+//                            判讀規則 76/91 項，整合測試 29 assertions PASS。
+//    mods 只寫模組完成狀態，不寫「進行中/待領」——那是 GitHub 標籤的職責，
+//    寫在這裡會跟下方 issue 卡片打架。
 const ENGINE = {
   done: 76, total: 91,
-  mods: 'S3a ✅ S3b ✅ S3c ✅ S5 ✅ S8 ✅｜S4 ⬜(#3 進行中) S6 ⬜ S7 ⬜'
+  mods: 'S3a ✅ S3b ✅ S3c ✅ S5 ✅ S8 ✅｜S4 ⬜(#3) S6 ⬜ S7 ⬜'
 };
+
+const MAX_PAGES = 5;          // 100 張/頁 × 5 頁 ＝ 最多 500 張 issue
+let truncated = false;        // 抓滿上限（issue 超過 500 張）時為 true
 
 function token(){ return localStorage.getItem('retcp_gh_token') || ''; }
 function toggleSetup(){ const b=document.getElementById('setupBox'); b.style.display = b.style.display==='none'?'block':'none'; }
@@ -165,6 +185,17 @@ function daysLeft(dueISO){
 }
 function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
+// milestone 標題形如「Phase 0 收尾補洞」——空白切第一段只會拿到 "Phase"，
+// 所以用 regex 把「Phase + 數字」當成一個整體抓出來。
+// 回傳 {tag:'P0', badge:'Phase 0', rest:'收尾補洞'}；不合格式的標題則整串當 badge。
+function parsePhase(title){
+  const m = /^\s*Phase\s*([0-9]+)\s*(.*)$/i.exec(title||'');
+  if(m) return { tag:'P'+m[1], badge:'Phase '+m[1], rest:m[2].trim() };
+  const t=(title||'').trim(), sp=t.indexOf(' ');
+  return sp>0 ? { tag:t.slice(0,sp), badge:t.slice(0,sp), rest:t.slice(sp+1) }
+              : { tag:t||'—', badge:t||'—', rest:'' };
+}
+
 async function loadAll(){
   const content=document.getElementById('content');
   if(!token()){
@@ -174,12 +205,16 @@ async function loadAll(){
   }
   content.innerHTML='<div class="msg">載入中…</div>';
   try{
+    truncated=false;
     const [milestones, issuesRaw] = await Promise.all([
       gh('/milestones?state=all&sort=due_on&direction=asc&per_page=30'),
+      // 分頁：每頁 100 張，最多抓 MAX_PAGES 頁（＝500 張）。
+      // 不足 100 張代表最後一頁，直接收工；抓滿上限則標記 truncated，
+      // 由畫面提示「只顯示前 N 張」，避免無聲截斷讓人以為任務憑空消失。
       (async()=>{ let all=[],p=1;
-        while(p<=5){ const b=await gh('/issues?state=all&per_page=100&page='+p);
-          all=all.concat(b); if(b.length<100)break; p++; }
-        return all; })()
+        while(p<=MAX_PAGES){ const b=await gh('/issues?state=all&per_page=100&page='+p);
+          all=all.concat(b); if(b.length<100) return all; p++; }
+        truncated=true; return all; })()
     ]);
     const issues = issuesRaw.filter(i=>!i.pull_request);
     render(milestones, issues);
@@ -217,11 +252,14 @@ function render(milestones, issues){
   const done=issues.filter(i=>i.state==='closed').length;
   document.getElementById('stTasks').textContent = done+' / '+issues.length;
   const current = milestones.find(m=>m.state==='open' && m.open_issues>0) || milestones.find(m=>m.state==='open');
-  document.getElementById('stPhase').textContent = current ? current.title.split(' ')[0].replace('Phase','P') : '—';
+  document.getElementById('stPhase').textContent = current ? parsePhase(current.title).tag : '—';
   const dl = current ? daysLeft(current.due_on) : null;
   document.getElementById('stDue').textContent = dl===null?'—':(dl>=0? dl+' 天':'逾 '+(-dl)+' 天');
-  document.getElementById('stDue').style.color = dl!==null&&dl<7 ? 'var(--yellow)' : '';
-  const peOpen = issues.filter(i=>i.state==='open'&&i.labels.some(l=>l.name==='PE')).length;
+  document.getElementById('stDue').style.color = dl===null?'':(dl<0?'var(--red)':(dl<7?'var(--yellow)':''));
+  // 「待領」＝open ＋ PE 標籤 ＋ 還沒被貼「進行中」（PE 領取時會自己貼）
+  const peOpen = issues.filter(i=>i.state==='open'
+      && i.labels.some(l=>l.name==='PE')
+      && !i.labels.some(l=>l.name==='進行中')).length;
   document.getElementById('stPE').textContent = peOpen;
   document.getElementById('statsRow').style.display='grid';
 
@@ -235,6 +273,7 @@ function render(milestones, issues){
   const byMs={}; issues.forEach(i=>{ const k=i.milestone?i.milestone.number:0; (byMs[k]=byMs[k]||[]).push(i); });
   let html='';
   milestones.forEach(m=>{
+    const ph=parsePhase(m.title);
     const list=(byMs[m.number]||[]).sort((a,b)=>a.number-b.number);
     const tot=m.open_issues+m.closed_issues;
     const pct= tot? Math.round(m.closed_issues/tot*100) : 0;
@@ -246,14 +285,14 @@ function render(milestones, issues){
     else if(m.due_on) dueBadge='<span class="badge '+(dl<0?'overdue':'due')+'">'+m.due_on.slice(0,10)+(dl<0?'（逾期）':'')+'</span>';
     html+='<div class="card">'
       +'<div class="card-head" onclick="tog(this)">'
-      +'<span class="card-title"><span class="badge phase">'+esc(m.title.split(' ')[0])+'</span> '+esc(m.title.split(' ').slice(1).join(' '))+dueBadge+'</span>'
+      +'<span class="card-title"><span class="badge phase">'+esc(ph.badge)+'</span> '+esc(ph.rest)+dueBadge+'</span>'
       +'<span class="card-meta">'+m.closed_issues+'/'+tot+'（'+pct+'%）<span class="chevron'+(isCur?' open':'')+'">▶</span></span>'
       +'</div>'
       +'<div style="padding:0 16px"><div class="bar'+(allDone?' done':'')+'"><div style="width:'+pct+'%"></div></div></div>'
       +'<div class="card-body'+(isCur?' open':'')+'">'
       + (m.description? '<div style="font-size:.75rem;color:var(--text3);padding:8px 0 4px">'+esc(m.description)+'</div>':'')
       + (list.length? list.map(i=>{
-          const lbls=i.labels.map(l=>'<span class="lbl '+(['PE','人工','PM'].includes(l.name)?l.name:'other')+'">'+esc(l.name)+'</span>').join('');
+          const lbls=i.labels.map(l=>'<span class="lbl '+(['PE','人工','PM','進行中'].includes(l.name)?l.name:'other')+'">'+esc(l.name)+'</span>').join('');
           return '<div class="issue '+i.state+'">'
             +'<span class="st">'+(i.state==='closed'?'✅':'⬜')+'</span>'
             +'<span><a href="'+i.html_url+'" target="_blank"><span class="num">#'+i.number+'</span>'+esc(i.title)+'</a>'+lbls+'</span>'
@@ -261,6 +300,8 @@ function render(milestones, issues){
         }).join('') : '<div style="font-size:.8rem;color:var(--text3);padding:8px 0">（尚未開單——任務由 PM 於階段開始時建立）</div>')
       +'</div></div>';
   });
+  if(truncated) html = '<div class="msg err">⚠️ issue 數量已超過 '+(MAX_PAGES*100)+' 張，面板只讀到最新 '
+    + (MAX_PAGES*100) + ' 張，統計數字會偏低——請調高 MAX_PAGES 後重新部署。</div>' + html;
   document.getElementById('content').innerHTML = html || '<div class="msg">沒有 milestone 資料</div>';
   document.getElementById('lastSync').textContent='更新於 '+new Date().toLocaleString('zh-TW');
 }
